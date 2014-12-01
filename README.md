@@ -1,11 +1,11 @@
 jclouds-vcloud-director
 =======================
-[![Build Status](https://api.travis-ci.org/cloudsoft/jclouds-vcloud-director.svg?branch=1.9.x)](https://travis-ci.org/cloudsoft/jclouds-vcloud-director)
+[![Build Status](https://api.travis-ci.org/cloudsoft/jclouds-vcloud-director.svg?branch=master)](https://travis-ci.org/cloudsoft/jclouds-vcloud-director)
 -----------------------
 
 In order to release a new version:
 
-1. create a new `release` branch out of `1.9.x` branch
+1. create a new `release` branch out of `master` branch
 2. update the version inside `release/new-branch` pom.xml
 3. mvn clean install
 
