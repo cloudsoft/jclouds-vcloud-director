@@ -17,7 +17,6 @@
 package org.jclouds.vcloud.director.v1_5.domain.dmtf;
 
 import static org.testng.Assert.assertNotNull;
-import java.io.File;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -25,6 +24,8 @@ import javax.xml.bind.Unmarshaller;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.google.common.io.Resources;
 
 @Test(groups = "unit", testName = "EnvelopeTest")
 public class EnvelopeTest {
@@ -39,10 +40,8 @@ public class EnvelopeTest {
    public void testUnmarshallEnvelope() throws JAXBException {
       Unmarshaller unmarshaller = jc.createUnmarshaller();
       unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
-      File xml = new File("src/test/resources/dmtf/envelope.xml");
-      Envelope envelope = (Envelope) unmarshaller.unmarshal(xml);
+      Envelope envelope = (Envelope) unmarshaller.unmarshal(Resources.getResource("dmtf/envelope.xml"));
       assertNotNull(envelope);
    }
-
 
 }
