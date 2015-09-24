@@ -24,6 +24,7 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.google.common.collect.Iterables;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.DiskSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.NetworkSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.ReferencesType;
@@ -46,6 +47,10 @@ public class Envelope { //extends BaseEnvelope<VirtualSystem, Envelope> {
    protected Set<NetworkConfigSection> networkConfigSections = Sets.newLinkedHashSet();
    @XmlElement(name = "LeaseSettingsSection", namespace = VCLOUD_1_5_NS)
    protected Set<LeaseSettingsSection> leaseSettingsSections = Sets.newLinkedHashSet();
+
+   @XmlElement(name = "VirtualSystemCollection", namespace = OVF_NS)
+   protected VirtualSystemCollection virtualSystemCollection;
+
    @XmlElement(name = "VirtualSystem", namespace = OVF_NS)
    protected VirtualSystem virtualSystem;
 
@@ -81,6 +86,12 @@ public class Envelope { //extends BaseEnvelope<VirtualSystem, Envelope> {
    }
 
    public VirtualSystem getVirtualSystem() {
-      return virtualSystem;
+      if (virtualSystem != null) {
+         return virtualSystem;
+      } else if (virtualSystemCollection == null || virtualSystemCollection.getVirtualSystems() == null) {
+         return null;
+      } else {
+         return Iterables.getFirst(virtualSystemCollection.getVirtualSystems(), null);
+      }
    }
 }

@@ -58,7 +58,7 @@
         <vssd:VirtualSystemType>vmx-09</vssd:VirtualSystemType>
       </ovf:System>
       <ovf:Item>
-        <rasd:Address>00:50:56:01:03:7a</rasd:Address>
+        <rasd:Address>00:11:22:33:44:55</rasd:Address>
         <rasd:AddressOnParent>0</rasd:AddressOnParent>
         <rasd:AutomaticAllocation>true</rasd:AutomaticAllocation>
         <rasd:Connection vcloud:primaryNetworkConnection="true" vcloud:ipAddressingMode="POOL">M523007043-2739-default-routed</rasd:Connection>
@@ -164,7 +164,7 @@
       <vcloud:UseOrgSettings>false</vcloud:UseOrgSettings>
       <vcloud:AdminPasswordEnabled>true</vcloud:AdminPasswordEnabled>
       <vcloud:AdminPasswordAuto>false</vcloud:AdminPasswordAuto>
-      <vcloud:AdminPassword>Canopy1!</vcloud:AdminPassword>
+      <vcloud:AdminPassword>password</vcloud:AdminPassword>
       <vcloud:ResetPasswordRequired>false</vcloud:ResetPasswordRequired>
       <vcloud:CustomizationScript>@echo echo</vcloud:CustomizationScript>
       <vcloud:ComputerName>VMSupportTest1</vcloud:ComputerName>
@@ -175,7 +175,7 @@
       <vcloud:NetworkConnection needsCustomization="true" network="M523007043-2739-default-routed">
         <vcloud:NetworkConnectionIndex>0</vcloud:NetworkConnectionIndex>
         <vcloud:IsConnected>true</vcloud:IsConnected>
-        <vcloud:MACAddress>00:50:56:01:03:7a</vcloud:MACAddress>
+        <vcloud:MACAddress>00:11:22:33:44:55</vcloud:MACAddress>
         <vcloud:IpAddressAllocationMode>POOL</vcloud:IpAddressAllocationMode>
       </vcloud:NetworkConnection>
     </vcloud:NetworkConnectionSection>

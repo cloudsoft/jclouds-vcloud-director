@@ -52,6 +52,9 @@ public class VirtualSystem extends SectionType {
    @XmlElement(name = "NetworkConnectionSection", namespace = VCLOUD_1_5_NS)
    private Set<NetworkConnectionSection> networkConnectionSections;
 
+   @XmlElement(name = "AnnotationSection", namespace = OVF_NS)
+   private AnnotationSection annotationSection;
+
    private VirtualSystem(Builder<?> builder) {
       super(builder);
       this.name = checkNotNull(builder.name, "name");

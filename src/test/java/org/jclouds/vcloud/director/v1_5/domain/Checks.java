@@ -405,6 +405,8 @@ public class Checks {
       // NOTE retainNetInfoAcrossDeployments cannot be checked
       if (config.getIpScopes() != null) {
          checkIpScopes(config.getIpScopes());
+      } else if (config.getIpScope() != null) {
+         checkIpScope(config.getIpScope());
       }
       if (config.getParentNetwork() != null) {
          checkReferenceType(config.getParentNetwork());

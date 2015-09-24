@@ -140,6 +140,10 @@ public class NetworkConfiguration {
 
    @XmlElement(name = "IpScopes")
    private IpScopes ipScopes;
+
+   @XmlElement(name = "IpScope")
+   private IpScope ipScope;
+
    @XmlElement(name = "ParentNetwork")
    private Reference parentNetwork;
    @XmlElement(name = "FenceMode")
@@ -160,6 +164,10 @@ public class NetworkConfiguration {
     */
    public IpScopes getIpScopes() {
       return ipScopes;
+   }
+
+   public IpScope getIpScope() {
+      return ipScope;
    }
 
    /**

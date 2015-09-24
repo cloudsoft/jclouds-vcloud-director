@@ -17,6 +17,8 @@
 package org.jclouds.vcloud.director.v1_5.domain.dmtf;
 
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
 import java.io.File;
 
 import javax.xml.bind.JAXBContext;
@@ -42,6 +44,22 @@ public class EnvelopeTest {
       File xml = new File("src/test/resources/dmtf/envelope.xml");
       Envelope envelope = (Envelope) unmarshaller.unmarshal(xml);
       assertNotNull(envelope);
+
+      assertNotNull(envelope);
+      assertNotNull(envelope.getVirtualSystem().getOperatingSystemSection());
+
+      assertTrue(envelope.getVirtualSystem().getOperatingSystemSection().getOsType().startsWith("windows"));
    }
 
+   public void testUnmarshallEnvelopeUpgraded() throws JAXBException {
+      Unmarshaller unmarshaller = jc.createUnmarshaller();
+      unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
+      File xml = new File("src/test/resources/dmtf/envelope_upgraded.xml");
+      Envelope envelope = (Envelope) unmarshaller.unmarshal(xml);
+
+      assertNotNull(envelope);
+      assertNotNull(envelope.getVirtualSystem().getOperatingSystemSection());
+
+      assertTrue(envelope.getVirtualSystem().getOperatingSystemSection().getOsType().startsWith("windows"));
+   }
 }
