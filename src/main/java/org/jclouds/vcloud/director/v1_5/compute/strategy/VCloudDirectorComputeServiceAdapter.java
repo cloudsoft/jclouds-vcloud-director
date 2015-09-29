@@ -22,7 +22,6 @@ import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.find;
 import static java.lang.String.format;
 import static org.jclouds.util.Predicates2.retry;
-import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VAPP;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VDC;
 import static org.jclouds.vcloud.director.v1_5.compute.util.VCloudDirectorComputeUtils.name;
 import static org.jclouds.vcloud.director.v1_5.compute.util.VCloudDirectorComputeUtils.tryFindNetworkInVDCWithFenceMode;
@@ -394,32 +393,12 @@ public class VCloudDirectorComputeServiceAdapter implements
 
    @Override
    public Set<QueryResultVAppTemplateRecord> listImages() {
-
-      QueryResultRecords queryResultRecords = api.getQueryApi().vAppTemplatesQueryAll();
-      Set<QueryResultRecordType> result = Sets.newHashSet(queryResultRecords.getRecords());
-      QueryResultRecords currentRecords = queryResultRecords;
-      Map<String, String> splittedQuery = getQueryMapFromRel(currentRecords, Link.Rel.LAST_PAGE);
-      int lastPage = splittedQuery.isEmpty() ? 1 : Integer.valueOf(splittedQuery.get("page"));
-
-      while (currentRecords.getPage() < lastPage) {
-         for (Link link : currentRecords.getLinks()) {
-            if (link.getRel() == Link.Rel.NEXT_PAGE) {
-               splittedQuery = getQueryMapFromRel(currentRecords, Link.Rel.NEXT_PAGE);
-               currentRecords = api.getQueryApi().vAppTemplatesQuery(splittedQuery.get("page"),
-                       splittedQuery.get("pageSize"), splittedQuery.get("format"));
-               result.addAll(currentRecords.getRecords());
-               break;
-            }
-         }
-      }
-
-      return FluentIterable.from(result).transform(new Function<QueryResultRecordType, QueryResultVAppTemplateRecord>() {
+      return FluentIterable.from(getAllQueryResultRecords("vAppTemplate")).transform(new Function<QueryResultRecordType, QueryResultVAppTemplateRecord>() {
          @Override
          public QueryResultVAppTemplateRecord apply(QueryResultRecordType input) {
             return (QueryResultVAppTemplateRecord) input;
          }
       }).toSet();
-
    }
 
    @Override
@@ -429,39 +408,34 @@ public class VCloudDirectorComputeServiceAdapter implements
 
    @Override
    public Iterable<Vm> listNodes() {
-      Set<Vm> vms = Sets.newHashSet();
-      for (Vdc vdc : listLocations()) {
-         vms.addAll(FluentIterable.from(vdc.getResourceEntities())
-                 .filter(ReferencePredicates.typeEquals(VAPP))
-                 .transform(new Function<Reference, VApp>() {
-                    @Override
-                    public VApp apply(Reference in) {
-                       return api.getVAppApi().get(in.getHref());
-                    }
-                 })
-                 .filter(Predicates.notNull())
-                 .filter(new Predicate<VApp>() {
-                    @Override
-                    public boolean apply(VApp input) {
-                       return input.getTasks().isEmpty();
-                    }
-                 })
-                 .transformAndConcat(new Function<VApp, Iterable<Vm>>() {
-                    @Override
-                    public Iterable<Vm> apply(VApp input) {
-                       return input.getChildren() != null ? input.getChildren().getVms() : ImmutableList.<Vm>of();
-                    }
-                 })
-                 // TODO we want also POWERED_OFF?
-                 .filter(new Predicate<Vm>() {
-                    @Override
-                    public boolean apply(Vm input) {
-                       return input.getStatus() == ResourceEntity.Status.POWERED_ON;
-                    }
-                 })
-                 .toSet());
-      }
-      return vms;
+      return FluentIterable.from(getAllQueryResultRecords("vApp"))
+              .transform(new Function<QueryResultRecordType, VApp>() {
+                 @Override
+                 public VApp apply(QueryResultRecordType input) {
+                    return api.getVAppApi().get(input.getHref());
+                 }
+              })
+              .filter(Predicates.notNull())
+              .filter(new Predicate<VApp>() {
+                 @Override
+                 public boolean apply(VApp input) {
+                    return input.getTasks().isEmpty();
+                 }
+              })
+              .transformAndConcat(new Function<VApp, Iterable<Vm>>() {
+                 @Override
+                 public Iterable<Vm> apply(VApp input) {
+                    return input.getChildren() != null ? input.getChildren().getVms() : ImmutableList.<Vm>of();
+                 }
+              })
+                      // TODO we want also POWERED_OFF?
+              .filter(new Predicate<Vm>() {
+                 @Override
+                 public boolean apply(Vm input) {
+                    return input.getStatus() == ResourceEntity.Status.POWERED_ON;
+                 }
+              })
+              .toSet();
    }
 
    @Override
@@ -551,6 +525,28 @@ public class VCloudDirectorComputeServiceAdapter implements
    private Org getOrgForSession() {
       Session session = api.getCurrentSession();
       return api.getOrgApi().get(find(api.getOrgApi().list(), ReferencePredicates.nameEquals(session.get())).getHref());
+   }
+
+
+   private Set<QueryResultRecordType> getAllQueryResultRecords(String type) {
+      QueryResultRecords queryResultRecords = api.getQueryApi().queryAll(type);
+      Set<QueryResultRecordType> result = Sets.newHashSet(queryResultRecords.getRecords());
+      QueryResultRecords currentRecords = queryResultRecords;
+      Map<String, String> splittedQuery = getQueryMapFromRel(currentRecords, Link.Rel.LAST_PAGE);
+      int lastPage = splittedQuery.isEmpty() ? 1 : Integer.valueOf(splittedQuery.get("page"));
+
+      while (currentRecords.getPage() < lastPage) {
+         for (Link link : currentRecords.getLinks()) {
+            if (link.getRel() == Link.Rel.NEXT_PAGE) {
+               splittedQuery = getQueryMapFromRel(currentRecords, Link.Rel.NEXT_PAGE);
+               currentRecords = api.getQueryApi().query(type, splittedQuery.get("page"),
+                       splittedQuery.get("pageSize"), splittedQuery.get("format"));
+               result.addAll(currentRecords.getRecords());
+               break;
+            }
+         }
+      }
+      return result;
    }
 
    private Map<String, String> getQueryMapFromRel(QueryResultRecords records, Link.Rel rel) {

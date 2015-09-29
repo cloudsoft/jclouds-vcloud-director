@@ -24,6 +24,7 @@ import javax.inject.Named;
 import org.jclouds.ContextBuilder;
 import org.jclouds.compute.ComputeServiceContext;
 import org.jclouds.compute.RunNodesException;
+import org.jclouds.compute.domain.ComputeMetadata;
 import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.domain.Template;
 import org.jclouds.compute.domain.TemplateBuilder;
@@ -58,6 +59,11 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
               .modules(ImmutableSet.of(new SLF4JLoggingModule(),
                       new SshjSshClientModule()))
               .build(ComputeServiceContext.class);
+
+
+      for (ComputeMetadata computeMetadata : context.getComputeService().listNodes()) {
+         System.out.println(computeMetadata);
+      }
 
       TemplateBuilder templateBuilder = context.getComputeService().templateBuilder();
 

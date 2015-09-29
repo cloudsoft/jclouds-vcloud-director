@@ -82,6 +82,15 @@ public interface QueryApi {
    QueryResultRecords query(@QueryParam("page") Integer page, @QueryParam("pageSize") Integer pageSize,
          @QueryParam("format") String format, @QueryParam("type") String type, @QueryParam("filter") String filter);
 
+   /** @see #queryAll(String) */
+   @GET
+   @Path("/query")
+   @Consumes
+   @JAXBResponseParser
+   QueryResultRecords query(@QueryParam("type") String type , @QueryParam("page") String page, @QueryParam("pageSize") String pageSize,
+                            @QueryParam("format") String format);
+
+
    /**
     * Retrieves a list of {@link org.jclouds.vcloud.director.v1_5.endpoints.Catalog}s by using REST API general QueryHandler.
     *
