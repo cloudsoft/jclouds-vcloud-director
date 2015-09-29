@@ -169,6 +169,14 @@ public interface QueryApi {
    @JAXBResponseParser
    QueryResultRecords vAppTemplatesQuery(@QueryParam("filter") String filter);
 
+   @GET
+   @Path("/vAppTemplates/query")
+   @Consumes
+   @JAXBResponseParser
+   QueryResultRecords vAppTemplatesQuery(@QueryParam("page") String page, @QueryParam("pageSize") String pageSize,
+                                 @QueryParam("format") String format);
+
+
    /**
     * Retrieves a list of {@link VApp}s by using REST API general QueryHandler.
     */

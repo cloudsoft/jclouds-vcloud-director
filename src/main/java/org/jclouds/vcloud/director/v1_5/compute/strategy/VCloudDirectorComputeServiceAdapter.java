@@ -23,13 +23,13 @@ import static com.google.common.collect.Iterables.find;
 import static java.lang.String.format;
 import static org.jclouds.util.Predicates2.retry;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VAPP;
-import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VAPP_TEMPLATE;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VDC;
 import static org.jclouds.vcloud.director.v1_5.compute.util.VCloudDirectorComputeUtils.name;
 import static org.jclouds.vcloud.director.v1_5.compute.util.VCloudDirectorComputeUtils.tryFindNetworkInVDCWithFenceMode;
 import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -72,6 +72,9 @@ import org.jclouds.vcloud.director.v1_5.domain.params.DeployVAppParams;
 import org.jclouds.vcloud.director.v1_5.domain.params.InstantiationParams;
 import org.jclouds.vcloud.director.v1_5.domain.params.SourcedCompositionItemParam;
 import org.jclouds.vcloud.director.v1_5.domain.params.UndeployVAppParams;
+import org.jclouds.vcloud.director.v1_5.domain.query.QueryResultRecordType;
+import org.jclouds.vcloud.director.v1_5.domain.query.QueryResultRecords;
+import org.jclouds.vcloud.director.v1_5.domain.query.QueryResultVAppTemplateRecord;
 import org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection;
 import org.jclouds.vcloud.director.v1_5.domain.section.NetworkConfigSection;
 import org.jclouds.vcloud.director.v1_5.domain.section.NetworkConnectionSection;
@@ -83,11 +86,13 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.base.Splitter;
 import com.google.common.base.Supplier;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -96,7 +101,7 @@ import com.google.common.collect.Sets;
  */
 @Singleton
 public class VCloudDirectorComputeServiceAdapter implements
-        ComputeServiceAdapter<Vm, Hardware, VAppTemplate, Vdc> {
+        ComputeServiceAdapter<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc> {
 
    protected static final long TASK_TIMEOUT_SECONDS = 300L;
 
@@ -388,38 +393,37 @@ public class VCloudDirectorComputeServiceAdapter implements
    }
 
    @Override
-   public Set<VAppTemplate> listImages() {
-      Set<VAppTemplate> vAppTemplates = Sets.newHashSet();
-      for (Vdc vdc : listLocations()) {
-         vAppTemplates.addAll(FluentIterable.from(vdc.getResourceEntities())
-                 .filter(ReferencePredicates.typeEquals(VAPP_TEMPLATE))
-                 .transform(new Function<Reference, VAppTemplate>() {
+   public Set<QueryResultVAppTemplateRecord> listImages() {
 
-                    @Override
-                    public VAppTemplate apply(Reference in) {
-                       return api.getVAppTemplateApi().get(in.getHref());
-                    }
-                 })
-                 .filter(and(Predicates.notNull(),
-                         new Predicate<VAppTemplate>() {
-                            @Override
-                            public boolean apply(VAppTemplate input) {
-                               return input.getStatus() == ResourceEntity.Status.POWERED_OFF;
-                            }
-                         },
-                         new Predicate<VAppTemplate>() {
-                            @Override
-                            public boolean apply(VAppTemplate input) {
-                               return input.getTasks().isEmpty();
-                            }
-                         }))
-                         .toSet());
+      QueryResultRecords queryResultRecords = api.getQueryApi().vAppTemplatesQueryAll();
+      Set<QueryResultRecordType> result = Sets.newHashSet(queryResultRecords.getRecords());
+      QueryResultRecords currentRecords = queryResultRecords;
+      Map<String, String> splittedQuery = getQueryMapFromRel(currentRecords, Link.Rel.LAST_PAGE);
+      int lastPage = splittedQuery.isEmpty() ? 1 : Integer.valueOf(splittedQuery.get("page"));
+
+      while (currentRecords.getPage() < lastPage) {
+         for (Link link : currentRecords.getLinks()) {
+            if (link.getRel() == Link.Rel.NEXT_PAGE) {
+               splittedQuery = getQueryMapFromRel(currentRecords, Link.Rel.NEXT_PAGE);
+               currentRecords = api.getQueryApi().vAppTemplatesQuery(splittedQuery.get("page"),
+                       splittedQuery.get("pageSize"), splittedQuery.get("format"));
+               result.addAll(currentRecords.getRecords());
+               break;
+            }
+         }
       }
-      return vAppTemplates;
+
+      return FluentIterable.from(result).transform(new Function<QueryResultRecordType, QueryResultVAppTemplateRecord>() {
+         @Override
+         public QueryResultVAppTemplateRecord apply(QueryResultRecordType input) {
+            return (QueryResultVAppTemplateRecord) input;
+         }
+      }).toSet();
+
    }
 
    @Override
-   public VAppTemplate getImage(final String imageId) {
+   public QueryResultVAppTemplateRecord getImage(final String imageId) {
       return null;
    }
 
@@ -548,5 +552,19 @@ public class VCloudDirectorComputeServiceAdapter implements
       Session session = api.getCurrentSession();
       return api.getOrgApi().get(find(api.getOrgApi().list(), ReferencePredicates.nameEquals(session.get())).getHref());
    }
+
+   private Map<String, String> getQueryMapFromRel(QueryResultRecords records, Link.Rel rel) {
+      for (Link link : records.getLinks()) {
+         if (link.getRel() == rel) {
+            return Splitter.on("&")
+                    .omitEmptyStrings()
+                    .trimResults()
+                    .withKeyValueSeparator("=")
+                    .split(link.getHref().getQuery());
+         }
+      }
+      return Maps.newHashMap();
+   }
+
 
 }

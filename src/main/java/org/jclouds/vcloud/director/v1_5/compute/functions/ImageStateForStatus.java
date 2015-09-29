@@ -19,7 +19,6 @@ package org.jclouds.vcloud.director.v1_5.compute.functions;
 import javax.inject.Singleton;
 
 import org.jclouds.compute.domain.Image.Status;
-import org.jclouds.vcloud.director.v1_5.domain.ResourceEntity;
 
 import com.google.common.base.Function;
 
@@ -27,12 +26,13 @@ import com.google.common.base.Function;
  * Transforms an {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status} to the jclouds portable model.
  */
 @Singleton
-public class ImageStateForStatus implements Function<ResourceEntity.Status, Status> {
+public class ImageStateForStatus implements Function<String, Status> {
 
    @Override
-   public Status apply(final ResourceEntity.Status status) {
+   public Status apply(final String status) {
       if (status == null) return Status.UNRECOGNIZED;
-      return status.isVApp() ? Status.AVAILABLE : Status.DELETED;
+      // TODO
+      return status.equals("RESOLVED") ? Status.AVAILABLE : Status.ERROR;
    }
 
 }
