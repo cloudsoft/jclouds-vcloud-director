@@ -83,7 +83,7 @@ public class ImageForVAppTemplate implements Function<QueryResultVAppTemplateRec
 
    private String getVappId(QueryResultVAppTemplateRecord from) {
       String vApp = from.getHref().getPath().substring(from.getHref().getPath().lastIndexOf("/"));
-      return vApp.substring(vApp.indexOf("-") + 1);
+      return "urn:vcloud:vapptemplate:" + vApp.substring(vApp.indexOf("-") + 1);
    }
 
    private boolean is64bit(String osType) {

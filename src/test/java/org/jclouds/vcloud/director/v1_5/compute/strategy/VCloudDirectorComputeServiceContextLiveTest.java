@@ -68,7 +68,7 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
       // test passing custom options
       VCloudDirectorTemplateOptions options = template.getOptions().as(VCloudDirectorTemplateOptions.class);
 
-      options.networks("Operational_Network_01"); 
+      options.networks("Operational_Network_01");
       NodeMetadata node = null;
       try {
          Set<? extends NodeMetadata> nodes = context.getComputeService().createNodesInGroup(name, 1, template);
