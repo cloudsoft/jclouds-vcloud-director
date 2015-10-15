@@ -46,6 +46,7 @@ import org.jclouds.logging.Logger;
 import org.jclouds.scriptbuilder.domain.OsFamily;
 import org.jclouds.scriptbuilder.domain.Statement;
 import org.jclouds.vcloud.director.v1_5.VCloudDirectorApi;
+import org.jclouds.vcloud.director.v1_5.VCloudDirectorException;
 import org.jclouds.vcloud.director.v1_5.compute.options.VCloudDirectorTemplateOptions;
 import org.jclouds.vcloud.director.v1_5.compute.util.VCloudDirectorComputeUtils;
 import org.jclouds.vcloud.director.v1_5.domain.Link;
@@ -412,7 +413,14 @@ public class VCloudDirectorComputeServiceAdapter implements
               .transform(new Function<QueryResultRecordType, VApp>() {
                  @Override
                  public VApp apply(QueryResultRecordType input) {
-                    return api.getVAppApi().get(input.getHref());
+                    try {
+                       return api.getVAppApi().get(input.getHref());
+                    } catch (VCloudDirectorException e) {
+                       // If the VApp is in an inconsistent state, the server will return at 500 error and an
+                       // exception will be thrown, in which case we can only skip this VApp
+                       logger.debug(String.format("Cannot get details for vApp %s, ignoring. Exception was: %s", input.getHref(), e));
+                       return null;
+                    }
                  }
               })
               .filter(Predicates.notNull())

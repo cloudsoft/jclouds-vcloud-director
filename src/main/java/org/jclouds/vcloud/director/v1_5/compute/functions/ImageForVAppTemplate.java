@@ -63,7 +63,15 @@ public class ImageForVAppTemplate implements Function<QueryResultVAppTemplateRec
    @Override
    public Image apply(QueryResultVAppTemplateRecord from) {
       checkNotNull(from, "VAppTemplate");
-      Envelope ovf = templateToEnvelope.apply(from.getHref());
+      Envelope ovf;
+      try {
+         ovf = templateToEnvelope.apply(from.getHref());
+      } catch (Exception e) {
+         // If the VApp is in an inconsistent state, the server will return at 500 error and an
+         // exception will be thrown, in which case we can only skip this VApp
+         logger.debug(String.format("Cannot get details for vApp %s, ignoring. Exception was: %s", from.getHref(), e));
+         return null;
+      }
 
       ImageBuilder builder = new ImageBuilder();
       builder.ids(getVappId(from));
