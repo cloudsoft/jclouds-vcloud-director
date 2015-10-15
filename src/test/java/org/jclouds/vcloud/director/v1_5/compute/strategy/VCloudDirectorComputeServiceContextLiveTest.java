@@ -62,20 +62,13 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
       TemplateBuilder templateBuilder = context.getComputeService().templateBuilder();
 
       Template template = templateBuilder
-              .locationId("https://emea01.canopy-cloud.com/api/vdc/e931a09d-131f-4aaa-a667-efbe02eba428") // TAI2.0
-              //.imageNameMatches("centos6.4x64") // TAI
-              .imageNameMatches("CentOS_66_x64_platform") // TAI2.0
               .minCores(4)
               .minRam(2048)
               .build();
       // test passing custom options
       VCloudDirectorTemplateOptions options = template.getOptions().as(VCloudDirectorTemplateOptions.class);
 
-      options.memory(1024);
-      // .networks("Operational_Network_01"); // TAI2.0
-      //.networks("Deployment_Network_01"); // TAI
-
-      options.networks("Operational_Network_01"); // TAI2.0
+      options.networks("Operational_Network_01");
       NodeMetadata node = null;
       try {
          Set<? extends NodeMetadata> nodes = context.getComputeService().createNodesInGroup(name, 1, template);

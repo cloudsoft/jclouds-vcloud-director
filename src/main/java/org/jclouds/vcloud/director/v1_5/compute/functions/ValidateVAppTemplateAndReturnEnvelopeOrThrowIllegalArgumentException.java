@@ -16,9 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.compute.functions;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.net.URI;
 import java.util.concurrent.ExecutionException;
 
@@ -27,7 +25,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.jclouds.logging.Logger;
-import org.jclouds.vcloud.director.v1_5.domain.VAppTemplate;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.Envelope;
 import org.jclouds.vcloud.director.v1_5.functions.NetworkSectionForVAppTemplate;
 
@@ -36,7 +33,7 @@ import com.google.common.cache.LoadingCache;
 
 @Singleton
 public class ValidateVAppTemplateAndReturnEnvelopeOrThrowIllegalArgumentException implements
-        Function<VAppTemplate, Envelope> {
+        Function<URI, Envelope> {
 
    @Resource
    protected Logger logger = Logger.NULL;
@@ -52,7 +49,7 @@ public class ValidateVAppTemplateAndReturnEnvelopeOrThrowIllegalArgumentExceptio
    }
 
    @Override
-   public Envelope apply(VAppTemplate from) {
+   public Envelope apply(URI from) {
       //checkArgument(from.getChildren().size() == 1, "multiple vms are not supported: %s", from);
 
       // TODO
@@ -60,15 +57,15 @@ public class ValidateVAppTemplateAndReturnEnvelopeOrThrowIllegalArgumentExceptio
       checkArgument(findNetworkSectionForVAppTemplate.apply(from).getNetworks().size() == 1,
                "multiple network connections are not supported: %s", from);
       */
-      checkArgument(from.isOvfDescriptorUploaded(), "ovf descriptor is not uploaded: %s", from);
+      //checkArgument(from.isOvfDescriptorUploaded(), "ovf descriptor is not uploaded: %s", from);
       Envelope ovf = getOVFForVAppTemplateAndValidate(from);
       return ovf;
    }
 
-   private Envelope getOVFForVAppTemplateAndValidate(VAppTemplate from) throws IllegalArgumentException {
+   private Envelope getOVFForVAppTemplateAndValidate(URI from) throws IllegalArgumentException {
       Envelope ovf;
       try {
-         ovf = envelopes.get(from.getHref());
+         ovf = envelopes.get(from);
          // TODO
          //checkArgument(ovf.getVirtualSystem().getVirtualHardwareSections().size() > 0, "no hardware sections exist in ovf %s", ovf);
       } catch (ExecutionException e) {

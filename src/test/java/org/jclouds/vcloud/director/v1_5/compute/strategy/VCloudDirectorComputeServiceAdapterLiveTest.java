@@ -58,21 +58,10 @@ public class VCloudDirectorComputeServiceAdapterLiveTest extends BaseVCloudDirec
       String group = "foo";
       String name = "vm-" + new Random().nextInt();
 
-      Template template = templateBuilder
-              //.locationId("https://emea01.canopy-cloud.com/api/vdc/e931a09d-131f-4aaa-a667-efbe02eba428") // TAI2.0
-              // image
-              .imageNameMatches("CentOS_66_x64_blueprint") // vCloudAir (aka vCHS)
-              //.imageNameMatches("centos6.4x64") // TAI
-              //.imageNameMatches("W2K12_STD_ENG_X64") // TAI
-              //.imageNameMatches("cloudsoft-template")
-              //.imageNameMatches("CentOS_66_x64_platform") // TAI2.0
-              //.imageNameMatches("W2K12_DCE_ENG_X64") // TAI2.0
-              .build();
+      Template template = templateBuilder.build();
 
       VCloudDirectorTemplateOptions options = template.getOptions().as(VCloudDirectorTemplateOptions.class);
-      options //.memory(1024)
-              //.networks("Deployment_Network_01"); // TAI
-              .networks("Operational_Network_01"); // TAI2.0
+      options.networks("Operational_Network_01");
 
       /*
       template.getOptions().runScript("winrm quickconfig -q & " +

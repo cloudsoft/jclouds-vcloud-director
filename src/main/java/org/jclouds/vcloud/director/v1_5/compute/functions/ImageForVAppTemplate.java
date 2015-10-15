@@ -17,33 +17,29 @@
 package org.jclouds.vcloud.director.v1_5.compute.functions;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import java.util.Set;
+import java.net.URI;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import org.jclouds.collect.Memoized;
 import org.jclouds.compute.domain.Image;
 import org.jclouds.compute.domain.ImageBuilder;
 import org.jclouds.compute.domain.OperatingSystem;
 import org.jclouds.compute.domain.OsFamily;
 import org.jclouds.compute.reference.ComputeServiceConstants;
-import org.jclouds.domain.Location;
 import org.jclouds.logging.Logger;
-import org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status;
-import org.jclouds.vcloud.director.v1_5.domain.VAppTemplate;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.Envelope;
+import org.jclouds.vcloud.director.v1_5.domain.query.QueryResultVAppTemplateRecord;
 import org.jclouds.vcloud.director.v1_5.domain.section.OperatingSystemSection;
 
 import com.google.common.base.Function;
 import com.google.common.base.Splitter;
-import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
 @Singleton
-public class ImageForVAppTemplate implements Function<VAppTemplate, Image> {
+public class ImageForVAppTemplate implements Function<QueryResultVAppTemplateRecord, Image> {
 
    private static final String CENTOS = "centos";
    private static final String UBUNTU = "ubuntu";
@@ -55,30 +51,33 @@ public class ImageForVAppTemplate implements Function<VAppTemplate, Image> {
    @Named(ComputeServiceConstants.COMPUTE_LOGGER)
    public Logger logger = Logger.NULL;
 
-   private final Function<Status, Image.Status> toPortableImageStatus;
-   private final Function<VAppTemplate, Envelope> templateToEnvelope;
-   private final FindLocationForResource findLocationForResourceInVDC;
-   private final Supplier<Set<? extends Location>> locations;
+   private final Function<String, Image.Status> toPortableImageStatus;
+   private final Function<URI, Envelope> templateToEnvelope;
 
    @Inject
-   protected ImageForVAppTemplate(Function<Status, Image.Status> toPortableImageStatus, Function<VAppTemplate, Envelope> templateToEnvelope,
-            FindLocationForResource findLocationForResource, @Memoized Supplier<Set<? extends Location>> locations) {
+   protected ImageForVAppTemplate(Function<String, Image.Status> toPortableImageStatus, Function<URI, Envelope> templateToEnvelope) {
       this.toPortableImageStatus = checkNotNull(toPortableImageStatus, "toPortableImageStatus");
       this.templateToEnvelope = checkNotNull(templateToEnvelope, "templateToEnvelope");
-      this.findLocationForResourceInVDC = checkNotNull(findLocationForResource, "findLocationForResourceInVDC");
-      this.locations = checkNotNull(locations, "locations");
    }
 
    @Override
-   public Image apply(VAppTemplate from) {
+   public Image apply(QueryResultVAppTemplateRecord from) {
       checkNotNull(from, "VAppTemplate");
-      Envelope ovf = templateToEnvelope.apply(from);
+      Envelope ovf;
+      try {
+         ovf = templateToEnvelope.apply(from.getHref());
+      } catch (Exception e) {
+         // If the VApp is in an inconsistent state, the server will return at 500 error and an
+         // exception will be thrown, in which case we can only skip this VApp
+         logger.debug(String.format("Cannot get details for vApp %s, ignoring. Exception was: %s", from.getHref(), e));
+         return null;
+      }
 
       ImageBuilder builder = new ImageBuilder();
-      builder.ids(from.getId());
+      builder.ids(getVappId(from));
       builder.uri(from.getHref());
       builder.name(from.getName());
-      builder.description(from.getDescription() != null ? from.getDescription() : from.getName());
+      builder.description(String.format("%s_%s", from.getName(), from.getCatalogName()));
       OperatingSystem os;
       if (ovf.getVirtualSystem() != null) {
          os = setOsDetails(ovf.getVirtualSystem().getOperatingSystemSection());
@@ -88,6 +87,11 @@ public class ImageForVAppTemplate implements Function<VAppTemplate, Image> {
       builder.operatingSystem(os);
       builder.status(toPortableImageStatus.apply(from.getStatus()));
       return builder.build();
+   }
+
+   private String getVappId(QueryResultVAppTemplateRecord from) {
+      String vApp = from.getHref().getPath().substring(from.getHref().getPath().lastIndexOf("/"));
+      return "urn:vcloud:vapptemplate:" + vApp.substring(vApp.indexOf("-") + 1);
    }
 
    private boolean is64bit(String osType) {
