@@ -29,6 +29,7 @@ import java.net.URI;
 import java.util.Properties;
 
 import org.jclouds.compute.ComputeServiceContext;
+import org.jclouds.http.okhttp.config.OkHttpCommandExecutorServiceModule;
 import org.jclouds.rest.internal.BaseHttpApiMetadata;
 import org.jclouds.vcloud.director.v1_5.compute.config.VCloudDirectorComputeServiceContextModule;
 import org.jclouds.vcloud.director.v1_5.config.VCloudDirectorHttpApiModule;
@@ -88,6 +89,7 @@ public class VCloudDirectorApiMetadata extends BaseHttpApiMetadata<VCloudDirecto
                  .view(typeToken(ComputeServiceContext.class))
                  .defaultModules(ImmutableSet.<Class<? extends Module>>of(
                          VCloudDirectorHttpApiModule.class,
+                         OkHttpCommandExecutorServiceModule.class,
                          VCloudDirectorComputeServiceContextModule.class));
       }
 

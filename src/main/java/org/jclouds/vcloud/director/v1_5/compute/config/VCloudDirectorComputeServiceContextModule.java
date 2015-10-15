@@ -38,18 +38,18 @@ import org.jclouds.vcloud.director.v1_5.compute.functions.ImageStateForStatus;
 import org.jclouds.vcloud.director.v1_5.compute.functions.NodemetadataStatusForStatus;
 import org.jclouds.vcloud.director.v1_5.compute.functions.ValidateVAppTemplateAndReturnEnvelopeOrThrowIllegalArgumentException;
 import org.jclouds.vcloud.director.v1_5.compute.functions.VdcToLocation;
-import org.jclouds.vcloud.director.v1_5.compute.suppliers.VirtualHardwareConfigSupplier;
 import org.jclouds.vcloud.director.v1_5.compute.functions.VmToNodeMetadata;
 import org.jclouds.vcloud.director.v1_5.compute.options.VCloudDirectorTemplateOptions;
 import org.jclouds.vcloud.director.v1_5.compute.strategy.VCloudDirectorComputeServiceAdapter;
+import org.jclouds.vcloud.director.v1_5.compute.suppliers.VirtualHardwareConfigSupplier;
 import org.jclouds.vcloud.director.v1_5.domain.Entity;
 import org.jclouds.vcloud.director.v1_5.domain.ResourceEntity;
 import org.jclouds.vcloud.director.v1_5.domain.Session;
 import org.jclouds.vcloud.director.v1_5.domain.SessionWithToken;
-import org.jclouds.vcloud.director.v1_5.domain.VAppTemplate;
 import org.jclouds.vcloud.director.v1_5.domain.Vdc;
 import org.jclouds.vcloud.director.v1_5.domain.Vm;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.Envelope;
+import org.jclouds.vcloud.director.v1_5.domain.query.QueryResultVAppTemplateRecord;
 import org.jclouds.vcloud.director.v1_5.loaders.LoginUserInOrgWithPassword;
 import org.jclouds.vcloud.director.v1_5.loaders.ResolveEntity;
 import org.jclouds.vcloud.director.v1_5.loaders.ResolveEnvelope;
@@ -65,23 +65,23 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.name.Named;
 
 public class VCloudDirectorComputeServiceContextModule extends
-        ComputeServiceAdapterContextModule<Vm, Hardware, VAppTemplate, Vdc> {
+        ComputeServiceAdapterContextModule<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc> {
 
    @SuppressWarnings("unchecked")
    @Override
    protected void configure() {
       super.configure();
-      bind(new TypeLiteral<ComputeServiceAdapter<Vm, Hardware, VAppTemplate, Vdc>>() {
+      bind(new TypeLiteral<ComputeServiceAdapter<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc>>() {
       }).to(VCloudDirectorComputeServiceAdapter.class);
       bind(new TypeLiteral<Function<ResourceEntity.Status, NodeMetadata.Status>>() {
       }).to(NodemetadataStatusForStatus.class);
-      bind(new TypeLiteral<Function<ResourceEntity.Status, Image.Status>>() {
+      bind(new TypeLiteral<Function<String, Image.Status>>() {
       }).to(ImageStateForStatus.class);
       bind(new TypeLiteral<Function<Vm, NodeMetadata>>() {
       }).to(VmToNodeMetadata.class);
-      bind(new TypeLiteral<Function<VAppTemplate, org.jclouds.compute.domain.Image>>() {
+      bind(new TypeLiteral<Function<QueryResultVAppTemplateRecord, org.jclouds.compute.domain.Image>>() {
       }).to(ImageForVAppTemplate.class);
-      bind(new TypeLiteral<Function<VAppTemplate, Envelope>>() {
+      bind(new TypeLiteral<Function<URI, Envelope>>() {
       }).to(ValidateVAppTemplateAndReturnEnvelopeOrThrowIllegalArgumentException.class);
       bind(new TypeLiteral<Function<Hardware, Hardware>>() {
       }).to(Class.class.cast(IdentityFunction.class));
@@ -91,7 +91,7 @@ public class VCloudDirectorComputeServiceContextModule extends
       }).to(VdcToLocation.class);
       bind(TemplateOptions.class).to(VCloudDirectorTemplateOptions.class);
       bind(new TypeLiteral<Supplier<Set<Hardware>>>() {}).to(VirtualHardwareConfigSupplier.class);
-      install(new LocationsFromComputeServiceAdapterModule<Vm, Hardware, VAppTemplate, Vdc>() {
+      install(new LocationsFromComputeServiceAdapterModule<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc>() {
       });
    }
 

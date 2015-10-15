@@ -46,6 +46,8 @@ public class BindUserOrgAndPasswordAsBasicAuthorizationHeader implements MapBind
                         checkNotNull(postParams.get("org"), "org"),
                         checkNotNull(postParams.get("password"), "password")).getBytes(UTF_8));
       return (R) request.toBuilder()
+              .replaceHeader(HttpHeaders.ACCEPT_ENCODING, "gzip")
+              .replaceHeader(HttpHeaders.CONTENT_ENCODING, "gzip")
               .replaceHeader(HttpHeaders.ACCEPT, "application/*+xml;version=1.5")
               .replaceHeader(HttpHeaders.AUTHORIZATION, header).build();
    }
