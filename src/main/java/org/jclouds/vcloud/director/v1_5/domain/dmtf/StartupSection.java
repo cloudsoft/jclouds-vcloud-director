@@ -16,18 +16,18 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf;
 
-import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.Item;
+import static org.jclouds.vcloud.director.v1_5.domain.dmtf.DMTFConstants.OVF_NS;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static org.jclouds.vcloud.director.v1_5.domain.dmtf.DMTFConstants.OVF_NS;
+import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.Item;
 
 @XmlRootElement(name = "StartupSection", namespace = OVF_NS)
 public class StartupSection {
     @XmlElement(name = "Info", namespace = OVF_NS)
     private String info;
 
-    @XmlElement(name = "Item")
+    @XmlElement(name = "Item", namespace = OVF_NS)
     private Item item;
 }
