@@ -16,6 +16,9 @@
  */
 package org.jclouds.vcloud.director.v1_5.compute.strategy;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Strings.emptyToNull;
+
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -33,6 +36,7 @@ import org.jclouds.logging.Logger;
 import org.jclouds.logging.slf4j.config.SLF4JLoggingModule;
 import org.jclouds.sshj.config.SshjSshClientModule;
 import org.jclouds.vcloud.director.v1_5.compute.options.VCloudDirectorTemplateOptions;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.ImmutableSet;
@@ -40,6 +44,12 @@ import com.google.common.collect.Iterables;
 
 @Test(groups = "live", testName = "VCloudDirectorComputeServiceContextLiveTest")
 public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServiceContextLiveTest {
+
+   protected String vAppTemplateUrn;
+   protected String vAppTemplateNameRegex;
+   protected String vdcUrn;
+   protected String networkUrn;
+   protected String networkName;
 
    @Resource
    @Named(ComputeServiceConstants.COMPUTE_LOGGER)
@@ -49,6 +59,19 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
       provider = "vcloud-director";
    }
 
+   @BeforeClass(groups = { "integration", "live" })
+   public void initTestParametersFromProperties() {
+      vAppTemplateUrn = emptyToNull(System.getProperty("test." + provider + ".vapptemplate-id"));
+      vAppTemplateNameRegex = emptyToNull(System.getProperty("test." + provider + ".vapptemplate-name-regex"));
+      vdcUrn = emptyToNull(System.getProperty("test." + provider + ".vdc-id"));
+      networkUrn = emptyToNull(System.getProperty("test." + provider + ".network-id"));
+      networkName = emptyToNull(System.getProperty("test." + provider + ".network-name"));
+      checkArgument(vAppTemplateUrn == null || vAppTemplateNameRegex == null, 
+            "Must not specify id %s and name %s for template", vAppTemplateUrn, vAppTemplateNameRegex);
+      checkArgument(networkUrn == null || networkName == null, 
+            "Must not specify id %s and name %s for network", networkUrn, networkName);
+   }
+   
    @Test
    public void testLaunchNode() throws RunNodesException {
       final String name = "node";
@@ -61,6 +84,15 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
 
       TemplateBuilder templateBuilder = context.getComputeService().templateBuilder();
 
+      if (vdcUrn != null) {
+         templateBuilder.locationId(vdcUrn);
+      }
+      if (vAppTemplateUrn != null) {
+         templateBuilder.imageId(vAppTemplateUrn);
+      } else if (vAppTemplateNameRegex != null) {
+         templateBuilder.imageNameMatches(vAppTemplateNameRegex);
+      }
+      
       Template template = templateBuilder
               .minCores(4)
               .minRam(2048)
@@ -68,7 +100,12 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
       // test passing custom options
       VCloudDirectorTemplateOptions options = template.getOptions().as(VCloudDirectorTemplateOptions.class);
 
-      options.networks("Operational_Network_01");
+      if (networkName != null) {
+         options.networks(networkName);
+      } else {
+         options.networks("Operational_Network_01");
+      }
+      
       NodeMetadata node = null;
       try {
          Set<? extends NodeMetadata> nodes = context.getComputeService().createNodesInGroup(name, 1, template);

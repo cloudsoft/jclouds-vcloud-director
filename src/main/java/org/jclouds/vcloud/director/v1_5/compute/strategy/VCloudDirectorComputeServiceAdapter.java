@@ -25,6 +25,7 @@ import static org.jclouds.util.Predicates2.retry;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VDC;
 import static org.jclouds.vcloud.director.v1_5.compute.util.VCloudDirectorComputeUtils.name;
 import static org.jclouds.vcloud.director.v1_5.compute.util.VCloudDirectorComputeUtils.tryFindNetworkInVDCWithFenceMode;
+
 import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
@@ -41,6 +42,7 @@ import org.jclouds.compute.domain.Hardware;
 import org.jclouds.compute.domain.Processor;
 import org.jclouds.compute.domain.Template;
 import org.jclouds.compute.reference.ComputeServiceConstants;
+import org.jclouds.compute.reference.ComputeServiceConstants.Timeouts;
 import org.jclouds.domain.LoginCredentials;
 import org.jclouds.logging.Logger;
 import org.jclouds.scriptbuilder.domain.OsFamily;
@@ -103,23 +105,25 @@ import com.google.common.collect.Sets;
 public class VCloudDirectorComputeServiceAdapter implements
         ComputeServiceAdapter<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc> {
 
-   protected static final long TASK_TIMEOUT_SECONDS = 300L;
-
    @Resource
    @Named(ComputeServiceConstants.COMPUTE_LOGGER)
    protected Logger logger = Logger.NULL;
 
    private final VCloudDirectorApi api;
-   private Predicate<Task> retryTaskSuccess;
    private final Supplier<Set<Hardware>> hardwareProfileSupplier;
+   private final Timeouts timeouts;
 
    @Inject
-   public VCloudDirectorComputeServiceAdapter(VCloudDirectorApi api, Supplier<Set<Hardware>> hardwareProfileSupplier) {
+   public VCloudDirectorComputeServiceAdapter(VCloudDirectorApi api, Supplier<Set<Hardware>> hardwareProfileSupplier, Timeouts timeouts) {
       this.api = checkNotNull(api, "api");
-      retryTaskSuccess = retry(new TaskSuccess(api.getTaskApi()), TASK_TIMEOUT_SECONDS * 1000L);
       this.hardwareProfileSupplier = hardwareProfileSupplier;
+      this.timeouts = timeouts;
    }
 
+   protected boolean waitForTask(Task task, long timeoutMillis) {
+      return retry(new TaskSuccess(api.getTaskApi()), timeoutMillis).apply(task);
+   }
+   
    @Override
    public NodeAndInitialCredentials<Vm> createNodeWithGroupEncodedIntoName(String group, String name, Template template) {
       checkNotNull(template, "template was null");
@@ -176,14 +180,28 @@ public class VCloudDirectorComputeServiceAdapter implements
       Task compositionTask = Iterables.getFirst(vApp.getTasks(), null);
 
       logger.debug(">> awaiting vApp(%s) deployment", vApp.getId());
-      boolean vAppDeployed = retryTaskSuccess.apply(compositionTask);
+      boolean vAppDeployed = waitForTask(compositionTask, timeouts.nodeRunning);
       logger.trace("<< vApp(%s) deployment completed(%s)", vApp.getId(), vAppDeployed);
+      if (!vAppDeployed) {
+         // TODO Destroy node? But don't have VM id yet.
+         final String message = format("vApp(%s, %s) not composed within %d ms (task %s).", 
+                  name, vApp.getId(), timeouts.nodeRunning, compositionTask.getHref());
+         logger.warn(message);
+         throw new IllegalStateException(message);
+      }
 
       if (!vApp.getTasks().isEmpty()) {
          for (Task task : vApp.getTasks()) {
             logger.debug(">> awaiting vApp(%s) composition", vApp.getId());
-            boolean vAppReady = retryTaskSuccess.apply(task);
+            boolean vAppReady = waitForTask(task, timeouts.nodeRunning);
             logger.trace("<< vApp(%s) composition completed(%s)", vApp.getId(), vAppReady);
+            if (!vAppReady) {
+               // TODO Destroy node? But don't have VM id yet.
+               final String message = format("vApp(%s, %s) post-compose not ready within %d ms (task %s).", 
+                        name, vApp.getId(), timeouts.nodeRunning, task.getHref());
+               logger.warn(message);
+               throw new IllegalStateException(message);
+            }
          }
       }
       URI vAppHref = checkNotNull(vApp.getHref(), format("vApp %s must not have a null href", vApp.getId()));
@@ -194,8 +212,15 @@ public class VCloudDirectorComputeServiceAdapter implements
       if (!vm.getTasks().isEmpty()) {
          for (Task task : vm.getTasks()) {
             logger.debug(">> awaiting vm(%s) deployment", vApp.getId());
-            boolean vmReady = retryTaskSuccess.apply(task);
+            boolean vmReady = waitForTask(task, timeouts.nodeRunning);
             logger.trace("<< vApp(%s) deployment completed(%s)", vApp.getId(), vmReady);
+            if (!vmReady) {
+               final String message = format("vApp(%s, %s) post-compose VM(%s) not ready within %d ms (task %s), so it will be destroyed", 
+                        name, vApp.getId(), vm.getHref(), timeouts.nodeRunning, task.getHref());
+               logger.warn(message);
+               destroyNode(vm.getId());
+               throw new IllegalStateException(message);
+            }
          }
       }
 
@@ -212,8 +237,15 @@ public class VCloudDirectorComputeServiceAdapter implements
       Integer ram = templateOptions.getMemory() == null ? getRamFromHardware(hardwareOptional) : templateOptions.getMemory();
 
       if (virtualCpus == null || ram == null) {
-         logger.error("the hardwareId %s specified doesn't exist. The deployment may fail subsequently");
-         throw new IllegalStateException("VirtualCPUs and/or ram are null.");
+         String msg;
+         if (hardwareOptional.isPresent()) {
+            msg = format("vCPUs and RAM stats not available in hardware %s, and not configured in template options", hardwareId);
+         } else {
+            msg = format("vCPUs and RAM stats not available - no hardware matching id %s, and not configured in template options; destroying VM", hardwareId);
+         }
+         logger.error(msg + "; destroying VM and failing");
+         destroyNode(vm.getId());
+         throw new IllegalStateException(msg);
       }
 
       VirtualHardwareSection virtualHardwareSection = api.getVmApi().getVirtualHardwareSection(vm.getHref());
@@ -226,15 +258,29 @@ public class VCloudDirectorComputeServiceAdapter implements
       // NOTE this is not efficient but the vCD API v1.5 don't support editing hardware sections during provisioning
       Task editVirtualHardwareSectionTask = api.getVmApi().editVirtualHardwareSection(vm.getHref(), virtualHardwareSection);
       logger.debug(">> awaiting vm(%s) to be edited", vm.getId());
-      boolean vmEdited = retryTaskSuccess.apply(editVirtualHardwareSectionTask);
+      boolean vmEdited = waitForTask(editVirtualHardwareSectionTask, timeouts.nodeRunning);
       logger.trace("<< vApp(%s) to be edited completed(%s)", vm.getId(), vmEdited);
+      if (!vmEdited) {
+         final String message = format("vApp(%s, %s) VM(%s) edit not completed within %d ms (task %s); destroying VM", 
+                  name, vApp.getId(), vm.getHref(), timeouts.nodeRunning, editVirtualHardwareSectionTask.getHref());
+         logger.warn(message);
+         destroyNode(vm.getId());
+         throw new IllegalStateException(message);
+      }
 
       Task deployTask = api.getVAppApi().deploy(vApp.getHref(), DeployVAppParams.builder()
               .powerOn()
               .build());
       logger.debug(">> awaiting vApp(%s) to be powered on", vApp.getId());
-      boolean vAppPoweredOn = retryTaskSuccess.apply(deployTask);
+      boolean vAppPoweredOn = waitForTask(deployTask, timeouts.nodeRunning);
       logger.trace("<< vApp(%s) to be powered on completed(%s)", vApp.getId(), vAppPoweredOn);
+      if (!vAppPoweredOn) {
+         final String message = format("vApp(%s, %s) power-on not completed within %d ms (task %s); destroying VM", 
+                  name, vApp.getId(), timeouts.nodeRunning, deployTask.getHref());
+         logger.warn(message);
+         destroyNode(vm.getId());
+         throw new IllegalStateException(message);
+      }
 
       // Reload the VM; the act of "deploy" can change things like the password in the guest customization
       composedVApp = api.getVAppApi().get(vAppHref);
@@ -436,7 +482,7 @@ public class VCloudDirectorComputeServiceAdapter implements
                     return input.getChildren() != null ? input.getChildren().getVms() : ImmutableList.<Vm>of();
                  }
               })
-                      // TODO we want also POWERED_OFF?
+              // TODO we want also POWERED_OFF?
               .filter(new Predicate<Vm>() {
                  @Override
                  public boolean apply(Vm input) {
@@ -479,8 +525,13 @@ public class VCloudDirectorComputeServiceAdapter implements
       if (!vApp.getTasks().isEmpty()) {
          for (Task task : vApp.getTasks()) {
             logger.debug(">> awaiting vApp(%s) tasks completion", vApp.getId());
-            boolean vAppDeployed = retryTaskSuccess.apply(task);
+            boolean vAppDeployed = waitForTask(task, timeouts.nodeTerminated);
             logger.trace("<< vApp(%s) tasks completions(%s)", vApp.getId(), vAppDeployed);
+            if (!vAppDeployed) {
+               final String message = format("vApp(%s) prior to destroy, pre-existing task not completed within %d ms (task %s); continuing.", 
+                        vApp.getId(), timeouts.nodeTerminated, task.getHref());
+               logger.warn(message);
+            }
          }
       }
       UndeployVAppParams params = UndeployVAppParams.builder()
@@ -488,13 +539,25 @@ public class VCloudDirectorComputeServiceAdapter implements
               .build();
       Task undeployTask = api.getVAppApi().undeploy(vAppRef, params);
       logger.debug(">> awaiting vApp(%s) undeploy completion", vApp.getId());
-      boolean vAppUndeployed = retryTaskSuccess.apply(undeployTask);
+      boolean vAppUndeployed = waitForTask(undeployTask, timeouts.nodeTerminated);
       logger.trace("<< vApp(%s) undeploy completions(%s)", vApp.getId(), vAppUndeployed);
+      if (!vAppUndeployed) {
+         final String message = format("vApp(%s) undeploy not completed within %d ms (task %s); continuing", 
+                  vApp.getId(), timeouts.nodeTerminated, undeployTask.getHref());
+         throw new IllegalStateException(message);
+      }
 
       Task removeTask = api.getVAppApi().remove(vAppRef);
       logger.debug(">> awaiting vApp(%s) remove completion", vApp.getId());
-      boolean vAppRemoved = retryTaskSuccess.apply(removeTask);
+      boolean vAppRemoved = waitForTask(removeTask, timeouts.nodeTerminated);
       logger.trace("<< vApp(%s) remove completions(%s)", vApp.getId(), vAppRemoved);
+      if (!vAppRemoved) {
+         final String message = format("vApp(%s) removal not completed within %d ms (task %s).", 
+                  vApp.getId(), timeouts.nodeTerminated, removeTask.getHref());
+         logger.warn(message);
+         throw new IllegalStateException(message);
+      }
+      
       logger.debug("vApp(%s) deleted", vApp.getName());
    }
 
