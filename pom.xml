@@ -30,7 +30,7 @@
   <groupId>io.cloudsoft.jclouds.labs</groupId>
   <artifactId>vcloud-director</artifactId>
   <name>jclouds vcloud-director api</name>
-  <version>1.9.2-SNAPSHOT</version>
+  <version>1.9.1-20151118.1705</version>
   <description>jclouds components to access an implementation of VMware vCloud Director 1.5+</description>
   <packaging>bundle</packaging>
 
