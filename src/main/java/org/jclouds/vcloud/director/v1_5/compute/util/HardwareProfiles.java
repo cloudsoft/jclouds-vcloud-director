@@ -16,11 +16,16 @@
  */
 package org.jclouds.vcloud.director.v1_5.compute.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.jclouds.compute.domain.Hardware;
 import org.jclouds.compute.domain.HardwareBuilder;
 import org.jclouds.compute.domain.Processor;
 
 public class HardwareProfiles {
+
+   public static final Pattern SHORT_NAME_PATTERN = Pattern.compile("([0-9]+)CPU_([0-9\\.]+)GB_RAM");
 
    public static Hardware createHardwareProfile(int numCpu, int ramAllocatedMB) {
 
@@ -36,5 +41,18 @@ public class HardwareProfiles {
       }
 
       return new HardwareBuilder().ids(shortName).hypervisor("esxi").name(shortName).processor(new Processor(numCpu, 1)).ram(ramAllocatedMB).build();
+   }
+   
+   public static Hardware createHardwareProfile(String shortName) {
+      Matcher matcher = SHORT_NAME_PATTERN.matcher(shortName);
+      if (!matcher.matches()) {
+          throw new IllegalArgumentException("Invalid hardware profile '" + shortName + "'");
+      }
+      String cpus = matcher.group(1);
+      String ram = matcher.group(2);
+      int numCpus = Integer.parseInt(cpus);
+      int ramAllocatedMB = (int) (Double.parseDouble(ram) * 1024);
+
+      return new HardwareBuilder().ids(shortName).hypervisor("esxi").name(shortName).processor(new Processor(numCpus, 1)).ram(ramAllocatedMB).build();
    }
 }

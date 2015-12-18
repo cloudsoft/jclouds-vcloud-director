@@ -60,6 +60,11 @@ public final class VCloudDirectorConstants {
     */
    public static final String PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_RAM = "jclouds.vcloud-director.hardware-profiles.max-ram";
 
+   /**
+    * For synthesizing hardware profiles, the maximum number of CPUs.
+    */
+   public static final String PROPERTY_VCLOUD_DIRECTOR_PREDEFINED_HARDWARE_PROFILES = "jclouds.vcloud-director.hardware-profiles.predefined";
+
    /** TODO javadoc */
    /*
    public static final TypeToken<RestContext<SessionApi, SessionAsyncApi>> SESSION_CONTEXT_TYPE =

@@ -25,6 +25,7 @@ import org.jclouds.compute.domain.Hardware;
 import org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants;
 import org.jclouds.vcloud.director.v1_5.compute.util.HardwareProfiles;
 
+import com.google.common.base.Splitter;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableSet;
 
@@ -35,15 +36,21 @@ public class VirtualHardwareConfigSupplier implements Supplier<Set<Hardware>> {
    @Inject
    public VirtualHardwareConfigSupplier(@Named(VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_CPU) int maxCpuFromProperties,
                                         @Named(VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MIN_RAM) int minRamFromProperties,
-                                        @Named(VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_RAM) int maxRamFromProperties) {
+                                        @Named(VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_RAM) int maxRamFromProperties,
+                                        @Named(VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_PREDEFINED_HARDWARE_PROFILES) String predefinedProfiles) {
       // Synthetic profiles
       ImmutableSet.Builder<Hardware> builder = ImmutableSet.builder();
-      for (int cpu = 1; cpu <= maxCpuFromProperties; cpu *= 2) {
+      for (int cpu = 1; cpu <= maxCpuFromProperties; cpu++) {
          for (int ram = minRamFromProperties; ram <= maxRamFromProperties; ram *= 2) {
             builder.add(HardwareProfiles.createHardwareProfile(cpu, ram));
          }
       }
-
+      // Predefined profiles, supplied explicitly by the user
+      if (predefinedProfiles != null) {
+         for (String profile : Splitter.on(",").trimResults().omitEmptyStrings().split(predefinedProfiles)) {
+            builder.add(HardwareProfiles.createHardwareProfile(profile));
+         }
+      }
       this.hardwareConfigs = builder.build();
    }
 
