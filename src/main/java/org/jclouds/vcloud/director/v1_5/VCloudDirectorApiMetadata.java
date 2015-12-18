@@ -24,6 +24,7 @@ import static org.jclouds.reflect.Reflection2.typeToken;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_CPU;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_RAM;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MIN_RAM;
+import static org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_PREDEFINED_HARDWARE_PROFILES;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_TIMEOUT_TASK_COMPLETED;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_VERSION_SCHEMA;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorConstants.PROPERTY_VCLOUD_DIRECTOR_XML_NAMESPACE;
@@ -75,7 +76,8 @@ public class VCloudDirectorApiMetadata extends BaseHttpApiMetadata<VCloudDirecto
 
       properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_CPU, "" + 8);
       properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MIN_RAM, "" + 512);
-      properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_RAM, "" + 1024 * 8);
+      properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_RAM, "" + 1024 * 32);
+      properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_PREDEFINED_HARDWARE_PROFILES, "");
 
       properties.setProperty(TIMEOUT_NODE_TERMINATED, "" + 5 * 60 * 1000);
       properties.setProperty(TIMEOUT_NODE_SUSPENDED, "" + 5 * 60 * 1000);
