@@ -17,7 +17,6 @@
 package org.jclouds.vcloud.director.v1_5.compute.strategy;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Predicates.and;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.find;
 import static java.lang.String.format;
@@ -36,6 +35,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.xml.namespace.QName;
 
 import org.jclouds.compute.ComputeServiceAdapter;
 import org.jclouds.compute.domain.Hardware;
@@ -61,6 +61,7 @@ import org.jclouds.vcloud.director.v1_5.domain.VAppChildren;
 import org.jclouds.vcloud.director.v1_5.domain.VAppTemplate;
 import org.jclouds.vcloud.director.v1_5.domain.Vdc;
 import org.jclouds.vcloud.director.v1_5.domain.Vm;
+import org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.CimString;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.ResourceAllocationSettingData;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.MsgType;
 import org.jclouds.vcloud.director.v1_5.domain.network.Network;
@@ -85,6 +86,7 @@ import org.jclouds.vcloud.director.v1_5.predicates.ReferencePredicates;
 import org.jclouds.vcloud.director.v1_5.predicates.TaskSuccess;
 
 import com.google.common.base.Function;
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -235,6 +237,7 @@ public class VCloudDirectorComputeServiceAdapter implements
       // virtualCpus and memory templateOptions get the precedence over the default values given by hardwareId
       Integer virtualCpus = templateOptions.getVirtualCpus() == null ? getCoresFromHardware(hardwareOptional) : templateOptions.getVirtualCpus();
       Integer ram = templateOptions.getMemory() == null ? getRamFromHardware(hardwareOptional) : templateOptions.getMemory();
+      Integer disk = templateOptions.getDisk();
 
       if (virtualCpus == null || ram == null) {
          String msg;
@@ -254,7 +257,11 @@ public class VCloudDirectorComputeServiceAdapter implements
       virtualHardwareSection = updateVirtualHardwareSection(virtualHardwareSection, processorPredicate, virtualCpus + " virtual CPU(s)", BigInteger.valueOf(virtualCpus.intValue()));
       Predicate<ResourceAllocationSettingData> memoryPredicate = resourceTypeEquals(ResourceAllocationSettingData.ResourceType.MEMORY);
       virtualHardwareSection = updateVirtualHardwareSection(virtualHardwareSection, memoryPredicate, ram + " MB of memory", BigInteger.valueOf(ram.intValue()));
-
+      if (disk != null) {
+         Predicate<ResourceAllocationSettingData> diskPredicate = resourceTypeEquals(ResourceAllocationSettingData.ResourceType.DISK_DRIVE);
+         Predicate<ResourceAllocationSettingData> elementPredicate = elementNameEquals("Hard disk 1");
+         virtualHardwareSection = updateVirtualHardwareSectionDisk(virtualHardwareSection, Predicates.and(diskPredicate, elementPredicate), BigInteger.valueOf(disk.intValue()));
+      }
       // NOTE this is not efficient but the vCD API v1.5 don't support editing hardware sections during provisioning
       Task editVirtualHardwareSectionTask = api.getVmApi().editVirtualHardwareSection(vm.getHref(), virtualHardwareSection);
       logger.debug(">> awaiting vm(%s) to be edited", vm.getId());
@@ -314,15 +321,73 @@ public class VCloudDirectorComputeServiceAdapter implements
       return new NodeAndInitialCredentials<Vm>(vm, vm.getId(), credsBuilder.build());
    }
 
+   private VirtualHardwareSection updateVirtualHardwareSection(VirtualHardwareSection virtualHardwareSection, 
+            Predicate<ResourceAllocationSettingData> predicate, final String elementName, final BigInteger virtualQuantity) {
+      return updateVirtualHardwareSection(virtualHardwareSection, predicate, new Function<ResourceAllocationSettingData, ResourceAllocationSettingData>() {
+         @Override
+         public ResourceAllocationSettingData apply(ResourceAllocationSettingData input) {
+            return input.toBuilder().elementName(elementName).virtualQuantity(virtualQuantity).build();
+         }
+         @Override
+         public String toString() {
+            return elementName + " = " + virtualQuantity;
+         }
+      });
+   }
+
+   private VirtualHardwareSection updateVirtualHardwareSectionDisk(VirtualHardwareSection virtualHardwareSection, 
+            Predicate<ResourceAllocationSettingData> predicate, final BigInteger capacity) {
+      return updateVirtualHardwareSection(virtualHardwareSection, predicate, new Function<ResourceAllocationSettingData, ResourceAllocationSettingData>() {
+         @Override
+         public ResourceAllocationSettingData apply(ResourceAllocationSettingData input) {
+            Set<CimString> oldHostResources = input.getHostResources();
+            CimString oldHostResource = (oldHostResources != null) ? Iterables.getFirst(oldHostResources, null) : null;
+            if (oldHostResource != null) {
+               boolean overriddenCapacity = false;
+               Map<QName, String> oldHostResourceAttribs = oldHostResource.getOtherAttributes();
+               Map<QName, String> newHostResourceAttribs = Maps.newLinkedHashMap();
+               for (Map.Entry<QName, String> entry : oldHostResourceAttribs.entrySet()) {
+                  QName key = entry.getKey();
+                  String val = entry.getValue();
+                  if ("capacity".equals(key.getLocalPart())) {
+                     val = capacity.toString();
+                     overriddenCapacity = true;
+                  }
+                  newHostResourceAttribs.put(key, val);
+               }
+               if (overriddenCapacity) {
+                  CimString newHostResource = new CimString(oldHostResource.getValue(), newHostResourceAttribs);
+                  Iterable<CimString> newHostResources = Iterables.concat(ImmutableList.of(newHostResource), Iterables.skip(oldHostResources, 1));
+                  return input.toBuilder().hostResources(newHostResources).build();
+               } else {
+                  logger.warn("Unable to find capacity in Host Resource for disk %s in hardware section; cannot resize disk to %s", input, capacity);
+               }
+            } else {
+               logger.warn("Unable to find Host Resource for disk %s in hardware section; cannot resize disk to %s", input, capacity);
+            }
+            return input;
+         }
+         @Override
+         public String toString() {
+            return "disk = " + capacity;
+         }
+      });
+   }
+
    private VirtualHardwareSection updateVirtualHardwareSection(VirtualHardwareSection virtualHardwareSection, Predicate<ResourceAllocationSettingData>
-           predicate, String elementName, BigInteger virtualQuantity) {
+            predicate, Function<ResourceAllocationSettingData, ResourceAllocationSettingData> modifier) {
       Set<? extends ResourceAllocationSettingData> oldItems = virtualHardwareSection.getItems();
       Set<ResourceAllocationSettingData> newItems = Sets.newLinkedHashSet(oldItems);
-      ResourceAllocationSettingData oldResourceAllocationSettingData = Iterables.find(oldItems, predicate);
-      ResourceAllocationSettingData newResourceAllocationSettingData = oldResourceAllocationSettingData.toBuilder().elementName(elementName).virtualQuantity(virtualQuantity).build();
-      newItems.remove(oldResourceAllocationSettingData);
-      newItems.add(newResourceAllocationSettingData);
-      return virtualHardwareSection.toBuilder().items(newItems).build();
+      Optional<? extends ResourceAllocationSettingData> oldResourceAllocationSettingData = Iterables.tryFind(oldItems, predicate);
+      if (oldResourceAllocationSettingData.isPresent()) {
+         ResourceAllocationSettingData newResourceAllocationSettingData = modifier.apply(oldResourceAllocationSettingData.get());
+         newItems.remove(oldResourceAllocationSettingData.get());
+         newItems.add(newResourceAllocationSettingData);
+         return virtualHardwareSection.toBuilder().items(newItems).build();
+      } else {
+         logger.warn("Unable to find hardware section matching %s; cannot apply %s", predicate, modifier);
+         return virtualHardwareSection;
+      }
    }
 
    private Predicate<ResourceAllocationSettingData> resourceTypeEquals(final ResourceAllocationSettingData.ResourceType resourceType) {
@@ -330,6 +395,23 @@ public class VCloudDirectorComputeServiceAdapter implements
          @Override
          public boolean apply(ResourceAllocationSettingData rasd) {
             return rasd.getResourceType() == resourceType;
+         }
+         @Override
+         public String toString() {
+            return "resourceTypeEquals(" + resourceType + ")";
+         }
+      };
+   }
+
+   private Predicate<ResourceAllocationSettingData> elementNameEquals(final String name) {
+      return new Predicate<ResourceAllocationSettingData>() {
+         @Override
+         public boolean apply(ResourceAllocationSettingData rasd) {
+            return Objects.equal(rasd.getElementName(), name);
+         }
+         @Override
+         public String toString() {
+            return "elementNameEquals(" + name + ")";
          }
       };
    }
@@ -501,7 +583,7 @@ public class VCloudDirectorComputeServiceAdapter implements
    public Iterable<Vdc> listLocations() {
       Org org = getOrgForSession();
       return FluentIterable.from(org.getLinks())
-              .filter(and(ReferencePredicates.<Link>typeEquals(VDC)))
+              .filter(ReferencePredicates.<Link>typeEquals(VDC))
               .transform(new Function<Link, Vdc>() {
                  @Override
                  public Vdc apply(Link input) {

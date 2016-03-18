@@ -32,6 +32,7 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
    protected Statement guestCustomizationScript;
    protected Integer memory;
    protected Integer virtualCpus;
+   protected Integer disk;
 
    /**
     * Specifies a script to be added to the GuestCustomizationSection
@@ -58,6 +59,15 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
       return this;
    }
 
+   /**
+    * Specifies the size of the first disk (in MB). If null, the disk will be left at its 
+    * default size.
+    */
+   public VCloudDirectorTemplateOptions disk(@Nullable Integer disk) {
+      this.disk = disk;
+      return this;
+   }
+
    public Statement getGuestCustomizationScript() {
       return guestCustomizationScript;
    }
@@ -65,6 +75,8 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
    public Integer getMemory() { return memory; }
 
    public Integer getVirtualCpus() { return virtualCpus; }
+
+   public Integer getDisk() { return disk; }
 
    @Override
    public VCloudDirectorTemplateOptions clone() {
@@ -81,6 +93,7 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
          vto.guestCustomizationScript(getGuestCustomizationScript());
          vto.memory(memory);
          vto.virtualCpus(virtualCpus);
+         vto.disk(disk);
       }
    }
 
@@ -91,12 +104,14 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
       if (o == null || getClass() != o.getClass())
          return false;
       VCloudDirectorTemplateOptions that = VCloudDirectorTemplateOptions.class.cast(o);
-      return super.equals(that) && equal(this.guestCustomizationScript, that.guestCustomizationScript);
+      return super.equals(that) && equal(this.guestCustomizationScript, that.guestCustomizationScript)
+            && equal(this.memory, that.memory) && equal(this.virtualCpus, that.virtualCpus) 
+            && equal(this.disk, that.disk);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hashCode(super.hashCode(), guestCustomizationScript);
+      return Objects.hashCode(super.hashCode(), guestCustomizationScript, memory, virtualCpus, disk);
    }
 
    @Override
@@ -104,6 +119,12 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
       Objects.ToStringHelper toString = super.string();
       if (guestCustomizationScript != null)
          toString.add("guestCustomizationScript", guestCustomizationScript);
+      if (memory != null)
+         toString.add("memory", memory);
+      if (virtualCpus != null)
+         toString.add("virtualCpus", virtualCpus);
+      if (disk != null)
+         toString.add("disk", disk);
       return toString;
    }
 
@@ -135,6 +156,14 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
       public static VCloudDirectorTemplateOptions virtualCpus(Integer virtualCpus) {
          VCloudDirectorTemplateOptions options = new VCloudDirectorTemplateOptions();
          return options.virtualCpus(virtualCpus);
+      }
+
+      /**
+       * @see #disk
+       */
+      public static VCloudDirectorTemplateOptions disk(Integer disk) {
+         VCloudDirectorTemplateOptions options = new VCloudDirectorTemplateOptions();
+         return options.disk(disk);
       }
 
       /**
