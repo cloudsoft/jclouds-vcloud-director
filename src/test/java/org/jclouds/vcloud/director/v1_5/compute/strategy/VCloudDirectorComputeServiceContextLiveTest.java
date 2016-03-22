@@ -50,7 +50,9 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
    protected String vdcUrn;
    protected String networkUrn;
    protected String networkName;
-
+   protected String hardwareId;
+   protected String diskSize;
+   
    @Resource
    @Named(ComputeServiceConstants.COMPUTE_LOGGER)
    protected Logger logger = Logger.NULL;
@@ -66,6 +68,8 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
       vdcUrn = emptyToNull(System.getProperty("test." + provider + ".vdc-id"));
       networkUrn = emptyToNull(System.getProperty("test." + provider + ".network-id"));
       networkName = emptyToNull(System.getProperty("test." + provider + ".network-name"));
+      hardwareId = emptyToNull(System.getProperty("test." + provider + ".hardware-id"));
+      diskSize = emptyToNull(System.getProperty("test." + provider + ".disk-size"));
       checkArgument(vAppTemplateUrn == null || vAppTemplateNameRegex == null, 
             "Must not specify id %s and name %s for template", vAppTemplateUrn, vAppTemplateNameRegex);
       checkArgument(networkUrn == null || networkName == null, 
@@ -93,10 +97,16 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
          templateBuilder.imageNameMatches(vAppTemplateNameRegex);
       }
       
-      Template template = templateBuilder
-              .minCores(4)
-              .minRam(2048)
-              .build();
+      if (hardwareId != null) {
+         templateBuilder.hardwareId(hardwareId);
+      } else {
+         templateBuilder
+                  .minCores(4)
+                  .minRam(2048);
+      }
+      
+      Template template = templateBuilder.build();
+      
       // test passing custom options
       VCloudDirectorTemplateOptions options = template.getOptions().as(VCloudDirectorTemplateOptions.class);
 
@@ -104,6 +114,12 @@ public class VCloudDirectorComputeServiceContextLiveTest extends BaseComputeServ
          options.networks(networkName);
       } else {
          options.networks("Operational_Network_01");
+      }
+      
+      if (diskSize != null) {
+         options.disk(Integer.parseInt(diskSize));
+      } else {
+         options.disk(22000); // in MB
       }
       
       NodeMetadata node = null;

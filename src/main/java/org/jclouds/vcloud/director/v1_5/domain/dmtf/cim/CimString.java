@@ -47,6 +47,11 @@ public class CimString {
       this.value = value;
    }
 
+   public CimString(String value, Map<QName, String> otherAttributes) {
+      this.value = value;
+      this.otherAttributes = otherAttributes != null ? Maps.newLinkedHashMap(otherAttributes) : null;
+   }
+
    @XmlValue
    protected String value;
    @XmlAnyAttribute
@@ -89,7 +94,7 @@ public class CimString {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("value", value).toString();
+      return Objects.toStringHelper("").add("value", value).add("otherAttributes", otherAttributes).toString();
    }
 
 }
