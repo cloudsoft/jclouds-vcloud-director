@@ -52,7 +52,7 @@ import com.google.inject.name.Named;
  * filter out any null values returned by the nodeMetadataAdapter. The addLoginCredentials 
  * thus also guards against null input.
  */
-public class VcloudDirectorListNodesStrategy extends AdaptingComputeServiceStrategies<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc> {
+public class VcloudDirectorAdaptingComputeServiceStrategies extends AdaptingComputeServiceStrategies<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc> {
 
    // TODO Longer term, fix this in core jclouds and delete when that is available in a stable release.
    
@@ -65,7 +65,7 @@ public class VcloudDirectorListNodesStrategy extends AdaptingComputeServiceStrat
    private final Function<Vm, NodeMetadata> nodeMetadataAdapter;
 
    @Inject
-   public VcloudDirectorListNodesStrategy(Map<String, Credentials> credentialStore,
+   public VcloudDirectorAdaptingComputeServiceStrategies(Map<String, Credentials> credentialStore,
             PrioritizeCredentialsFromTemplate prioritizeCredentialsFromTemplate,
             ComputeServiceAdapter<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc> client, Function<Vm, NodeMetadata> nodeMetadataAdapter,
             Function<QueryResultVAppTemplateRecord, Image> imageAdapter,

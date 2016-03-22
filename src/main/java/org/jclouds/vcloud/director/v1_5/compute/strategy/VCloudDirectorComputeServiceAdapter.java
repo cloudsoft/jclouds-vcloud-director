@@ -600,8 +600,18 @@ public class VCloudDirectorComputeServiceAdapter implements
    @Override
    public void destroyNode(String id) {
       Vm vm = api.getVmApi().get(id);
+      if (vm == null) {
+         // See https://github.com/cloudsoft/jclouds-vcloud-director/issues/29
+         // Happens if the VM has been deleted behind-our-back
+         logger.info("Failed to destroy VM %s; not found (presumably already deleted?)", id);
+      }
       URI vAppRef = VCloudDirectorComputeUtils.getVAppParent(vm);
       VApp vApp = api.getVAppApi().get(vAppRef);
+      if (vApp == null) {
+         // See https://github.com/cloudsoft/jclouds-vcloud-director/issues/29
+         // Happens if the VM has been deleted behind-our-back (between us retrieving VM above, and retrieving vApp)!
+         logger.info("Failed to destroy VM %s; vApp %s not found (presumably already deleted?)", id, vAppRef);
+      }
 
       logger.debug("Deleting vApp(%s) that contains VM(%s) ...", vApp.getName(), vm.getName());
       if (!vApp.getTasks().isEmpty()) {
