@@ -83,6 +83,12 @@ public class VmToNodeMetadata implements Function<Vm, NodeMetadata> {
       builder.group(nodeNamingConvention.groupInUniqueNameOrNull(from.getName()));
       URI vAppRef = VCloudDirectorComputeUtils.getVAppParent(from);
       VApp vAppParent = api.getVAppApi().get(vAppRef);
+      if (vAppParent == null) {
+         // See https://github.com/cloudsoft/jclouds-vcloud-director/issues/35
+         // Happens if the VM has been deleted between listing all vApps and us retrieving this vApp.
+         logger.debug("Failed to convert VM %s to NodeMetadata; get for vApp %s returned null (presumably deleted?)", from, vAppRef);
+         return null;
+      }
       Optional<Link> linkOptional = Iterables.tryFind(vAppParent.getLinks(), LinkPredicates.typeEquals(VCloudDirectorMediaType.VDC));
       if (linkOptional.isPresent()) {
          builder.location(findLocationForResourceInVDC.apply(linkOptional.get()));

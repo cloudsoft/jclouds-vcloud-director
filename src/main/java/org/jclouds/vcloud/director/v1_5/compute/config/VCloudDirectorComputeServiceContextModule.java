@@ -17,6 +17,7 @@
 package org.jclouds.vcloud.director.v1_5.compute.config;
 
 import static org.jclouds.Constants.PROPERTY_SESSION_INTERVAL;
+
 import java.net.URI;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +28,7 @@ import org.jclouds.compute.domain.Hardware;
 import org.jclouds.compute.domain.Image;
 import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.options.TemplateOptions;
+import org.jclouds.compute.strategy.impl.AdaptingComputeServiceStrategies;
 import org.jclouds.domain.Credentials;
 import org.jclouds.domain.Location;
 import org.jclouds.functions.IdentityFunction;
@@ -41,6 +43,7 @@ import org.jclouds.vcloud.director.v1_5.compute.functions.VdcToLocation;
 import org.jclouds.vcloud.director.v1_5.compute.functions.VmToNodeMetadata;
 import org.jclouds.vcloud.director.v1_5.compute.options.VCloudDirectorTemplateOptions;
 import org.jclouds.vcloud.director.v1_5.compute.strategy.VCloudDirectorComputeServiceAdapter;
+import org.jclouds.vcloud.director.v1_5.compute.strategy.VcloudDirectorAdaptingComputeServiceStrategies;
 import org.jclouds.vcloud.director.v1_5.compute.suppliers.VirtualHardwareConfigSupplier;
 import org.jclouds.vcloud.director.v1_5.domain.Entity;
 import org.jclouds.vcloud.director.v1_5.domain.ResourceEntity;
@@ -91,6 +94,8 @@ public class VCloudDirectorComputeServiceContextModule extends
       }).to(VdcToLocation.class);
       bind(TemplateOptions.class).to(VCloudDirectorTemplateOptions.class);
       bind(new TypeLiteral<Supplier<Set<Hardware>>>() {}).to(VirtualHardwareConfigSupplier.class);
+      bind(new TypeLiteral<AdaptingComputeServiceStrategies<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc>>() {
+      }).to(VcloudDirectorAdaptingComputeServiceStrategies.class);
       install(new LocationsFromComputeServiceAdapterModule<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc>() {
       });
    }
