@@ -18,6 +18,7 @@ package org.jclouds.vcloud.director.v1_5.compute.functions;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import java.net.URI;
+import java.util.NoSuchElementException;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -30,6 +31,7 @@ import org.jclouds.compute.domain.OperatingSystem;
 import org.jclouds.compute.domain.OsFamily;
 import org.jclouds.compute.reference.ComputeServiceConstants;
 import org.jclouds.logging.Logger;
+import org.jclouds.vcloud.director.v1_5.domain.Reference;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.Envelope;
 import org.jclouds.vcloud.director.v1_5.domain.query.QueryResultVAppTemplateRecord;
 import org.jclouds.vcloud.director.v1_5.domain.section.OperatingSystemSection;
@@ -53,11 +55,13 @@ public class ImageForVAppTemplate implements Function<QueryResultVAppTemplateRec
 
    private final Function<String, Image.Status> toPortableImageStatus;
    private final Function<URI, Envelope> templateToEnvelope;
+   private final FindLocationForResource findLocationForResource;
 
    @Inject
-   protected ImageForVAppTemplate(Function<String, Image.Status> toPortableImageStatus, Function<URI, Envelope> templateToEnvelope) {
+   protected ImageForVAppTemplate(Function<String, Image.Status> toPortableImageStatus, Function<URI, Envelope> templateToEnvelope, FindLocationForResource findLocationForResource) {
       this.toPortableImageStatus = checkNotNull(toPortableImageStatus, "toPortableImageStatus");
       this.templateToEnvelope = checkNotNull(templateToEnvelope, "templateToEnvelope");
+      this.findLocationForResource = findLocationForResource;
    }
 
    @Override
@@ -86,6 +90,19 @@ public class ImageForVAppTemplate implements Function<QueryResultVAppTemplateRec
       }
       builder.operatingSystem(os);
       builder.status(toPortableImageStatus.apply(from.getStatus()));
+
+      if (from.getVdc() != null) {
+          Reference reference = Reference.builder().name(from.getVdc()).href(URI.create(from.getVdc())).build();
+
+          try {
+              builder.location(findLocationForResource.apply(reference));
+          } catch (NoSuchElementException e) {
+              logger.warn("The image doesn't have a location metadata attached and cannot be prioritized", e);
+          }
+      } else {
+          logger.warn("The image doesn't have a location metadata attached and cannot be prioritized");
+      }
+
       return builder.build();
    }
 
