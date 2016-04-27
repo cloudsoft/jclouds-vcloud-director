@@ -27,6 +27,7 @@ import org.jclouds.compute.config.ComputeServiceAdapterContextModule;
 import org.jclouds.compute.domain.Hardware;
 import org.jclouds.compute.domain.Image;
 import org.jclouds.compute.domain.NodeMetadata;
+import org.jclouds.compute.domain.TemplateBuilder;
 import org.jclouds.compute.options.TemplateOptions;
 import org.jclouds.compute.strategy.impl.AdaptingComputeServiceStrategies;
 import org.jclouds.domain.Credentials;
@@ -34,6 +35,7 @@ import org.jclouds.domain.Location;
 import org.jclouds.functions.IdentityFunction;
 import org.jclouds.location.Provider;
 import org.jclouds.vcloud.director.v1_5.annotations.Login;
+import org.jclouds.vcloud.director.v1_5.builders.VCloudDirectorTemplateBuilderImpl;
 import org.jclouds.vcloud.director.v1_5.compute.functions.HardwareForVm;
 import org.jclouds.vcloud.director.v1_5.compute.functions.ImageForVAppTemplate;
 import org.jclouds.vcloud.director.v1_5.compute.functions.ImageStateForStatus;
@@ -96,6 +98,8 @@ public class VCloudDirectorComputeServiceContextModule extends
       bind(new TypeLiteral<Supplier<Set<Hardware>>>() {}).to(VirtualHardwareConfigSupplier.class);
       bind(new TypeLiteral<AdaptingComputeServiceStrategies<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc>>() {
       }).to(VcloudDirectorAdaptingComputeServiceStrategies.class);
+      bind(new TypeLiteral<TemplateBuilder>() {
+      }).to(VCloudDirectorTemplateBuilderImpl.class);
       install(new LocationsFromComputeServiceAdapterModule<Vm, Hardware, QueryResultVAppTemplateRecord, Vdc>() {
       });
    }
