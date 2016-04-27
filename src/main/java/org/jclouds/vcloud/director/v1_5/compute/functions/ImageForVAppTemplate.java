@@ -97,10 +97,10 @@ public class ImageForVAppTemplate implements Function<QueryResultVAppTemplateRec
           try {
               builder.location(findLocationForResource.apply(reference));
           } catch (NoSuchElementException e) {
-              logger.warn("The image doesn't have a location metadata attached and cannot be prioritized", e);
+              logger.debug("The image %s doesn't have location metadata attached. %s", from, e.toString());
           }
       } else {
-          logger.warn("The image doesn't have a location metadata attached and cannot be prioritized");
+          logger.debug("The image %s doesn't have location metadata attached.", from);
       }
 
       return builder.build();
