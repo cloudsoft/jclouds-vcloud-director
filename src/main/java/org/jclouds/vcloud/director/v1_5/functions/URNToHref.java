@@ -46,6 +46,13 @@ public final class URNToHref implements Function<Object, URI> {
    @Override
    public URI apply(@Nullable Object from) {
       checkArgument(checkNotNull(from, "urn") instanceof String, "urn is a String argument");
+      if (!from.toString().toLowerCase().startsWith("urn")) {
+         try {
+            return URI.create(from.toString());
+         } catch (IllegalArgumentException e) {
+            // not a valid href; presumably it is just the URN part. Must load the entity.
+         }
+      }
       Entity entity = resolveEntityCache.getUnchecked(from.toString());
       checkArgument(entity.getLinks().size() > 0, "no links found for entity %s", entity);
       return get(entity.getLinks(), 0).getHref();

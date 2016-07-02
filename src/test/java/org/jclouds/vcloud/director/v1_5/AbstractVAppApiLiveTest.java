@@ -134,8 +134,7 @@ public abstract class AbstractVAppApiLiveTest extends BaseVCloudDirectorApiLiveT
       vdc = lazyGetVdc();
 
       // Get the configured VAppTemplate for the tests
-      vAppTemplate = vAppTemplateApi.get(vAppTemplateUrn);
-      assertNotNull(vAppTemplate, String.format(ENTITY_NON_NULL, VAPP_TEMPLATE));
+      vAppTemplate = lazyGetVAppTemplate();
 
       // Instantiate a new VApp
       VApp vAppInstantiated = instantiateVApp();

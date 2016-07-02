@@ -101,6 +101,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.base.Throwables;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -561,9 +562,15 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
    
    protected VAppTemplate lazyGetVAppTemplate() {
       if (vAppTemplate == null) {
-         assertNotNull(vAppTemplateUrn, String.format(URN_REQ_LIVE, VAPP_TEMPLATE));
-         vAppTemplate = api.getVAppTemplateApi().get(vAppTemplateUrn);
-         assertNotNull(vAppTemplate, String.format(ENTITY_NON_NULL, VAPP_TEMPLATE));
+         if (vAppTemplateUrn != null) {
+            vAppTemplate = api.getVAppTemplateApi().get(vAppTemplateUrn);
+            assertNotNull(vAppTemplate, String.format(ENTITY_NON_NULL, VAPP_TEMPLATE));
+         } else {
+            Optional<VAppTemplate> optionalvAppTemplate = tryFindVAppTemplateInOrg();
+            assertTrue(optionalvAppTemplate.isPresent(), String.format(ENTITY_NON_NULL, VAPP_TEMPLATE));
+            vAppTemplate = optionalvAppTemplate.get();
+            vAppTemplateUrn = vAppTemplate.getId();
+         }
       }
       return vAppTemplate;
    }
