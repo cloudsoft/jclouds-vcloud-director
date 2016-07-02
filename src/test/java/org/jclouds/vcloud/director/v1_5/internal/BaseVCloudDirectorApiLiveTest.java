@@ -101,6 +101,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.base.Throwables;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -686,6 +687,10 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
    }
 
    protected void cleanUpVApp(VApp vApp) {
+      cleanUpVApp(vApp, false);
+   }
+   
+   protected void cleanUpVApp(VApp vApp, boolean propagateExceptions) {
       VAppApi vAppApi = api.getVAppApi();
 
       String vAppUrn = vApp.getId();
@@ -738,6 +743,9 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
       } catch (Exception e) {
          vApp = vAppApi.get(vApp.getId()); // Refresh
          logger.warn(e, "Deleting VApp %s failed (%s)", vApp.getName(), vAppUrn);
+         if (propagateExceptions) {
+            throw Throwables.propagate(e);
+         }
       }
    }
 
