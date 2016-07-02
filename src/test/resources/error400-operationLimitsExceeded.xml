@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error xmlns="http://www.vmware.com/vcloud/v1.5" 
+     minorErrorCode="OPERATION_LIMITS_EXCEEDED" 
+     message="The maximum number of simultaneous operations for user &quot;myname&quot; on organization &quot;my-org&quot; has been reached." 
+     majorErrorCode="400" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://acme.com/api/v1.5/schema/master.xsd">
+</Error>
