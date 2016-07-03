@@ -37,7 +37,7 @@ public class VcloudDirectorClientErrorRetryHandler extends BackoffLimitedRetryHa
    private final Set<String> retryableCodes;
 
    @Inject
-   public VcloudDirectorClientErrorRetryHandler(VcloudDirectorUtils utils, 
+   protected VcloudDirectorClientErrorRetryHandler(VcloudDirectorUtils utils, 
          @ClientError Set<String> retryableCodes) {
       this.utils = utils;
       this.retryableCodes = retryableCodes;

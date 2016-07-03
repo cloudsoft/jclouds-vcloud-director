@@ -26,6 +26,7 @@ import org.jclouds.http.HttpResponse;
 import org.jclouds.http.functions.ParseSax;
 import org.jclouds.http.functions.ParseSax.Factory;
 import org.jclouds.logging.Logger;
+import org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType;
 import org.jclouds.vcloud.director.v1_5.domain.VcloudDirectorError;
 
 @Singleton
@@ -38,7 +39,7 @@ public class VcloudDirectorUtils {
    protected Logger logger = Logger.NULL;
 
    @Inject
-   VcloudDirectorUtils(Factory factory, Provider<ErrorHandler> errorHandlerProvider) {
+   protected VcloudDirectorUtils(Factory factory, Provider<ErrorHandler> errorHandlerProvider) {
       this.factory = factory;
       this.errorHandlerProvider = errorHandlerProvider;
    }
@@ -48,7 +49,7 @@ public class VcloudDirectorUtils {
          return null;
  
       String contentType = response.getPayload().getContentMetadata().getContentType();
-      if (contentType == null || !contentType.toLowerCase().contains("vnd.vmware.vcloud.error+xml")) {
+      if (contentType == null || !contentType.toLowerCase().contains(VCloudDirectorMediaType.ERROR)) {
          // expected "application/vnd.vmware.vcloud.error+xml;version=1.5"
          return null;
       }
