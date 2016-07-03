@@ -33,7 +33,6 @@ import org.jclouds.rest.config.HttpApiModule;
 import org.jclouds.vcloud.director.v1_5.VCloudDirectorApi;
 import org.jclouds.vcloud.director.v1_5.handlers.VCloudDirectorErrorHandler;
 import org.jclouds.vcloud.director.v1_5.handlers.VcloudDirectorClientErrorRetryHandler;
-import org.jclouds.vcloud.director.v1_5.handlers.VcloudDirectorServerErrorRetryHandler;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Provides;
@@ -82,6 +81,5 @@ public class VCloudDirectorHttpApiModule extends HttpApiModule<VCloudDirectorApi
    @Override
    protected void bindRetryHandlers() {
       bind(HttpRetryHandler.class).annotatedWith(ClientError.class).to(VcloudDirectorClientErrorRetryHandler.class);
-      bind(HttpRetryHandler.class).annotatedWith(ServerError.class).to(VcloudDirectorServerErrorRetryHandler.class);
    }
 }
