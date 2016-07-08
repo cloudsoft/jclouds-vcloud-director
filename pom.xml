@@ -21,16 +21,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.apache.jclouds.labs</groupId>
+    <groupId>io.cloudsoft.jclouds.labs</groupId>
     <artifactId>jclouds-labs</artifactId>
-    <version>1.9.3-SNAPSHOT</version>
+    <version>1.9.2-cloudsoft.20160708-rc1</version>
   </parent>
 
   <!-- TODO: when out of labs, switch to org.jclouds.api -->
   <groupId>io.cloudsoft.jclouds.labs</groupId>
   <artifactId>vcloud-director</artifactId>
   <name>jclouds vcloud-director api</name>
-  <version>1.9.3-SNAPSHOT</version>
+  <version>1.9.2-cloudsoft.20160708-rc1</version>
   <description>jclouds components to access an implementation of VMware vCloud Director 1.5+</description>
   <packaging>bundle</packaging>
 
@@ -70,37 +70,37 @@
       <artifactId>java-xmlbuilder</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.jclouds</groupId>
+      <groupId>io.cloudsoft.jclouds</groupId>
       <artifactId>jclouds-compute</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.jclouds.driver</groupId>
+      <groupId>io.cloudsoft.jclouds.driver</groupId>
       <artifactId>jclouds-okhttp</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.jclouds</groupId>
+      <groupId>io.cloudsoft.jclouds</groupId>
       <artifactId>jclouds-core</artifactId>
       <version>${project.parent.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.jclouds</groupId>
+      <groupId>io.cloudsoft.jclouds</groupId>
       <artifactId>jclouds-compute</artifactId>
       <version>${project.parent.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.jclouds.driver</groupId>
+      <groupId>io.cloudsoft.jclouds.driver</groupId>
       <artifactId>jclouds-sshj</artifactId>
       <version>${project.parent.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.jclouds.driver</groupId>
+      <groupId>io.cloudsoft.jclouds.driver</groupId>
       <artifactId>jclouds-slf4j</artifactId>
       <version>${project.parent.version}</version>
       <scope>test</scope>
@@ -143,9 +143,9 @@
         </executions>
         <dependencies>
           <dependency>
-            <groupId>org.apache.jclouds</groupId>
+            <groupId>io.cloudsoft.jclouds</groupId>
             <artifactId>jclouds-resources</artifactId>
-            <version>1.9.3-SNAPSHOT</version>
+            <version>1.9.2-cloudsoft.20160708-rc1</version>
             <scope>compile</scope>
           </dependency>
         </dependencies>
@@ -176,9 +176,9 @@
         </executions>
         <dependencies>
           <dependency>
-            <groupId>org.apache.jclouds</groupId>
+            <groupId>io.cloudsoft.jclouds</groupId>
             <artifactId>jclouds-resources</artifactId>
-            <version>1.9.3-SNAPSHOT</version>
+            <version>1.9.2-cloudsoft.20160708-rc1</version>
             <scope>compile</scope>
           </dependency>
         </dependencies>
