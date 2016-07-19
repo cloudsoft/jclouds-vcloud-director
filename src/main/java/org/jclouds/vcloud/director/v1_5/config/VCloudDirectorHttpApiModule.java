@@ -16,7 +16,10 @@
  */
 package org.jclouds.vcloud.director.v1_5.config;
 
+import java.util.Set;
+
 import org.jclouds.http.HttpErrorHandler;
+import org.jclouds.http.HttpRetryHandler;
 import org.jclouds.http.annotation.ClientError;
 import org.jclouds.http.annotation.Redirection;
 import org.jclouds.http.annotation.ServerError;
@@ -29,8 +32,12 @@ import org.jclouds.rest.ConfiguresHttpApi;
 import org.jclouds.rest.config.HttpApiModule;
 import org.jclouds.vcloud.director.v1_5.VCloudDirectorApi;
 import org.jclouds.vcloud.director.v1_5.handlers.VCloudDirectorErrorHandler;
+import org.jclouds.vcloud.director.v1_5.handlers.VcloudDirectorClientErrorRetryHandler;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.inject.Provides;
 import com.google.inject.Scopes;
+import com.google.inject.Singleton;
 
 /**
  * Configures the vCloud Director connection.
@@ -42,6 +49,20 @@ public class VCloudDirectorHttpApiModule extends HttpApiModule<VCloudDirectorApi
    protected void configure() {
       bind(DateAdapter.class).to(Iso8601DateAdapter.class);
       super.configure();
+   }
+
+   @Provides
+   @ClientError
+   @Singleton
+   protected Set<String> provideRetryableCodes() {
+      return ImmutableSet.of("OPERATION_LIMITS_EXCEEDED");
+   }
+   
+   @Provides
+   @ServerError
+   @Singleton
+   protected Set<String> provideRetryableServerCodes() {
+      return ImmutableSet.of();
    }
 
    @Override
@@ -57,4 +78,8 @@ public class VCloudDirectorHttpApiModule extends HttpApiModule<VCloudDirectorApi
       bind(ImplicitLocationSupplier.class).to(OnlyLocationOrFirstZone.class).in(Scopes.SINGLETON);
    }
 
+   @Override
+   protected void bindRetryHandlers() {
+      bind(HttpRetryHandler.class).annotatedWith(ClientError.class).to(VcloudDirectorClientErrorRetryHandler.class);
+   }
 }

@@ -17,6 +17,8 @@
 package org.jclouds.vcloud.director.v1_5;
 
 
+import static org.jclouds.Constants.PROPERTY_MAX_RETRIES;
+import static org.jclouds.Constants.PROPERTY_RETRY_DELAY_START;
 import static org.jclouds.Constants.PROPERTY_SESSION_INTERVAL;
 import static org.jclouds.compute.config.ComputeServiceProperties.TIMEOUT_NODE_SUSPENDED;
 import static org.jclouds.compute.config.ComputeServiceProperties.TIMEOUT_NODE_TERMINATED;
@@ -81,6 +83,13 @@ public class VCloudDirectorApiMetadata extends BaseHttpApiMetadata<VCloudDirecto
 
       properties.setProperty(TIMEOUT_NODE_TERMINATED, "" + 5 * 60 * 1000);
       properties.setProperty(TIMEOUT_NODE_SUSPENDED, "" + 5 * 60 * 1000);
+
+      // Be more conservative about exponential backoff with vCloudDirector - have seen throttling
+      // far more with vCD than other clouds like AWS.
+      // This will backoff each time for a delay of 100 * failureCount^2, to a max of 100*100 = 10 seconds.
+      // The exponential backoff times will be: 100ms, 400ms, 900ms, 1600ms, 2500ms, 5000ms
+      properties.setProperty(PROPERTY_MAX_RETRIES, "" + 6); // jclouds default is 5
+      properties.setProperty(PROPERTY_RETRY_DELAY_START, "" + 100); // jclouds default is 50
 
       return properties;
    }
