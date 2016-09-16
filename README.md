@@ -3,7 +3,7 @@ jclouds-vcloud-director
 
 In order to release a new version:
 
-1. create a new `release` branch out of `1.8.x` branch
+1. create a new `release` branch out of `master` branch
 2. update the version inside `release/new-branch` pom.xml
 3. mvn clean install
 
