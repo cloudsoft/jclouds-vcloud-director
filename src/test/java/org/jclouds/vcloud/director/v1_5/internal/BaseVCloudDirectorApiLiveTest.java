@@ -78,7 +78,7 @@ import org.jclouds.vcloud.director.v1_5.domain.network.Network;
 import org.jclouds.vcloud.director.v1_5.domain.network.NetworkConfiguration;
 import org.jclouds.vcloud.director.v1_5.domain.network.VAppNetworkConfiguration;
 import org.jclouds.vcloud.director.v1_5.domain.org.Org;
-import org.jclouds.vcloud.director.v1_5.domain.params.InstantiateVAppTemplateParams;
+//import org.jclouds.vcloud.director.v1_5.domain.params.InstantiateVAppTemplateParams;
 import org.jclouds.vcloud.director.v1_5.domain.params.InstantiationParams;
 import org.jclouds.vcloud.director.v1_5.domain.params.UndeployVAppParams;
 import org.jclouds.vcloud.director.v1_5.domain.section.NetworkConfigSection;
@@ -611,9 +611,9 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
    }
 
    protected VApp instantiateVApp(String name) {
-      InstantiateVAppTemplateParams instantiate = InstantiateVAppTemplateParams.builder().name(name).notDeploy()
-               .notPowerOn().description("Test VApp").instantiationParams(instantiationParams())
-               .source(Reference.builder().href(lazyGetVAppTemplate().getHref()).build()).build();
+//      InstantiateVAppTemplateParams instantiate = InstantiateVAppTemplateParams.builder().name(name).notDeploy()
+//               .notPowerOn().description("Test VApp").instantiationParams(instantiationParams())
+//               .source(Reference.builder().href(lazyGetVAppTemplate().getHref()).build()).build();
 
       VdcApi vdcApi = api.getVdcApi();
       vappId = emptyToNull(System.getProperty("test." + provider + ".vapp-id"));

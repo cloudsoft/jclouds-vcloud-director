@@ -110,7 +110,7 @@ public class RasdItem extends ResourceAllocationSettingData {
                .links(in.getLinks());
       }
    }
-   
+
    @XmlAttribute(name = "type", namespace = VCLOUD_1_5_NS)
    private String type;
    @XmlAttribute(name = "href", namespace = VCLOUD_1_5_NS)

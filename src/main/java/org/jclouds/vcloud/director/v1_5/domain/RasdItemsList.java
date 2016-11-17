@@ -30,13 +30,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.collect.ForwardingList;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.RasdItem;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
-import com.google.common.collect.Sets;
 
 /**
  * Represents a list of RASD items.
@@ -71,7 +72,7 @@ public class RasdItemsList extends ForwardingList<RasdItem> implements Set<RasdI
        * @see RasdItemsList#getItems()
        */
       public Builder items(List<RasdItem> items) {
-         this.items = checkNotNull(items, "items");
+         this.items = ImmutableList.copyOf(checkNotNull(items, "items"));
          return this;
       }
 
