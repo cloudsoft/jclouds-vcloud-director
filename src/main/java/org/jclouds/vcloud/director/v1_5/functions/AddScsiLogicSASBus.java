@@ -19,6 +19,7 @@ package org.jclouds.vcloud.director.v1_5.functions;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import org.jclouds.vcloud.director.v1_5.domain.RasdItemsList;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.RasdItem;
@@ -39,7 +40,9 @@ public class AddScsiLogicSASBus {
         }
     };
     public RasdItemsList addScsiLogicSASBus(RasdItemsList virtualHardwareSectionDisks) {
-        RasdItemsList result = RasdItemsList.builder().fromRasdItemsList(virtualHardwareSectionDisks).build();
+        RasdItemsList result = RasdItemsList.builder().fromRasdItemsList(virtualHardwareSectionDisks)
+                .items(Lists.<RasdItem>newLinkedList())
+                .build();
         for (RasdItem item : virtualHardwareSectionDisks) {
             result.add(item);
         }
