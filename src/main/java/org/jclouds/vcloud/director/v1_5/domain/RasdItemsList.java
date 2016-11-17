@@ -19,14 +19,19 @@ package org.jclouds.vcloud.director.v1_5.domain;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.net.URI;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.google.common.collect.ForwardingList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.RasdItem;
 
 import com.google.common.base.Objects;
@@ -42,68 +47,145 @@ import com.google.common.collect.Sets;
  */
 @XmlRootElement(name = "RasdItemsList")
 @XmlType(name = "RasdItemsList")
-public class RasdItemsList extends Resource implements Set<RasdItem> {
+public class RasdItemsList extends ForwardingList<RasdItem> implements Set<RasdItem> {
+   @XmlAttribute
+   private URI href;
+   @XmlAttribute
+   private String type;
+   @XmlElement(name = "Link")
+   private Set<Link> links = Sets.newLinkedHashSet();
 
-   public static Builder<?> builder() {
-      return new ConcreteBuilder();
+   public static Builder builder() {
+      return new Builder();
    }
 
-   @Override
-   public Builder<?> toBuilder() {
+   public Builder toBuilder() {
       return builder().fromRasdItemsList(this);
    }
 
-   private static class ConcreteBuilder extends Builder<ConcreteBuilder> {
-   }
-   
-   public abstract static class Builder<B extends Builder<B>> extends Resource.Builder<B> {
 
-      private Set<RasdItem> items = Sets.newLinkedHashSet();
+   public static class Builder {
+      private List<RasdItem> items = Lists.newLinkedList();
 
       /**
        * @see RasdItemsList#getItems()
        */
-      public B items(Set<RasdItem> items) {
+      public Builder items(List<RasdItem> items) {
          this.items = checkNotNull(items, "items");
-         return self();
+         return this;
       }
 
       /**
        * @see RasdItemsList#getItems()
        */
-      public B item(RasdItem item) {
+      public Builder item(RasdItem item) {
          this.items.add(checkNotNull(item, "item"));
-         return self();
+         return this;
       }
 
-      @Override
-      public RasdItemsList build() {
-         RasdItemsList rasdItemsList = new RasdItemsList(this);
-         return rasdItemsList;
+      public Builder item(int index, RasdItem item) {
+          this.items.add(index, item);
+          return this;
       }
 
-      public B fromRasdItemsList(RasdItemsList in) {
+      public Builder fromRasdItemsList(RasdItemsList in) {
          return fromResource(in).items(in.getItems());
       }
-   }
 
+      private URI href;
+      private String type;
+      private Set<Link> links;
+
+      public Builder href(URI href) {
+         this.href = href;
+         return this;
+      }
+
+      public Builder type(String type) {
+         this.type = type;
+         return this;
+      }
+
+      public Builder links(Set<Link> links) {
+         this.links = Sets.newLinkedHashSet(checkNotNull(links, "links"));
+         return this;
+      }
+
+      public Builder link(Link link) {
+         if (links == null)
+            links = Sets.newLinkedHashSet();
+         this.links.add(checkNotNull(link, "link"));
+         return this;
+      }
+
+      public RasdItemsList build() {
+         return new RasdItemsList(this);
+      }
+
+      protected Builder fromResource(RasdItemsList in) {
+         return href(in.getHref()).type(in.getType()).links(Sets.newLinkedHashSet(in.getLinks()));
+      }
+  }
    protected RasdItemsList() {
       // For JAXB and B use
    }
 
-   protected RasdItemsList(Builder<?> builder) {
-      super(builder);
+   protected RasdItemsList(Builder builder) {
+      this.href = builder.href;
+      this.type = builder.type;
+      this.links = builder.links == null ? ImmutableSet.<Link>of() : builder.links;
       this.items = builder.items;
    }
 
    @XmlElement(name = "Item")
-   protected Set<RasdItem> items = Sets.newLinkedHashSet();
+   protected List<RasdItem> items = Lists.newLinkedList();
 
    /**
     * A RASD item content.
     */
-   public Set<RasdItem> getItems() {
+   public List<RasdItem> getItems() {
       return items;
+   }
+
+   @Override
+   protected List<RasdItem> delegate() {
+      return getItems();
+   }
+
+   /**
+    * Contains the URI to the entity.
+    *
+    * An object reference, expressed in URL format. Because this URL includes the object identifier
+    * portion of the id attribute value, it uniquely identifies the object, persists for the life of
+    * the object, and is never reused. The value of the href attribute is a reference to a view of
+    * the object, and can be used to access a representation of the object that is valid in a
+    * particular context. Although URLs have a well-known syntax and a well-understood
+    * interpretation, a api should treat each href as an opaque string. The rules that govern how
+    * the server constructs href strings might change in future releases.
+    *
+    * @return an opaque reference and should never be parsed
+    */
+   public URI getHref() {
+      return href;
+   }
+
+   /**
+    * Contains the type of the the entity.
+    *
+    * The object type, specified as a MIME content type, of the object that the link references.
+    * This attribute is present only for links to objects. It is not present for links to actions.
+    *
+    * @return type definition, type, expressed as an HTTP Content-Type
+    */
+   public String getType() {
+      return type;
+   }
+
+   /**
+    * Set of optional links to an entity or operation associated with this object.
+    */
+   public Set<Link> getLinks() {
+      return links == null ? ImmutableSet.<Link>of() : Collections.unmodifiableSet(links);
    }
 
    @Override
@@ -121,84 +203,7 @@ public class RasdItemsList extends Resource implements Set<RasdItem> {
       return Objects.hashCode(super.hashCode(), items);
    }
 
-   @Override
    public ToStringHelper string() {
-      return super.string().add("items", items);
-   }
-
-   /**
-    * The delegate always returns a {@link Set} even if {@link #items} is {@literal null}.
-    * 
-    * The delegated {@link Set} is used by the methods implementing its interface.
-    * <p>
-    * NOTE Annoying lack of multiple inheritance for using ForwardingList!
-    */
-   private Set<RasdItem> delegate() {
-      return getItems();
-   }
-
-   @Override
-   public boolean add(RasdItem arg0) {
-      return delegate().add(arg0);
-   }
-
-   @Override
-   public boolean addAll(Collection<? extends RasdItem> arg0) {
-      return delegate().addAll(arg0);
-   }
-
-   @Override
-   public void clear() {
-      delegate().clear();
-   }
-
-   @Override
-   public boolean contains(Object arg0) {
-      return delegate().contains(arg0);
-   }
-
-   @Override
-   public boolean containsAll(Collection<?> arg0) {
-      return delegate().containsAll(arg0);
-   }
-
-   @Override
-   public boolean isEmpty() {
-      return delegate().isEmpty();
-   }
-
-   @Override
-   public Iterator<RasdItem> iterator() {
-      return delegate().iterator();
-   }
-
-   @Override
-   public boolean remove(Object arg0) {
-      return delegate().remove(arg0);
-   }
-
-   @Override
-   public boolean removeAll(Collection<?> arg0) {
-      return delegate().removeAll(arg0);
-   }
-
-   @Override
-   public boolean retainAll(Collection<?> arg0) {
-      return delegate().retainAll(arg0);
-   }
-
-   @Override
-   public int size() {
-      return delegate().size();
-   }
-
-   @Override
-   public Object[] toArray() {
-      return delegate().toArray();
-   }
-
-   @Override
-   public <T> T[] toArray(T[] arg0) {
-      return delegate().toArray(arg0);
+      return Objects.toStringHelper("").add("href", href).add("links", links).add("type", type).add("items", items);
    }
 }
