@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.collect.ForwardingList;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -72,7 +71,7 @@ public class RasdItemsList extends ForwardingList<RasdItem> implements Set<RasdI
        * @see RasdItemsList#getItems()
        */
       public Builder items(List<RasdItem> items) {
-         this.items = ImmutableList.copyOf(checkNotNull(items, "items"));
+         this.items = checkNotNull(items, "items");
          return this;
       }
 
