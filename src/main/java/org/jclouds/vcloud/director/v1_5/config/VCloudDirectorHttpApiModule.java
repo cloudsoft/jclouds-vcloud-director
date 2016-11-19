@@ -55,7 +55,7 @@ public class VCloudDirectorHttpApiModule extends HttpApiModule<VCloudDirectorApi
    @ClientError
    @Singleton
    protected Set<String> provideRetryableCodes() {
-      return ImmutableSet.of("OPERATION_LIMITS_EXCEEDED");
+      return ImmutableSet.of("OPERATION_LIMITS_EXCEEDED", "BUSY_ENTITY");
    }
    
    @Provides
