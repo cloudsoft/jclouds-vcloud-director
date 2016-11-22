@@ -39,23 +39,23 @@ import com.google.common.collect.Maps;
  * Represents a network connection.
  *
  * <pre>
- * &lt;complexType name="NetworkConnection">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="NetworkConnectionIndex" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="IpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/>
- *         &lt;element name="ExternalIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/>
- *         &lt;element name="IsConnected" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="MACAddress" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="IpAddressAllocationMode" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *       &lt;attribute name="network" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="needsCustomization" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="NetworkConnection"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="NetworkConnectionIndex" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="IpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/&gt;
+ *         &lt;element name="ExternalIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/&gt;
+ *         &lt;element name="IsConnected" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="MACAddress" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="IpAddressAllocationMode" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="network" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="needsCustomization" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "NetworkConnection", propOrder = {

@@ -25,25 +25,24 @@ import javax.xml.bind.annotation.XmlType;
 import com.google.common.base.Objects;
 
 /**
- * Represents a capacity and usage of a given resource.
- * <p/>
- * <p/>
+ * <p>Represents a capacity and usage of a given resource.
+ * <p>&nbsp;</p>
  * <p>Java class for CapacityWithUsage complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="CapacityWithUsage">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}CapacityType">
- *       &lt;sequence>
- *         &lt;element name="Used" type="{http://www.w3.org/2001/XMLSchema}Long" minOccurs="0"/>
- *         &lt;element name="Overhead" type="{http://www.w3.org/2001/XMLSchema}Long" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="CapacityWithUsage"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}CapacityType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Used" type="{http://www.w3.org/2001/XMLSchema}Long" minOccurs="0"/&gt;
+ *         &lt;element name="Overhead" type="{http://www.w3.org/2001/XMLSchema}Long" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "CapacityWithUsage", propOrder = {

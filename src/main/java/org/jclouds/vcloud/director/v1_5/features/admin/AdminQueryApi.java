@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.features.admin;
 
+import javax.management.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -24,7 +25,11 @@ import javax.ws.rs.QueryParam;
 import org.jclouds.rest.annotations.JAXBResponseParser;
 import org.jclouds.rest.annotations.QueryParams;
 import org.jclouds.rest.annotations.RequestFilters;
+import org.jclouds.vcloud.director.v1_5.domain.Role;
 import org.jclouds.vcloud.director.v1_5.domain.RoleReferences;
+import org.jclouds.vcloud.director.v1_5.domain.User;
+import org.jclouds.vcloud.director.v1_5.domain.Vdc;
+import org.jclouds.vcloud.director.v1_5.domain.org.Org;
 import org.jclouds.vcloud.director.v1_5.domain.query.QueryResultRecords;
 import org.jclouds.vcloud.director.v1_5.features.QueryApi;
 import org.jclouds.vcloud.director.v1_5.filters.AddAcceptHeaderToRequest;

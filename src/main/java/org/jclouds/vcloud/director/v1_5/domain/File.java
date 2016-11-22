@@ -29,24 +29,23 @@ import com.google.common.base.Objects.ToStringHelper;
 
 
 /**
- * Represents a file to be transferred (uploaded or downloaded).
- * <p/>
- * <p/>
+ * <p>Represents a file to be transferred (uploaded or downloaded).
+ * </p>
  * <p>Java class for File complex type.
- * <p/>
+ * </p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * </p>
  * <pre>
- * &lt;complexType name="File">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}EntityType">
- *       &lt;attribute name="size" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="bytesTransferred" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="checksum" type="{http://www.w3.org/2001/XMLSchema}normalizedString" />
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="File"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}EntityType"&gt;
+ *       &lt;attribute name="size" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="bytesTransferred" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="checksum" type="{http://www.w3.org/2001/XMLSchema}normalizedString" /&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "File")

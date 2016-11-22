@@ -34,23 +34,23 @@ import com.google.common.collect.Lists;
 
 /**
  * Represents Static Routing network service.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for StaticRoutingService complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="StaticRoutingService">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}NetworkServiceType">
- *       &lt;sequence>
- *         &lt;element name="StaticRoute" type="{http://www.vmware.com/vcloud/v1.5}StaticRouteType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="StaticRoutingService"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}NetworkServiceType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="StaticRoute" type="{http://www.vmware.com/vcloud/v1.5}StaticRouteType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "StaticRoutingService")

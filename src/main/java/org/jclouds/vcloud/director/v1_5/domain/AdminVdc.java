@@ -31,22 +31,22 @@ import com.google.common.base.Objects.ToStringHelper;
  * viewed and modified only by administrators.
  *
  * <pre>
- * &lt;complexType name="AdminVdc">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VdcType">
- *       &lt;sequence>
- *         &lt;element name="ResourceGuaranteedMemory" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
- *         &lt;element name="ResourceGuaranteedCpu" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
- *         &lt;element name="VCpuInMhz" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="IsThinProvision" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="NetworkPoolReference" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" minOccurs="0"/>
- *         &lt;element name="ProviderVdcReference" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" minOccurs="0"/>
- *         &lt;element name="UsesFastProvisioning" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="AdminVdc"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VdcType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="ResourceGuaranteedMemory" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
+ *         &lt;element name="ResourceGuaranteedCpu" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
+ *         &lt;element name="VCpuInMhz" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
+ *         &lt;element name="IsThinProvision" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="NetworkPoolReference" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" minOccurs="0"/&gt;
+ *         &lt;element name="ProviderVdcReference" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" minOccurs="0"/&gt;
+ *         &lt;element name="UsesFastProvisioning" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "AdminVdc")
@@ -98,7 +98,7 @@ public class AdminVdc extends Vdc {
       }
 
       /**
-       * @see AdminVdc#getIsThinProvision()
+       * @see AdminVdc#isThinProvision()
        */
       public T isThinProvision(Boolean isThinProvision) {
          this.isThinProvision = isThinProvision;
@@ -122,7 +122,7 @@ public class AdminVdc extends Vdc {
       }
 
       /**
-       * @see AdminVdc#getUsesFastProvisioning()
+       * @see AdminVdc#usesFastProvisioning()
        */
       public T usesFastProvisioning(Boolean usesFastProvisioning) {
          this.usesFastProvisioning = usesFastProvisioning;

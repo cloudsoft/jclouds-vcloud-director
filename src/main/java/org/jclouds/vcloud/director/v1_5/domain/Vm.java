@@ -74,7 +74,7 @@ public class Vm extends AbstractVAppType {
       }
 
       /**
-       * @see Vm#getNeedsCustomization()
+       * @see Vm#isNeedsCustomization()
        */
       public B isNeedsCustomization(Boolean needsCustomization) {
          this.needsCustomization = needsCustomization;
@@ -82,7 +82,7 @@ public class Vm extends AbstractVAppType {
       }
 
       /**
-       * @see Vm#getNeedsCustomization()
+       * @see Vm#isNeedsCustomization()
        */
       public B needsCustomization() {
          this.needsCustomization = Boolean.TRUE;
@@ -90,7 +90,7 @@ public class Vm extends AbstractVAppType {
       }
 
       /**
-       * @see Vm#getNeedsCustomization()
+       * @see Vm#isNeedsCustomization()
        */
       public B notNeedsCustomization() {
          this.needsCustomization = Boolean.FALSE;
@@ -138,7 +138,7 @@ public class Vm extends AbstractVAppType {
    /**
     * OVF environment section
     *
-    * @return possible object is {@link Environment }
+    * @return possible object is {@link EnvironmentType }
     */
    public EnvironmentType getEnvironment() {
       return environment;

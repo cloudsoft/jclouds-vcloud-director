@@ -28,16 +28,16 @@ import com.google.common.base.Objects.ToStringHelper;
  * Admin representation of external network.
  * 
  * <pre>
- * &lt;complexType name="ExternalNetwork">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}NetworkType">
- *       &lt;sequence>
- *         &lt;element name="ProviderInfo" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="ExternalNetwork"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}NetworkType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="ProviderInfo" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "ExternalNetwork")

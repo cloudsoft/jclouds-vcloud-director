@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.jclouds.vcloud.director.v1_5.domain.dmtf.AnnotationSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.DeploymentOptionSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.DiskSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.NetworkSection;
@@ -53,17 +54,17 @@ import com.google.common.collect.Sets;
  * Represents the parameters for capturing a vApp to a vApp template.
  *
  * <pre>
- * &lt;complexType name="CaptureVAppParams">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ParamsType">
- *       &lt;sequence>
- *         &lt;element name="Source" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType"/>
- *         &lt;element ref="{http://schemas.dmtf.org/ovf/envelope/1}Section" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="CaptureVAppParams"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ParamsType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Source" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType"/&gt;
+ *         &lt;element ref="{http://schemas.dmtf.org/ovf/envelope/1}Section" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "CaptureVAppParams", propOrder = {
@@ -185,23 +186,23 @@ public class CaptureVAppParams extends ParamsType {
     *
     * Objects of the following type(s) are allowed in the list:
     * <ul>
-    * <li>{@link VirtualHardwareSectionType}
-    * <li>{@link LeaseSettingsSectionType}
-    * <li>{@link EulaSectionType}
-    * <li>{@link RuntimeInfoSectionType}
-    * <li>{@link AnnotationSectionType}
-    * <li>{@link DeploymentOptionSectionType}
-    * <li>{@link StartupSectionType}
-    * <li>{@link ResourceAllocationSectionType}
-    * <li>{@link NetworkConnectionSectionType}
-    * <li>{@link CustomizationSectionType}
-    * <li>{@link ProductSectionType}
-    * <li>{@link GuestCustomizationSectionType}
-    * <li>{@link OperatingSystemSectionType}
-    * <li>{@link NetworkConfigSectionType}
-    * <li>{@link NetworkSectionType}
-    * <li>{@link DiskSectionType}
-    * <li>{@link InstallSectionType}
+    * <li>{@link VirtualHardwareSection}
+    * <li>{@link LeaseSettingsSection}
+    * <li>EulaSection
+    * <li>{@link RuntimeInfoSection}
+    * <li>{@link AnnotationSection}
+    * <li>{@link DeploymentOptionSection}
+    * <li>{@link StartupSection}
+    * <li>ResourceAllocationSection
+    * <li>{@link NetworkConnectionSection}
+    * <li>{@link CustomizationSection}
+    * <li>{@link ProductSection}
+    * <li>{@link GuestCustomizationSection}
+    * <li>{@link OperatingSystemSection}
+    * <li>{@link NetworkConfigSection}
+    * <li>{@link NetworkSection}
+    * <li>{@link DiskSection}
+    * <li>InstallSection
     * </ul>
     */
    public Set<SectionType> getSections() {

@@ -67,7 +67,7 @@ public class RasdItem extends ResourceAllocationSettingData {
       }
 
       /**
-       * @see ResourceAllocationSettingData#getType()
+       * @see #getType()
        */
       public B type(String type) {
          this.type = type;
@@ -75,7 +75,7 @@ public class RasdItem extends ResourceAllocationSettingData {
       }
 
       /**
-       * @see ResourceAllocationSettingData#getHref()
+       * @see RasdItem#getHref()
        */
       public B href(URI href) {
          this.href = href;
@@ -83,7 +83,7 @@ public class RasdItem extends ResourceAllocationSettingData {
       }
 
       /**
-       * @see ResourceAllocationSettingData#getLinks()
+       * @see RasdItem#getLinks()
        */
       public B links(Set<Link> links) {
          this.links = Sets.newLinkedHashSet(checkNotNull(links, "links"));
@@ -91,7 +91,7 @@ public class RasdItem extends ResourceAllocationSettingData {
       }
 
       /**
-       * @see ResourceAllocationSettingData#getLinks()
+       * @see RasdItem#getLinks()
        */
       public B link(Link link) {
          this.links.add(checkNotNull(link, "link"));
@@ -133,7 +133,7 @@ public class RasdItem extends ResourceAllocationSettingData {
    /**
     * Contains the URI to the entity.
     *
-    * @see ResourceType#getHref()
+    * @see RasdItem#getHref()
     */
    public String getType() {
       return type;
@@ -142,7 +142,7 @@ public class RasdItem extends ResourceAllocationSettingData {
    /**
     * Contains the type of the the entity.
     *
-    * @see ResourceType#getType()
+    * @see RasdItem#getType()
     */
    public URI getHref() {
       return href;
@@ -151,7 +151,7 @@ public class RasdItem extends ResourceAllocationSettingData {
    /**
     * Set of optional links to an entity or operation associated with this object.
     *
-    * @see ResourceType#getLinks()
+    * @see RasdItem#getLinks()
     */
    public Set<Link> getLinks() {
       return links != null ? ImmutableSet.copyOf(links) : Sets.<Link>newLinkedHashSet();

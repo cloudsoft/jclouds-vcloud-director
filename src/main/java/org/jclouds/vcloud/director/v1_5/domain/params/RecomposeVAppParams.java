@@ -35,17 +35,17 @@ import com.google.common.collect.Lists;
  * Represents vApp re-composition parameters.
  * 
  * <pre>
- * &lt;complexType name="RecomposeVAppParams">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ComposeVAppParamsType">
- *       &lt;sequence>
- *         &lt;element name="CreateItem" type="{http://www.vmware.com/vcloud/v1.5}VmType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="DeleteItem" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="RecomposeVAppParams"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ComposeVAppParamsType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="CreateItem" type="{http://www.vmware.com/vcloud/v1.5}VmType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="DeleteItem" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "RecomposeVAppParams")

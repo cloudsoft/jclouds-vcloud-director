@@ -18,7 +18,7 @@ package org.jclouds.vcloud.director.v1_5.domain;
 
 /**
  * Represents a metadata entry
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
  * &lt;xs:complexType name="MetadataType"&gt;
  * </pre>

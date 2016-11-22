@@ -33,21 +33,21 @@ import com.google.common.collect.Sets;
  * Information about deployment platform
  *
  * <pre>
- * &lt;complexType name="PlatformSection_Type">
- *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.dmtf.org/ovf/environment/1}Section_Type">
- *       &lt;sequence>
- *         &lt;element name="Kind" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/>
- *         &lt;element name="Version" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/>
- *         &lt;element name="Vendor" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/>
- *         &lt;element name="Locale" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/>
- *         &lt;element name="Timezone" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="PlatformSection_Type"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://schemas.dmtf.org/ovf/environment/1}Section_Type"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Kind" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/&gt;
+ *         &lt;element name="Version" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/&gt;
+ *         &lt;element name="Vendor" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/&gt;
+ *         &lt;element name="Locale" type="{http://schemas.dmtf.org/wbem/wscim/1/common}cimString" minOccurs="0"/&gt;
+ *         &lt;element name="Timezone" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&gt;
+ *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "PlatformSection")

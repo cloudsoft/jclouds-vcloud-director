@@ -41,7 +41,7 @@ import com.google.common.collect.Maps;
 
 /**
  * Represents an asynchronous or long-running task in the vCloud environment.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
  * &lt;xs:complexType name="TaskType"&gt;
  * </pre>
@@ -333,7 +333,7 @@ public class Task extends Entity {
 
    /**
     * The progress of a long running asynchronous task.
-    * <p/>
+    * <p>&nbsp;</p>
     * The value is between 0 - 100. Not all tasks have progress, the value is not
     * present for task which progress is not available.
     */
@@ -364,7 +364,7 @@ public class Task extends Entity {
 
    /**
     * The date and time the system started executing the task.
-    * <p/>
+    * <p>&nbsp;</p>
     * May not be present if the task hasn't been executed yet.
     */
    public Date getStartTime() {
@@ -373,7 +373,7 @@ public class Task extends Entity {
 
    /**
     * The date and time that processing of the task was completed.
-    * <p/>
+    * <p>&nbsp;</p>
     * May not be present if the task is still being executed.
     */
    public Date getEndTime() {
@@ -382,7 +382,7 @@ public class Task extends Entity {
 
    /**
     * The date and time at which the task resource will be destroyed and no longer available for retrieval.
-    * <p/>
+    * <p>&nbsp;</p>
     * May not be present if the task has not been executed or is still being executed.
     */
    public Date getExpiryTime() {

@@ -68,7 +68,7 @@ public interface VdcApi {
     * Captures a vApp into vApp template.
     *
     * The status of vApp template will be in
-    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNRESOLVED UNRESOLVED(0)} until the
+    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED UNRESOLVED(0)} until the
     * capture task is finished.
     *
     * @return a VApp resource which will contain a task. The user should should wait for this task to finish to be able
@@ -86,7 +86,7 @@ public interface VdcApi {
     * Clones a media into new one.
     *
     * The status of the returned media is
-    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNRESOLVED UNRESOLVED(0)} until the task
+    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED UNRESOLVED(0)} until the task
     * for cloning finish.
     *
     * @return a Media resource which will contain a task. The user should monitor the contained task status in order to
@@ -103,7 +103,7 @@ public interface VdcApi {
    /**
     * Clones a vApp into new one.
     *
-    * The status of vApp will be in {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNRESOLVED
+    * The status of vApp will be in {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED
     * UNRESOLVED(0)} until the clone task is finished.
     *
     * @return a VApp resource which will contain a task. The user should should wait for this task to finish to be able
@@ -122,7 +122,7 @@ public interface VdcApi {
     * Clones a vApp template into new one.
     *
     * The status of vApp template will be in
-    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNRESOLVED UNRESOLVED(0)} until the clone
+    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED UNRESOLVED(0)} until the clone
     * task is finished.
     *
     * @return a VAppTemplate resource which will contain a task. The user should should wait for this task to finish to
@@ -160,7 +160,7 @@ public interface VdcApi {
     * If any of the composition items is subject to a EULA, the ComposeVAppParams element must include an
     * AllEULAsAccepted element that has a value of true, indicating that you accept the EULA. Otherwise, composition
     * fails. The composed vApp must be deployed and powered on before it can be used. The status of vApp will be
-    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNRESOLVED UNRESOLVED(0)} until the
+    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED UNRESOLVED(0)} until the
     * compose task is finished.
     *
     * @return a VApp resource which will contain a task. The user should should wait for this task to finish to be able
@@ -177,7 +177,7 @@ public interface VdcApi {
    /**
     * Instantiate a vApp template into a new vApp.
     *
-    * The status of vApp will be in {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNRESOLVED
+    * The status of vApp will be in {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED
     * UNRESOLVED(0)} until the instantiate task is finished.
     *
     * <pre>
@@ -206,7 +206,7 @@ public interface VdcApi {
     * <li>finishing task for uploading
     * </ol>
     * The status of vApp template will be
-    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#NOT_READY NOT_READY(0)} until the ovf and
+    * {@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED} until the ovf and
     * all disks are uploaded to the transfer site. After this a task will run on the vApp template uploading.
     * Note that the empty vApp template's getFiles() returns a file of size -1 after step one above,
     * because the descriptor.ovf does not yet exist.
@@ -301,7 +301,7 @@ public interface VdcApi {
             @BinderParam(BindToXMLPayload.class) ComposeVAppParams params);
 
    /**
-    * @see VdcApi#instantiateVApp(URI, InstantiateVAppParamsType)
+    * @see VdcApi#instantiateVApp(URI, InstantiateVAppParams)
     */
    @POST
    @Path("/action/instantiateVAppTemplate")

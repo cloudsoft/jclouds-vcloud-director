@@ -39,21 +39,21 @@ import com.google.common.collect.Sets;
  * elements that can be viewed and modified only by system administrators.
  *            
  * <pre>
- * &lt;complexType name="AdminOrg">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}OrgType">
- *       &lt;sequence>
- *         &lt;element name="Settings" type="{http://www.vmware.com/vcloud/v1.5}OrgSettingsType"/>
- *         &lt;element name="Users" type="{http://www.vmware.com/vcloud/v1.5}UsersListType" minOccurs="0"/>
- *         &lt;element name="Groups" type="{http://www.vmware.com/vcloud/v1.5}GroupsListType" minOccurs="0"/>
- *         &lt;element name="Catalogs" type="{http://www.vmware.com/vcloud/v1.5}CatalogsListType" minOccurs="0"/>
- *         &lt;element name="Vdcs" type="{http://www.vmware.com/vcloud/v1.5}VdcsType" minOccurs="0"/>
- *         &lt;element name="Networks" type="{http://www.vmware.com/vcloud/v1.5}NetworksType" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="AdminOrg"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}OrgType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Settings" type="{http://www.vmware.com/vcloud/v1.5}OrgSettingsType"/&gt;
+ *         &lt;element name="Users" type="{http://www.vmware.com/vcloud/v1.5}UsersListType" minOccurs="0"/&gt;
+ *         &lt;element name="Groups" type="{http://www.vmware.com/vcloud/v1.5}GroupsListType" minOccurs="0"/&gt;
+ *         &lt;element name="Catalogs" type="{http://www.vmware.com/vcloud/v1.5}CatalogsListType" minOccurs="0"/&gt;
+ *         &lt;element name="Vdcs" type="{http://www.vmware.com/vcloud/v1.5}VdcsType" minOccurs="0"/&gt;
+ *         &lt;element name="Networks" type="{http://www.vmware.com/vcloud/v1.5}NetworksType" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "AdminOrg")

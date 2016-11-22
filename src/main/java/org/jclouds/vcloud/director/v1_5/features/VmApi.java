@@ -116,9 +116,9 @@ public interface VmApi {
    /**
     * Consolidates a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * POST /vApp/{id}/action/consolidate
-    * </pre
+    * </pre>
     *
     * @since 1.5
     */
@@ -159,9 +159,9 @@ public interface VmApi {
     *
     * It should be running in order for them to be installed.
     *
-    * <pre
+    * <pre>
     * POST /vApp/{id}/action/installVMwareTools
-    * </pre
+    * </pre>
     *
     * @since 1.5
     */
@@ -174,9 +174,9 @@ public interface VmApi {
    /**
     * Relocates a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * POST /vApp/{id}/action/relocate
-    * </pre
+    * </pre>
     *
     * @since 1.5
     */
@@ -206,9 +206,9 @@ public interface VmApi {
     * Upgrade virtual hardware version of a VM to the highest supported virtual hardware version of
     * provider vDC where the VM locates.
     *
-    * <pre
+    * <pre>
     * POST /vApp/{id}/action/upgradeHardwareVersion
-    * </pre
+    * </pre>
     *
     * @since 1.5
     */
@@ -293,9 +293,9 @@ public interface VmApi {
    /**
     * Retrieves the guest customization section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/guestCustomizationSection
-    * </pre
+    * </pre>
     *
     * @since 1.0
     */
@@ -310,9 +310,9 @@ public interface VmApi {
    /**
     * Modifies the guest customization section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/guestCustomizationSection
-    * </pre
+    * </pre>
     *
     * @since 1.0
     */
@@ -327,9 +327,9 @@ public interface VmApi {
    /**
     * Ejects media from a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/media/action/ejectMedia
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -344,9 +344,9 @@ public interface VmApi {
    /**
     * Insert media into a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/media/action/insertMedia
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -361,9 +361,9 @@ public interface VmApi {
    /**
     * Retrieves the network connection section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/networkConnectionSection
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -378,9 +378,9 @@ public interface VmApi {
    /**
     * Modifies the network connection section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/networkConnectionSection
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -395,9 +395,9 @@ public interface VmApi {
    /**
     * Retrieves the operating system section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/operatingSystemSection
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -412,9 +412,9 @@ public interface VmApi {
    /**
     * Modifies the operating system section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/operatingSystemSection
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -460,9 +460,9 @@ public interface VmApi {
     * {@link #answerQuestion(String, VmQuestionAnswer)}. Usually questions will be asked when the VM
     * is powering on.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/question
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -479,9 +479,9 @@ public interface VmApi {
     * The answer IDs of choice and question should match the ones returned from operation
     * {@link #getPendingQuestion(String)}.
     *
-    * <pre
+    * <pre>
     * POST /vApp/{id}/question/action/answer
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -496,9 +496,9 @@ public interface VmApi {
    /**
     * Retrieves the runtime info section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/runtimeInfoSection
-    * </pre
+    * </pre>
     *
     * @since 1.5
     */
@@ -514,9 +514,9 @@ public interface VmApi {
     *
     * The content type of the response may vary (e.g. {@code image/png}, {@code image/gif}).
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/screen
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -537,9 +537,9 @@ public interface VmApi {
     * for the virtual machine represented by that VM element. The vApp should be running to get a
     * valid screen ticket.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/screen/action/acquireTicket
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -553,9 +553,9 @@ public interface VmApi {
    /**
     * Retrieves the virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/virtualHardwareSection
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -570,9 +570,9 @@ public interface VmApi {
    /**
     * Modifies the virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/virtualHardwareSection
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -587,9 +587,9 @@ public interface VmApi {
    /**
     * Retrieves the CPU properties in virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/virtualHardwareSection/cpu
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -603,9 +603,9 @@ public interface VmApi {
    /**
     * Modifies the CPU properties in virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/virtualHardwareSection/cpu
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -620,9 +620,9 @@ public interface VmApi {
    /**
     * Retrieves a list of items for disks from virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/virtualHardwareSection/disks
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -636,9 +636,9 @@ public interface VmApi {
    /**
     * Modifies the disks list in virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/virtualHardwareSection/disks
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -653,9 +653,9 @@ public interface VmApi {
    /**
     * Retrieves the list of items that represents the floppies and CD/DVD drives in a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/virtualHardwareSection/media
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -671,9 +671,9 @@ public interface VmApi {
     * Retrieves the item that contains memory information from virtual hardware section of a
     * {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/virtualHardwareSection/memory
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -687,9 +687,9 @@ public interface VmApi {
    /**
     * Modifies the memory properties in virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/virtualHardwareSection/memory
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -704,9 +704,9 @@ public interface VmApi {
    /**
     * Retrieves a list of items for network cards from virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/virtualHardwareSection/networkCards
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -721,9 +721,9 @@ public interface VmApi {
    /**
     * Modifies the network cards list in virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/virtualHardwareSection/networkCards
-    * </pre
+    * </pre>
     *
     * @since 0.9
     */
@@ -739,9 +739,9 @@ public interface VmApi {
    /**
     * Retrieves a list of items for serial ports from virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * GET /vApp/{id}/virtualHardwareSection/serialPorts
-    * </pre
+    * </pre>
     *
     * @since 1.5
     */
@@ -756,9 +756,9 @@ public interface VmApi {
    /**
     * Modifies the serial ports list in virtual hardware section of a {@link Vm}.
     *
-    * <pre
+    * <pre>
     * PUT /vApp/{id}/virtualHardwareSection/serialPorts
-    * </pre
+    * </pre>
     *
     * @since 1.5
     */

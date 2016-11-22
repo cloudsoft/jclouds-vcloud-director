@@ -52,7 +52,7 @@ public class OrgList extends ForwardingSet<Reference> {
       private Set<Reference> orgs = Sets.newLinkedHashSet();
 
       /**
-       * @see OrgList#getOrgs
+       * @see OrgList#delegate()
        */
       public Builder orgs(Set<Reference> orgs) {
          this.orgs = Sets.newLinkedHashSet(checkNotNull(orgs, "orgs"));
@@ -60,7 +60,7 @@ public class OrgList extends ForwardingSet<Reference> {
       }
 
       /**
-       * @see OrgList#getOrgs
+       * @see OrgList#delegate()
        */
       public Builder org(Reference org) {
          orgs.add(checkNotNull(org, "org"));

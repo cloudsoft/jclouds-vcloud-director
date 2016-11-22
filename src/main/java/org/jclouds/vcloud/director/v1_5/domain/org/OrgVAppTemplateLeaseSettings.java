@@ -31,17 +31,17 @@ import com.google.common.base.Objects.ToStringHelper;
  * Defines default lease policies for vAppTemplate on organization level.
  *
  * <pre>
- * &lt;complexType name="OrgVAppTemplateLeaseSettings">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ResourceType">
- *       &lt;sequence>
- *         &lt;element name="DeleteOnStorageLeaseExpiration" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="StorageLeaseSeconds" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="OrgVAppTemplateLeaseSettings"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ResourceType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="DeleteOnStorageLeaseExpiration" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="StorageLeaseSeconds" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "OrgVAppTemplateLeaseSettings")

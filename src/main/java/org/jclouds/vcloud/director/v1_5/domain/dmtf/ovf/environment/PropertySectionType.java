@@ -31,27 +31,27 @@ import com.google.common.collect.Sets;
  * Key/value pairs of assigned properties for an entity
  *
  * <pre>
- * &lt;complexType name="PropertySection_Type">
- *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.dmtf.org/ovf/environment/1}Section_Type">
- *       &lt;sequence>
- *         &lt;element name="Property" maxOccurs="unbounded" minOccurs="0">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                 &lt;attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                 &lt;anyAttribute processContents='lax'/>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="PropertySection_Type"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://schemas.dmtf.org/ovf/environment/1}Section_Type"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Property" maxOccurs="unbounded" minOccurs="0"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;complexContent&gt;
+ *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *                 &lt;attribute name="key" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *                 &lt;attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/restriction&gt;
+ *             &lt;/complexContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "PropertySection")

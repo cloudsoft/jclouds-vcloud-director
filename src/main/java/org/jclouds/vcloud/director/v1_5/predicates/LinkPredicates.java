@@ -70,7 +70,7 @@ public class LinkPredicates {
          });
 
    /**
-    * @see ReferenceTypePredicates#nameEquals
+    * @see ReferencePredicates#nameEquals
     */
    public static Predicate<Link> nameEquals(String name) {
       return MEDIA_NAME_SELECTORS.getUnchecked(name);
@@ -87,7 +87,7 @@ public class LinkPredicates {
          });
 
    /**
-    * @see ReferenceTypePredicates#typeEquals
+    * @see ReferencePredicates#typeEquals
     */
    public static Predicate<Link> typeEquals(String type) {
       return MEDIA_TYPE_SELECTORS.getUnchecked(type);

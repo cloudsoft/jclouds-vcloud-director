@@ -63,7 +63,7 @@ public class TasksList extends Resource implements Set<Task> {
       }
 
       /**
-       * @see TasksList#getTasks()
+       * @see TasksList#delegate()
        */
       public B tasks(Set<Task> tasks) {
          if (checkNotNull(tasks, "tasks").size() > 0)
@@ -72,7 +72,7 @@ public class TasksList extends Resource implements Set<Task> {
       }
 
       /**
-       * @see TasksList#getTasks()
+       * @see TasksList#delegate()
        */
       public B task(Task task) {
          if (tasks == null)

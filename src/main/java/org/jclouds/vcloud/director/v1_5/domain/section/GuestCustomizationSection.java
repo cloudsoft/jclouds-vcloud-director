@@ -41,33 +41,33 @@ import com.google.common.collect.Sets;
  * Represents a guest customization settings.
  *
  * <pre>
- * &lt;complexType name="GuestCustomizationSection">
- *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.dmtf.org/ovf/envelope/1}Section_Type">
- *       &lt;sequence>
- *         &lt;element name="Enabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="ChangeSid" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="VirtualMachineId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="JoinDomainEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="UseOrgSettings" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="DomainName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="DomainUserName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="DomainUserPassword" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="AdminPasswordEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="AdminPasswordAuto" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="AdminPassword" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ResetPasswordRequired" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="CustomizationScript" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ComputerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Link" type="{http://www.vmware.com/vcloud/v1.5}LinkType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="GuestCustomizationSection"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://schemas.dmtf.org/ovf/envelope/1}Section_Type"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Enabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="ChangeSid" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="VirtualMachineId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="JoinDomainEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="UseOrgSettings" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="DomainName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="DomainUserName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="DomainUserPassword" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="AdminPasswordEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="AdminPasswordAuto" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="AdminPassword" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="ResetPasswordRequired" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="CustomizationScript" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="ComputerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Link" type="{http://www.vmware.com/vcloud/v1.5}LinkType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}anyURI" /&gt;
+ *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "GuestCustomizationSection")
@@ -129,7 +129,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#isChangeSid()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#isChangeSid()
        */
       public B changeSid(Boolean changeSid) {
          this.changeSid = changeSid;
@@ -137,7 +137,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getVirtualMachineId()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getVirtualMachineId()
        */
       public B virtualMachineId(String virtualMachineId) {
          this.virtualMachineId = virtualMachineId;
@@ -145,7 +145,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#isJoinDomainEnabled()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#isJoinDomainEnabled()
        */
       public B joinDomainEnabled(Boolean joinDomainEnabled) {
          this.joinDomainEnabled = joinDomainEnabled;
@@ -153,7 +153,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#isUseOrgSettings()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#isUseOrgSettings()
        */
       public B useOrgSettings(Boolean useOrgSettings) {
          this.useOrgSettings = useOrgSettings;
@@ -161,7 +161,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getDomainName()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getDomainName()
        */
       public B domainName(String domainName) {
          this.domainName = domainName;
@@ -169,7 +169,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getDomainUserName()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getDomainUserName()
        */
       public B domainUserName(String domainUserName) {
          this.domainUserName = domainUserName;
@@ -177,7 +177,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getDomainUserPassword()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getDomainUserPassword()
        */
       public B domainUserPassword(String domainUserPassword) {
          this.domainUserPassword = domainUserPassword;
@@ -185,7 +185,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#isAdminPasswordEnabled()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#isAdminPasswordEnabled()
        */
       public B adminPasswordEnabled(Boolean adminPasswordEnabled) {
          this.adminPasswordEnabled = adminPasswordEnabled;
@@ -193,7 +193,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#isAdminPasswordAuto()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#isAdminPasswordAuto()
        */
       public B adminPasswordAuto(Boolean adminPasswordAuto) {
          this.adminPasswordAuto = adminPasswordAuto;
@@ -201,7 +201,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getAdminPassword()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getAdminPassword()
        */
       public B adminPassword(String adminPassword) {
          this.adminPassword = adminPassword;
@@ -209,7 +209,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#isResetPasswordRequired()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#isResetPasswordRequired()
        */
       public B resetPasswordRequired(Boolean resetPasswordRequired) {
          this.resetPasswordRequired = resetPasswordRequired;
@@ -217,7 +217,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getCustomizationScript()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getCustomizationScript()
        */
       public B customizationScript(String customizationScript) {
          this.customizationScript = customizationScript;
@@ -225,7 +225,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getComputerName()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getComputerName()
        */
       public B computerName(String computerName) {
          this.computerName = computerName;
@@ -233,7 +233,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getLinks()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getLinks()
        */
       public B links(Set<Link> links) {
          this.links = checkNotNull(links, "links");
@@ -241,7 +241,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getHref()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getHref()
        */
       public B href(URI href) {
          this.href = href;
@@ -249,7 +249,7 @@ public class GuestCustomizationSection extends SectionType {
       }
 
       /**
-       * @see org.jclouds.vcloud.director.v1_5.domain.GuestCustomizationSection#getType()
+       * @see org.jclouds.vcloud.director.v1_5.domain.section.GuestCustomizationSection#getType()
        */
       public B type(String type) {
          this.type = type;
@@ -488,7 +488,7 @@ public class GuestCustomizationSection extends SectionType {
 
    /**
     * Gets the value of the link property.
-    * <p/>
+    * <p>&nbsp;</p>
     * Objects of the following type(s) are allowed in the list
     * {@link Link }
     */

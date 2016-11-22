@@ -31,19 +31,19 @@ import com.google.common.base.Objects;
  * element is taken into account.
  *            
  * <pre>
- * &lt;complexType name="SmtpServerSettings">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="IsUseAuthentication" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="Host" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Username" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SmtpServerSettings"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="IsUseAuthentication" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="Host" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="Username" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "SmtpServerSettings", propOrder = {

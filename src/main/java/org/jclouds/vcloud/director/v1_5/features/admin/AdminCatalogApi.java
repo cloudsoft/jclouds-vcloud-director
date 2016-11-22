@@ -53,9 +53,9 @@ public interface AdminCatalogApi extends CatalogApi {
    /**
     * Creates a catalog in an organization. The catalog will always be addd in unpublished state.
     *
-    * <pre
+    * <pre>
     * POST /admin/org/{id}/catalogs
-    * </pre
+    * </pre>
     *
     * @param orgUrn
     *           the urn for the org
@@ -72,9 +72,9 @@ public interface AdminCatalogApi extends CatalogApi {
    /**
     * Retrieves a catalog.
     *
-    * <pre
+    * <pre>
     * GET /admin/catalog/{id}
-    * </pre
+    * </pre>
     *
     * @param orgHref
     *           the urn for the catalog
@@ -113,9 +113,9 @@ public interface AdminCatalogApi extends CatalogApi {
     * treated as a read only value by the server. In order to control publishing settings use the
     * 'publish' action must be used.
     *
-    * <pre
+    * <pre>
     * PUT /admin/catalog/{id}
-    * </pre
+    * </pre>
     *
     * @return the edited catalog
     */
@@ -139,9 +139,9 @@ public interface AdminCatalogApi extends CatalogApi {
    /**
     * Deletes a catalog. The catalog could be removed if it is either published or unpublished.
     *
-    * <pre
+    * <pre>
     * DELETE /admin/catalog/{id}
-    * </pre
+    * </pre>
     */
    @DELETE
    @Consumes
@@ -159,9 +159,9 @@ public interface AdminCatalogApi extends CatalogApi {
    /**
     * Retrieves the owner of a catalog.
     *
-    * <pre
+    * <pre>
     * GET /admin/catalog/{id}/owner
-    * </pre
+    * </pre>
     *
     * @return the owner or null if not found
     */
@@ -185,9 +185,9 @@ public interface AdminCatalogApi extends CatalogApi {
    /**
     * Changes owner for catalog.
     *
-    * <pre
+    * <pre>
     * PUT /admin/catalog/{id}/owner
-    * </pre
+    * </pre>
     */
    @PUT
    @Path("/owner")
@@ -235,9 +235,9 @@ public interface AdminCatalogApi extends CatalogApi {
    /**
     * Modifies a catalog control access.
     *
-    * <pre
+    * <pre>
     * POST /org/{id}/catalog/{catalogId}/action/controlAccess
-    * </pre
+    * </pre>
     *
     * @return the control access information
     */
@@ -252,9 +252,9 @@ public interface AdminCatalogApi extends CatalogApi {
    /**
     * Retrieves the catalog control access information.
     *
-    * <pre
+    * <pre>
     * GET /org/{id}/catalog/{catalogId}/controlAccess
-    * </pre
+    * </pre>
     *
     * @return the control access information
     */

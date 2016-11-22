@@ -36,7 +36,7 @@ import com.google.common.collect.Sets;
 
 /**
  * Represents a set of metadata
- * <p/>
+ * <p>&nbsp;</p>
  * 
  * <pre>
  * &lt;xs:complexType name="Metadata"&gt;
