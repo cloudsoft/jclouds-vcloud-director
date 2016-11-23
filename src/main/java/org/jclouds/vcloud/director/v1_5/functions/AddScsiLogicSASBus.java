@@ -59,15 +59,13 @@ public class AddScsiLogicSASBus {
         Integer address = Integer.parseInt(maxBus.getAddress()) + 1;
         Integer instanceId = Integer.parseInt(maxBus.getInstanceID()) + 1;
         RasdItem newBus = RasdItem.builder()
-                .fromRasdItem(maxBus) // The same AddressOnParent (SCSI Controller)
+                .fromRasdItem(maxBus) // Copy fields from max Bus:
                 // and Description
                 // and ResourceType
-                // and HostResource
                 // and not needed parent
                 .resourceSubType("lsilogicsas")
                 .address("" + address)
                 .instanceID("" + instanceId)
-//               .hostResource(hostResource)
                 .elementName("SCSI Controller " + address)
                 .build();
 

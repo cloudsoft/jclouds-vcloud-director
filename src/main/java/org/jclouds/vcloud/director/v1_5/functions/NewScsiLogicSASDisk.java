@@ -48,10 +48,11 @@ public final class NewScsiLogicSASDisk implements Function<RasdItemsList, RasdIt
 
     static final Ordering<RasdItem> BY_ADDRESS_ON_PARENT_ORDERING = new Ordering<RasdItem>() {
         public int compare(RasdItem left, RasdItem right) {
-            if (left.getAddressOnParent() == null) {
+            if (left.getAddressOnParent() == null && right.getAddressOnParent() == null) {
+                return 0;
+            } else if (left.getAddressOnParent() == null) {
                 return -1;
-            }
-            if (right.getAddressOnParent() == null) {
+            } else if (right.getAddressOnParent() == null) {
                 return 1;
             }
             Integer leftParent = Integer.parseInt(left.getAddressOnParent());
@@ -60,6 +61,11 @@ public final class NewScsiLogicSASDisk implements Function<RasdItemsList, RasdIt
         }
     };
 
+   /**
+    * @param virtualHardwareSectionDiskItems
+    * @return New RasdItem describing diskDrive with 1024MB disk space with proper relations to <code>virtualHardwareSectionDiskItems</code>.
+    *         Consumer should take care of modifying diskSpace attribute.
+    */
    @Override
    public RasdItem apply(RasdItemsList virtualHardwareSectionDiskItems) {
        Iterable<RasdItem> scsiLogicSasBuses = Iterables.filter(virtualHardwareSectionDiskItems, SCSI_LSILOGICSAS_PREDICATE);
@@ -101,14 +107,12 @@ public final class NewScsiLogicSASDisk implements Function<RasdItemsList, RasdIt
            Integer instanceId = Integer.parseInt(lastDisk.getInstanceID()) + 1;
 
            return RasdItem.builder()
-                   .fromRasdItem(lastDisk) // The same AddressOnParent (SCSI Controller)
+                   .fromRasdItem(lastDisk) // Copy following fields from lastDisk:
                    // and Description
                    // and ResourceType
                    // and HostResource
-                   // and not needed parent
                    .addressOnParent("" + addressOnParent)
                    .instanceID("" + instanceId)
-    //               .hostResource(hostResource)
                    .elementName("Hard Disk " + (addressOnParent + 1))
                    .build();
        }
