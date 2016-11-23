@@ -47,7 +47,7 @@ import com.google.common.base.Objects.ToStringHelper;
  */
 @XmlRootElement(name = "RasdItemsList")
 @XmlType(name = "RasdItemsList")
-public class RasdItemsList extends ForwardingList<RasdItem> implements Set<RasdItem> {
+public class RasdItemsList extends ForwardingList<RasdItem> implements List<RasdItem> {
    @XmlAttribute
    private URI href;
    @XmlAttribute
@@ -160,7 +160,7 @@ public class RasdItemsList extends ForwardingList<RasdItem> implements Set<RasdI
     * the object, and is never reused. The value of the href attribute is a reference to a view of
     * the object, and can be used to access a representation of the object that is valid in a
     * particular context. Although URLs have a well-known syntax and a well-understood
-    * interpretation, a api should treat each href as an opaque string. The rules that govern how
+    * interpretation, an api should treat each href as an opaque string. The rules that govern how
     * the server constructs href strings might change in future releases.
     *
     * @return an opaque reference and should never be parsed

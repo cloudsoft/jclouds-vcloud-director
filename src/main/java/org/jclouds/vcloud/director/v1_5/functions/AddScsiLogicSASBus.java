@@ -28,10 +28,11 @@ import org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.ResourceAllocationSettin
 public class AddScsiLogicSASBus {
     static final Ordering<RasdItem> BY_ADDRESS_ORDERING = new Ordering<RasdItem>() {
         public int compare(RasdItem left, RasdItem right) {
-            if (left.getAddress() == null) {
+            if (left.getAddress() == null && right.getAddress() == null) {
+                return 0;
+            } else if (left.getAddress() == null) {
                 return -1;
-            }
-            if (right.getAddress() == null) {
+            } else if (right.getAddress() == null) {
                 return 1;
             }
             Integer leftParent = Integer.parseInt(left.getAddress());
@@ -58,15 +59,13 @@ public class AddScsiLogicSASBus {
         Integer address = Integer.parseInt(maxBus.getAddress()) + 1;
         Integer instanceId = Integer.parseInt(maxBus.getInstanceID()) + 1;
         RasdItem newBus = RasdItem.builder()
-                .fromRasdItem(maxBus) // The same AddressOnParent (SCSI Controller)
+                .fromRasdItem(maxBus) // Copy fields from max Bus:
                 // and Description
                 // and ResourceType
-                // and HostResource
                 // and not needed parent
                 .resourceSubType("lsilogicsas")
                 .address("" + address)
                 .instanceID("" + instanceId)
-//               .hostResource(hostResource)
                 .elementName("SCSI Controller " + address)
                 .build();
 
