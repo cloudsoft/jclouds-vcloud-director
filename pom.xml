@@ -23,14 +23,14 @@
   <parent>
     <groupId>org.apache.jclouds.labs</groupId>
     <artifactId>jclouds-labs</artifactId>
-    <version>1.9.3-SNAPSHOT</version>
+    <version>1.9.3</version>
   </parent>
 
   <!-- TODO: when out of labs, switch to org.jclouds.api -->
   <groupId>io.cloudsoft.jclouds.labs</groupId>
   <artifactId>vcloud-director</artifactId>
   <name>jclouds vcloud-director api</name>
-  <version>1.9.3-SNAPSHOT</version>
+  <version>1.9.3</version>
   <description>jclouds components to access an implementation of VMware vCloud Director 1.5+</description>
   <packaging>bundle</packaging>
 
@@ -145,7 +145,7 @@
           <dependency>
             <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-resources</artifactId>
-            <version>1.9.3-SNAPSHOT</version>
+            <version>1.9.3</version>
             <scope>compile</scope>
           </dependency>
         </dependencies>
@@ -178,7 +178,7 @@
           <dependency>
             <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-resources</artifactId>
-            <version>1.9.3-SNAPSHOT</version>
+            <version>1.9.3</version>
             <scope>compile</scope>
           </dependency>
         </dependencies>
