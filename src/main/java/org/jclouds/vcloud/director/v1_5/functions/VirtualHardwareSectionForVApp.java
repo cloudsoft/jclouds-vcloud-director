@@ -26,7 +26,6 @@ import com.google.inject.Singleton;
 @Singleton
 public class VirtualHardwareSectionForVApp implements Function<AbstractVAppType, VirtualHardwareSection> {
 
-   @SuppressWarnings("unchecked")
    @Override
    public VirtualHardwareSection apply(AbstractVAppType from) {
       for (SectionType section : from.getSections()) {

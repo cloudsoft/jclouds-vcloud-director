@@ -74,7 +74,7 @@ public class VCloudDirectorApiMetadata extends BaseHttpApiMetadata<VCloudDirecto
 
       // TODO integrate these with the {@link ComputeTimeouts} instead of having a single timeout for everything.
       properties.setProperty(PROPERTY_SESSION_INTERVAL, Integer.toString(300));
-      properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_TIMEOUT_TASK_COMPLETED, Long.toString(1200l * 1000l));
+      properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_TIMEOUT_TASK_COMPLETED, Long.toString(1200L * 1000L));
 
       properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MAX_CPU, "" + 8);
       properties.setProperty(PROPERTY_VCLOUD_DIRECTOR_HARDWARE_MIN_RAM, "" + 512);

@@ -110,7 +110,7 @@ public abstract class AbstractVAppType extends ResourceEntity {
        * @see AbstractVAppType#getSections()
        */
       public B sections(Iterable<? extends SectionType> sections) {
-         this.sections = Sets.newLinkedHashSet(checkNotNull(sections, "sections"));
+         this.sections = Sets.<SectionType>newLinkedHashSet(checkNotNull(sections, "sections"));
          return self();
       }
 

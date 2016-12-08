@@ -109,6 +109,7 @@ import static org.jclouds.compute.util.ComputeServiceUtils.getSpace;
  *   <li>{@code NullEqualToIsParentOrIsGrandparentOfCurrentLocation}
  *   <li>{@code TemplateImpl}
  * </ul>
+ * Adds <pre>{@code @Override}</pre> (to avoid errors from http://errorprone.info/bugpattern/MissingOverride).
  */
 public class TemplateBuilderImpl implements TemplateBuilder {
    @Resource
@@ -490,23 +491,27 @@ public class TemplateBuilderImpl implements TemplateBuilder {
    }
 
    static final Ordering<Hardware> DEFAULT_SIZE_ORDERING = new Ordering<Hardware>() {
+      @Override
       public int compare(Hardware left, Hardware right) {
          return ComparisonChain.start().compare(getCores(left), getCores(right)).compare(left.getRam(), right.getRam())
                .compare(getSpace(left), getSpace(right)).result();
       }
    };
    static final Ordering<Hardware> BY_CORES_ORDERING = new Ordering<Hardware>() {
+      @Override
       public int compare(Hardware left, Hardware right) {
          return Doubles.compare(getCoresAndSpeed(left), getCoresAndSpeed(right));
       }
    };
    static final Ordering<Hardware> NOT_DEPRECATED_ORDERING = new Ordering<Hardware>() {
+      @Override
       public int compare(Hardware left, Hardware right) {
          // we take max so deprecated items come first
          return ComparisonChain.start().compareTrueFirst(left.isDeprecated(), right.isDeprecated()).result();
       }
    };
    static final Ordering<Image> DEFAULT_IMAGE_ORDERING = new Ordering<Image>() {
+      @Override
       public int compare(Image left, Image right) {
          /* This currently, and for some time, has *preferred* images whose fields are null,
           * and prefers those which come last alphabetically.

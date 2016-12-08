@@ -16,22 +16,21 @@
  */
 package org.jclouds.vcloud.director.v1_5.functions;
 
-import com.google.common.base.Function;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
-//import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Ordering;
+import javax.inject.Singleton;
+import javax.xml.namespace.QName;
+
 import org.jclouds.vcloud.director.v1_5.domain.RasdItemsList;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.RasdItem;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.CimString;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.ResourceAllocationSettingData;
+import org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.ResourceAllocationSettingData.ResourceType;
 
-import javax.inject.Singleton;
-import javax.xml.namespace.QName;
-
-import static org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.ResourceAllocationSettingData.ResourceType;
+import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Ordering;
 
 /**
  * Creates the next unique HDD RasdItem from RasdItemList.
@@ -47,6 +46,7 @@ public final class NewScsiLogicSASDisk implements Function<RasdItemsList, RasdIt
     };
 
     static final Ordering<RasdItem> BY_ADDRESS_ON_PARENT_ORDERING = new Ordering<RasdItem>() {
+        @Override
         public int compare(RasdItem left, RasdItem right) {
             if (left.getAddressOnParent() == null) {
                 return -1;

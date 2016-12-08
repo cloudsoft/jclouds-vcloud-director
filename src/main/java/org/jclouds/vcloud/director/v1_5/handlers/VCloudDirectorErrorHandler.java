@@ -19,6 +19,8 @@ package org.jclouds.vcloud.director.v1_5.handlers;
 import static org.jclouds.http.HttpUtils.closeClientButKeepContentStream;
 
 import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
 import javax.inject.Singleton;
 import javax.xml.bind.JAXB;
 
@@ -47,7 +49,7 @@ public class VCloudDirectorErrorHandler implements HttpErrorHandler {
 
       // Create default exception
       String message = data != null
-            ? new String(data)
+            ? new String(data, StandardCharsets.UTF_8)
             : String.format("%s -> %s", command.getCurrentRequest().getRequestLine(), response.getStatusLine());
       Exception exception = new HttpResponseException(command, response, message);
       

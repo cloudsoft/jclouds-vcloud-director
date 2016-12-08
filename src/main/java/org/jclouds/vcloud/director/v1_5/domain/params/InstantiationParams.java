@@ -72,7 +72,7 @@ public class InstantiationParams {
        * @see InstantiationParams#getSections()
        */
       public Builder sections(Iterable<? extends SectionType> sections) {
-         this.sections = Sets.newLinkedHashSet(checkNotNull(sections, "sections"));
+         this.sections = Sets.<SectionType>newLinkedHashSet(checkNotNull(sections, "sections"));
          return this;
       }
 
@@ -99,7 +99,7 @@ public class InstantiationParams {
    }
 
    private InstantiationParams(Set<? extends SectionType> sections) {
-      this.sections = sections.isEmpty() ? null : ImmutableSet.copyOf(sections);
+      this.sections = sections.isEmpty() ? null : ImmutableSet.<SectionType>copyOf(sections);
    }
 
    @XmlElementRefs({

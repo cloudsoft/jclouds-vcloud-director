@@ -98,7 +98,7 @@ public class VAppTemplate extends ResourceEntity {
        * @see VAppTemplate#getSections()
        */
       public B sections(Iterable<? extends SectionType> sections) {
-         this.sections = Sets.newLinkedHashSet(checkNotNull(sections, "sections"));
+         this.sections = Sets.<SectionType>newLinkedHashSet(checkNotNull(sections, "sections"));
          return self();
       }
 

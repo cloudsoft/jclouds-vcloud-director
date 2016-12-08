@@ -75,12 +75,12 @@ public class VcloudDirectorClientErrorRetryHandlerTest {
 
       String responsePayload = String.format(
             "<Error xmlns=\"http://www.vmware.com/vcloud/v1.5\"" 
-                  + " minorErrorCode=\"OPERATION_LIMITS_EXCEEDED\"" 
+                  + " minorErrorCode=\"%s\"" 
                   + " message=\"The maximum number of simultaneous operations for user &quot;myname&quot; on organization &quot;my-org&quot; has been reached.\"" 
-                  + " majorErrorCode=\"400\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                  + " majorErrorCode=\"%d\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                   + " xsi:schemaLocation=\"http://www.vmware.com/vcloud/v1.5 http://acme.com/api/v1.5/schema/master.xsd\">"
                   + "</Error>",
-            errorCode);
+            errorCode, httpStatusCode);
 
       HttpResponse response = HttpResponse.builder().statusCode(httpStatusCode)
             .payload(Payloads.newStringPayload(responsePayload)).build();

@@ -69,11 +69,11 @@ public abstract class ResourceEntity extends Entity {
       // Convention is "UNRECOGNIZED", but that is already a valid state name! so using UNRECOGNIZED_VALUE
       @XmlEnumValue("65535") UNRECOGNIZED_VALUE(65535, "Unrecognized", false, false, false);
       
-      private Integer value;
-      private String description;
-      private boolean vAppTemplate;
-      private boolean vApp;
-      private boolean vm;
+      private final Integer value;
+      private final String description;
+      private final boolean vAppTemplate;
+      private final boolean vApp;
+      private final boolean vm;
       
       private Status(int value, String description, boolean vAppTemplate, boolean vApp, boolean vm) {
          this.value = value;

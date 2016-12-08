@@ -56,8 +56,6 @@ import org.jclouds.vcloud.director.v1_5.filters.AddVCloudAuthorizationAndCookieT
 import org.jclouds.vcloud.director.v1_5.functions.URNToHref;
 import org.jclouds.vcloud.director.v1_5.login.SessionApi;
 
-import com.google.inject.Provides;
-
 /**
  * Provides access to VCloudDirector via their REST API.
  */
@@ -81,7 +79,6 @@ public interface VCloudDirectorApi extends Closeable {
    /**
     * @return the current login session
     */
-   @Provides
    Session getCurrentSession();
 
    /**

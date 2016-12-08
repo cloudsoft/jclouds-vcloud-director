@@ -611,7 +611,7 @@ public class VmApiLiveTest extends AbstractVAppApiLiveTest {
       // Copy existing section and edit fields
       VirtualHardwareSection oldSection = vmApi.getVirtualHardwareSection(vmUrn);
       Set<? extends ResourceAllocationSettingData> oldItems = oldSection.getItems();
-      Set<ResourceAllocationSettingData> newItems = Sets.newLinkedHashSet(oldItems);
+      Set<ResourceAllocationSettingData> newItems = Sets.<ResourceAllocationSettingData>newLinkedHashSet(oldItems);
       ResourceAllocationSettingData oldMemory = Iterables.find(oldItems,
                new Predicate<ResourceAllocationSettingData>() {
                   @Override

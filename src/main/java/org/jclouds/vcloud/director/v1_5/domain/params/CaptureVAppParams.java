@@ -120,7 +120,7 @@ public class CaptureVAppParams extends ParamsType {
        * @see CaptureVAppParams#getSections()
        */
       public B sections(Iterable<? extends SectionType> sections) {
-         this.sections = Sets.newLinkedHashSet(checkNotNull(sections, "sections"));
+         this.sections = Sets.<SectionType>newLinkedHashSet(checkNotNull(sections, "sections"));
          return self();
       }
 
@@ -147,7 +147,7 @@ public class CaptureVAppParams extends ParamsType {
    }
 
    private CaptureVAppParams(Set<? extends SectionType> sections) {
-      this.sections = ImmutableSet.copyOf(sections);
+      this.sections = ImmutableSet.<SectionType>copyOf(sections);
    }
 
    @XmlElement(name = "Source", required = true)

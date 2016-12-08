@@ -132,7 +132,7 @@ public class Checks {
       // Check optional fields
       // NOTE description cannot be checked
       List<Task> tasks = entity.getTasks();
-      if (tasks != null && tasks != null && !tasks.isEmpty()) {
+      if (tasks != null && !tasks.isEmpty()) {
          for (Task task : tasks) checkTask(task);
       }
       
@@ -480,7 +480,7 @@ public class Checks {
       checkIpAddress(routerInfo.getExternalIp());
    }
    
-   public static void checkNetworkService(NetworkServiceType service) {
+   public static void checkNetworkService(NetworkServiceType<?> service) {
       // NOTE isEnabled cannot be checked
    }
    
@@ -895,12 +895,12 @@ public class Checks {
       assertTrue(settings.getPort() >= 0,
             String.format(OBJ_FIELD_GTE_0, "CustomOrgLdapSettings", "port", settings.getPort()));
       assertNotNull(settings.getAuthenticationMechanism(), String.format(OBJ_FIELD_REQ, "CustomOrgLdapSettings", "authenticationMechanism"));
-      assertTrue(AuthenticationMechanism.ALL.contains(settings.getAuthenticationMechanism()),
+      assertTrue(AuthenticationMechanism.ALL.contains(AuthenticationMechanism.valueOf(settings.getAuthenticationMechanism())),
             String.format(REQUIRED_VALUE_OBJECT_FMT, "AuthenticationMechanism", "CustomOrdLdapSettings", settings.getAuthenticationMechanism(),
                   Iterables.toString(CustomOrgLdapSettings.AuthenticationMechanism.ALL)));
       assertNotNull(settings.isGroupSearchBaseEnabled(), String.format(OBJ_FIELD_REQ, "CustomOrgLdapSettings", "isGroupSearchBaseEnabled"));
       assertNotNull(settings.getConnectorType(), String.format(OBJ_FIELD_REQ, "CustomOrgLdapSettings", "connectorType"));
-      assertTrue(ConnectorType.ALL.contains(settings.getConnectorType()),
+      assertTrue(ConnectorType.ALL.contains(ConnectorType.valueOf(settings.getConnectorType())),
             String.format(REQUIRED_VALUE_OBJECT_FMT, "ConnectorType", "CustomOrdLdapSettings", settings.getConnectorType(),
                   Iterables.toString(CustomOrgLdapSettings.ConnectorType.ALL)));
       assertNotNull(settings.getUserAttributes(), String.format(OBJ_FIELD_REQ, "CustomOrgLdapSettings", "userAttributes"));
