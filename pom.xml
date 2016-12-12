@@ -189,8 +189,9 @@
       </plugin>
 
       <!-- 
-      Workaround to change to java17 compatibility, rather than java16.
-      Could upgrade from 1.11 to 1.15 as well.
+      Workaround to change to java17 compatibility, rather than java16
+      Also updates version from 1.11 to 1.15.
+      (i.e. overriding the jclouds 2.0.0 defaults, copy-pasting from jclouds project/pom.xml).
        -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -215,11 +216,16 @@
 
       <!-- 
       Workaround for https://github.com/google/error-prone/issues/493 with error-prone 2.0.5.
-      Update to 2.0.15, and disable a bunch of checkers that were not found.
+      Disables individual checkers - see comments below.
+      Updates plexus-compiler-javac-errorprone version from 2.6 to 2.8.1 (no specific reason!).
+      Updates maven-compiler-plugin version from 3.1 to 3.6.0 (no specific reason!).
+      (Don't upgrade error-prone beyone 2.0.5 until we are dropping support for Java 7 - see 
+      https://github.com/tbroyer/gradle-errorprone-plugin/issues/18).
+      (i.e. overriding the jclouds 2.0.0 defaults, copy-pasting from jclouds project/pom.xml).
        -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.6.0</version>
         <configuration>
           <compilerId>javac-with-errorprone</compilerId>
           <forceJavacCompilerUse>true</forceJavacCompilerUse>
