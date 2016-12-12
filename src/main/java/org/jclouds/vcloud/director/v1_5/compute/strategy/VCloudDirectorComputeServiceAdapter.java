@@ -675,20 +675,6 @@ public class VCloudDirectorComputeServiceAdapter implements
    }
 
    private Set<Vm> getAvailableVMsFromVAppTemplate(VAppTemplate vAppTemplate) {
-      // FIXME What should this be? Previously it did `computerName.equals(computerName)`,
-      // so would never have filtered anything out of the vApp children. Disabling for now.
-      // Old code was:
-//      return ImmutableSet.copyOf(filter(vAppTemplate.getChildren(), new Predicate<Vm>() {
-//         // filter out vms in the vApp template with computer name that contains underscores, dots,
-//         // or both.
-//         @Override
-//         public boolean apply(Vm input) {
-//            GuestCustomizationSection guestCustomizationSection = api.getVmApi().getGuestCustomizationSection(input.getId());
-//            String computerName = guestCustomizationSection.getComputerName();
-//            return computerName.equals(computerName);
-//         }
-//      }));
-      
       return ImmutableSet.copyOf(vAppTemplate.getChildren());
    }
 
