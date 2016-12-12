@@ -238,7 +238,8 @@
               <!-- on by default: warning -->
               <compilerArg>-Xep:CannotMockFinalClass:ERROR</compilerArg>
               <compilerArg>-Xep:ElementsCountedInLoop:ERROR</compilerArg>
-              <compilerArg>-Xep:EqualsHashCode:ERROR</compilerArg>
+              <!-- Disabled for error-prone 2.0.5 -->
+              <!--<compilerArg>-Xep:EqualsHashCode:ERROR</compilerArg>-->
               <compilerArg>-Xep:Finally:ERROR</compilerArg>
               <compilerArg>-Xep:IncompatibleModifiers:ERROR</compilerArg>
               <compilerArg>-Xep:JUnitAmbiguousTestClass:ERROR</compilerArg>
@@ -309,7 +310,8 @@
 
               <!-- experimental: warning -->
               <compilerArg>-Xep:AssertFalse:ERROR</compilerArg>
-              <compilerArg>-Xep:AssistedInjectAndInjectOnConstructors:ERROR</compilerArg>
+              <!-- Disabled for error-prone 2.0.5: NPE -->
+              <!--<compilerArg>-Xep:AssistedInjectAndInjectOnConstructors:ERROR</compilerArg>-->
               <compilerArg>-Xep:CollectionIncompatibleType:ERROR</compilerArg>
               <compilerArg>-Xep:GuiceInjectOnFinalField:OFF</compilerArg>  <!-- noisy -->
               <compilerArg>-Xep:MissingFail:ERROR</compilerArg>
@@ -370,7 +372,7 @@
           <dependency>
             <groupId>com.google.errorprone</groupId>
             <artifactId>error_prone_core</artifactId>
-            <version>2.0.15</version>
+            <version>2.0.5</version>
             <scope>compile</scope>
           </dependency>
         </dependencies>
