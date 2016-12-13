@@ -17,7 +17,6 @@
 package org.jclouds.vcloud.director.v1_5.compute.strategy;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.find;
 import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -380,7 +379,7 @@ public class VCloudDirectorComputeServiceAdapter implements
    private VirtualHardwareSection updateVirtualHardwareSection(VirtualHardwareSection virtualHardwareSection, Predicate<ResourceAllocationSettingData>
             predicate, Function<ResourceAllocationSettingData, ResourceAllocationSettingData> modifier) {
       Set<? extends ResourceAllocationSettingData> oldItems = virtualHardwareSection.getItems();
-      Set<ResourceAllocationSettingData> newItems = Sets.newLinkedHashSet(oldItems);
+      Set<ResourceAllocationSettingData> newItems = Sets.<ResourceAllocationSettingData>newLinkedHashSet(oldItems);
       Optional<? extends ResourceAllocationSettingData> oldResourceAllocationSettingData = Iterables.tryFind(oldItems, predicate);
       if (oldResourceAllocationSettingData.isPresent()) {
          ResourceAllocationSettingData newResourceAllocationSettingData = modifier.apply(oldResourceAllocationSettingData.get());
@@ -676,16 +675,7 @@ public class VCloudDirectorComputeServiceAdapter implements
    }
 
    private Set<Vm> getAvailableVMsFromVAppTemplate(VAppTemplate vAppTemplate) {
-      return ImmutableSet.copyOf(filter(vAppTemplate.getChildren(), new Predicate<Vm>() {
-         // filter out vms in the vApp template with computer name that contains underscores, dots,
-         // or both.
-         @Override
-         public boolean apply(Vm input) {
-            GuestCustomizationSection guestCustomizationSection = api.getVmApi().getGuestCustomizationSection(input.getId());
-            String computerName = guestCustomizationSection.getComputerName();
-            return computerName.equals(computerName);
-         }
-      }));
+      return ImmutableSet.copyOf(vAppTemplate.getChildren());
    }
 
    private Org getOrgForSession() {

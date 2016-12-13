@@ -26,7 +26,6 @@ import com.google.common.base.Function;
 @Singleton
 public class NetworkSectionForVAppTemplate implements Function<VAppTemplate, NetworkSection> {
 
-   @SuppressWarnings("unchecked")
    @Override
    public NetworkSection apply(VAppTemplate from) {
       for (SectionType section : from.getSections()) {

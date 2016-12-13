@@ -68,7 +68,7 @@ public class Error {
       @XmlEnumValue("503") UNAVAILABLE(503),
       UNRECOGNIZED(-1);
 
-      private Integer majorErrorCode;
+      private final Integer majorErrorCode;
       
       private Code(Integer majorErrorCode) {
          this.majorErrorCode = majorErrorCode;

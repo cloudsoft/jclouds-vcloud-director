@@ -40,12 +40,12 @@ public class VCloudExtensionType
   protected Boolean required;
 
   @XmlAnyAttribute
-  private Map<QName, String> otherAttributes = new HashMap();
+  private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
   public List<Object> getAny()
   {
     if (this.any == null) {
-      this.any = new ArrayList();
+      this.any = new ArrayList<Object>();
     }
     return this.any;
   }

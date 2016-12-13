@@ -83,6 +83,7 @@ public class VCloudDirectorComputeServiceAdapterLiveTest extends BaseVCloudDirec
    }
 
    @AfterGroups(groups = "live")
+   @Override
    protected void tearDown() {
       if (guest != null) {
          adapter.destroyNode(guest.getNode().getId());

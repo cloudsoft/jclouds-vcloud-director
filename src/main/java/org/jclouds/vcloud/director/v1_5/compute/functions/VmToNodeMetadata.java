@@ -74,6 +74,7 @@ public class VmToNodeMetadata implements Function<Vm, NodeMetadata> {
       this.api = api;
    }
 
+   @Override
    public NodeMetadata apply(Vm from) {
       NodeMetadataBuilder builder = new NodeMetadataBuilder();
       builder.ids(from.getId());

@@ -52,7 +52,7 @@ public class NetworkFeatures {
        * @see NetworkFeatures#getNetworkServices()
        */
       public Builder services(Set<? extends NetworkServiceType<?>> services) {
-         this.services = Sets.newLinkedHashSet(checkNotNull(services, "services"));
+         this.services = Sets.<NetworkServiceType<?>>newLinkedHashSet(checkNotNull(services, "services"));
          return this;
       }
 

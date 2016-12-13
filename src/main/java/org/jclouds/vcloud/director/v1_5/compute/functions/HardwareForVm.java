@@ -58,10 +58,8 @@ public class HardwareForVm implements Function<Vm, Hardware> {
 
    @Override
    public Hardware apply(Vm from) {
-      checkNotNull(from, "VApp");
+      checkNotNull(from, "VM");
       // TODO make this work with composite vApps
-      if (from == null)
-         return null;
 
       VirtualHardwareSection hardware = findVirtualHardwareSectionForVm.apply(from);
       HardwareBuilder builder = rasdToHardwareBuilder.apply(hardware.getItems());

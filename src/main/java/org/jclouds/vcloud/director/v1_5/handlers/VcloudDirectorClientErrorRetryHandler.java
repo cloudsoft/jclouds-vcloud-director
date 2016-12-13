@@ -66,6 +66,6 @@ public class VcloudDirectorClientErrorRetryHandler extends BackoffLimitedRetryHa
 
    @Override
    public void imposeBackoffExponentialDelay(long period, int pow, int failureCount, int max, String commandDescription) {
-      imposeBackoffExponentialDelay(period, period * 100l, pow, failureCount, max, commandDescription);
+      imposeBackoffExponentialDelay(period, period * 100L, pow, failureCount, max, commandDescription);
    }
 }

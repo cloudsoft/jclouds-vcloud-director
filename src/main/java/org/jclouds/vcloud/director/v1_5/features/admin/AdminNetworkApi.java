@@ -16,7 +16,6 @@
  */
 package org.jclouds.vcloud.director.v1_5.features.admin;
 
-import static org.jclouds.Fallbacks.NullOnNotFoundOr404;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.ADMIN_ORG_NETWORK;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.TASK;
 
@@ -29,6 +28,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import org.jclouds.Fallbacks.NullOnNotFoundOr404;
 import org.jclouds.rest.annotations.BinderParam;
 import org.jclouds.rest.annotations.EndpointParam;
 import org.jclouds.rest.annotations.Fallback;

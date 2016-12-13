@@ -84,7 +84,7 @@ public class AdminVdcApiLiveTest extends BaseVCloudDirectorApiLiveTest {
    public void testEditVdc() throws Exception {
       String origName = lazyGetVdc().getName();
       String newName = name("a");
-      Exception exception = null;
+      Exception exceptionInFinally = null;
 
       AdminVdc vdc = AdminVdc.builder().name(newName).build();
 
@@ -97,21 +97,19 @@ public class AdminVdcApiLiveTest extends BaseVCloudDirectorApiLiveTest {
 
          // parent type
          Checks.checkAdminVdc(vdc);
-      } catch (Exception e) {
-         exception = e;
       } finally {
          try {
             AdminVdc restorableVdc = AdminVdc.builder().name(origName).build();
             Task task = vdcApi.edit(vdcUrn, restorableVdc);
             assertTaskSucceeds(task);
          } catch (Exception e) {
-            if (exception != null) {
-               logger.warn(e, "Error resetting adminVdc.name; rethrowing original test exception...");
-               throw exception;
-            } else {
-               throw e;
-            }
+            exceptionInFinally = e;
+            logger.warn(e, "Error resetting adminVdc.name");
          }
+      }
+      
+      if (exceptionInFinally != null) {
+         throw exceptionInFinally;
       }
    }
 
@@ -134,23 +132,20 @@ public class AdminVdcApiLiveTest extends BaseVCloudDirectorApiLiveTest {
    @Test(description = "DISABLE/ENABLE /admin/vdc/{id}", enabled = false)
    public void testDisableAndEnableVdc() throws Exception {
       // TODO Need to have a VDC that we're happy to remove!
-      Exception exception = null;
+      Exception exceptionInFinally = null;
 
       try {
          vdcApi.disable(vdcUrn);
-      } catch (Exception e) {
-         exception = e;
       } finally {
          try {
             vdcApi.enable(vdcUrn);
          } catch (Exception e) {
-            if (exception != null) {
-               logger.warn(e, "Error resetting adminVdc.name; rethrowing original test exception...");
-               throw exception;
-            } else {
-               throw e;
-            }
+            exceptionInFinally = e;
+            logger.warn(e, "Error resetting adminVdc.name");
          }
+      }
+      if (exceptionInFinally != null) {
+         throw exceptionInFinally;
       }
    }
 

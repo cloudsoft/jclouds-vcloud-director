@@ -51,6 +51,7 @@ public class FindLocationForResource implements Function<Reference, Location> {
     * @throws NoSuchElementException
     *            if not found
     */
+   @Override
    public Location apply(Reference resource) {
       for (Location input : locations.get()) {
          do {

@@ -136,7 +136,7 @@ public class VirtualSystem extends SectionType {
       }
 
       public B virtualHardwareSections(Iterable<? extends VirtualHardwareSection> virtualHardwareSections) {
-         this.virtualHardwareSections = Sets.newLinkedHashSet(checkNotNull(virtualHardwareSections, "virtualHardwareSections"));
+         this.virtualHardwareSections = Sets.<VirtualHardwareSection>newLinkedHashSet(checkNotNull(virtualHardwareSections, "virtualHardwareSections"));
          return self();
       }
 

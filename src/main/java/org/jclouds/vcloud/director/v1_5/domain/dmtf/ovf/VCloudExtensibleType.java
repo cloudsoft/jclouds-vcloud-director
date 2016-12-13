@@ -36,12 +36,12 @@ public abstract class VCloudExtensibleType
   protected List<VCloudExtensionType> vCloudExtension;
 
   @XmlAnyAttribute
-  private Map<QName, String> otherAttributes = new HashMap();
+  private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
   public List<VCloudExtensionType> getVCloudExtension()
   {
     if (this.vCloudExtension == null) {
-      this.vCloudExtension = new ArrayList();
+      this.vCloudExtension = new ArrayList<VCloudExtensionType>();
     }
     return this.vCloudExtension;
   }
