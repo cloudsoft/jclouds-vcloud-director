@@ -16,13 +16,16 @@
  */
 package org.jclouds.vcloud.director.v1_5.features;
 
+import static com.google.common.collect.Iterables.getFirst;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.CORRECT_VALUE_OBJECT_FMT;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.ENTITY_EQUAL;
+import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.ENTITY_NON_NULL;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.MATCHES_STRING_FMT;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.NOT_EMPTY_OBJECT_FMT;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.OBJ_FIELD_EQ;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.TASK_COMPLETE_TIMELY;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.ADMIN_USER;
+import static org.jclouds.vcloud.director.v1_5.compute.strategy.VCloudDirectorComputeServiceAdapter.createVmItem;
 import static org.jclouds.vcloud.director.v1_5.domain.Checks.checkControlAccessParams;
 import static org.jclouds.vcloud.director.v1_5.domain.Checks.checkLeaseSettingsSection;
 import static org.jclouds.vcloud.director.v1_5.domain.Checks.checkMetadata;
@@ -36,6 +39,7 @@ import static org.jclouds.vcloud.director.v1_5.domain.Checks.checkStartupSection
 import static org.jclouds.vcloud.director.v1_5.domain.Checks.checkVApp;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -45,6 +49,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.jclouds.vcloud.director.v1_5.compute.strategy.VCloudDirectorComputeServiceAdapter;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.MsgType;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.NetworkSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.ProductSection;
@@ -104,18 +109,18 @@ import com.google.common.collect.Sets;
 /**
  * Tests behavior of the {@link VAppApi}.
  */
-@Test(singleThreaded = true, testName = "VAppApiLiveTest")
+@Test(groups = {"live"}, singleThreaded = true, testName = "VAppApiLiveTest")
 public class VAppApiLiveTest extends AbstractVAppApiLiveTest {
 
    private String key;
    private boolean testUserCreated = false;
    private User user;
-
+    
    @BeforeClass(alwaysRun = true)
    protected void setupRequiredEntities() {
-      userUrn = api.getUserApi().addUserToOrg(randomTestUser("VAppAccessTest"), org.getId())
-              .getId();
-      user = lazyGetUser();
+//      userUrn = api.getUserApi().addUserToOrg(randomTestUser("VAppAccessTest"), org.getId())
+//              .getId();
+//      user = lazyGetUser();
    }
 
    @AfterClass(alwaysRun = true, dependsOnMethods = { "cleanUpEnvironment" })
@@ -129,8 +134,39 @@ public class VAppApiLiveTest extends AbstractVAppApiLiveTest {
       }
    }
 
+   @Test
+   public void testComposeVApp() {
+      String name = name("test-vapp-");
+      VAppTemplate vAppTemplate = api.getVAppTemplateApi().get(vAppTemplateUrn);
+      Set<Vm> vms = ImmutableSet.copyOf(vAppTemplate.getChildren());
+      // TODO now get the first vm to be added to vApp, what if more?
+      Vm toAddVm = Iterables.get(vms, 0);
+   
+      // customize toAddVm
+      GuestCustomizationSection guestCustomizationSection = api.getVmApi().getGuestCustomizationSection(toAddVm.getHref());
+      guestCustomizationSection = guestCustomizationSection.toBuilder()
+            .resetPasswordRequired(false)
+            .build();
+
+      Network network = api.getNetworkApi().get(networkUrn);
+      SourcedCompositionItemParam vmItem = createVmItem(toAddVm, network.getName(), guestCustomizationSection);
+      ComposeVAppParams compositionParams = ComposeVAppParams.builder()
+            .name(name)
+            .instantiationParams(VCloudDirectorComputeServiceAdapter.instantiationParams(vdc, Reference.builder().fromEntity(network).build()))
+            .sourcedItems(ImmutableList.of(vmItem))
+            .build();
+      VApp vApp = api.getVdcApi().composeVApp(vdc.getId(), compositionParams);
+      vAppNames.add(vApp.getName());
+
+      assertNotNull(vApp, String.format(ENTITY_NON_NULL, VAPP));
+
+      Task instantiationTask = getFirst(vApp.getTasks(), null);
+      if (instantiationTask != null)
+         assertTaskSucceedsLong(instantiationTask);
+   }
+   
    /**
-    * @see VAppApi#get(URI)
+    * @see VAppApi#get(String)
     */
    @Test(groups = { "live", "user" }, description = "GET /vApp/{id}")
    public void testGetVApp() {
@@ -756,7 +792,7 @@ public class VAppApiLiveTest extends AbstractVAppApiLiveTest {
    }
 
    /**
-    * @see VAppApi#remove(URI)
+    * @see VAppApi#remove(String)
     */
    @Test(groups = { "live", "user" }, description = "DELETE /vApp/{id}")
    public void testRemoveVApp() {

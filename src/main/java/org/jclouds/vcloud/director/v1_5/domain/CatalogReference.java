@@ -68,6 +68,9 @@ public class CatalogReference extends Reference {
       CatalogReference that = CatalogReference.class.cast(o);
       return super.equals(that);
    }
-   
-   // NOTE hashcode inherited from Reference
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

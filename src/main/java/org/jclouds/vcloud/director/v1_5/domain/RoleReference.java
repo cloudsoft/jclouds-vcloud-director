@@ -68,6 +68,9 @@ public class RoleReference extends Reference {
       RoleReference that = RoleReference.class.cast(o);
       return super.equals(that);
    }
-   
-   // NOTE hashcode inherited from Reference
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

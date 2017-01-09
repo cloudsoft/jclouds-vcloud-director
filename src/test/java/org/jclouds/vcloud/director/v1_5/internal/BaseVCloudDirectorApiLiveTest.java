@@ -17,7 +17,6 @@
 package org.jclouds.vcloud.director.v1_5.internal;
 
 import static com.google.common.base.Predicates.and;
-import static com.google.common.base.Strings.emptyToNull;
 import static com.google.common.collect.Iterables.any;
 import static com.google.common.collect.Iterables.contains;
 import static com.google.common.collect.Iterables.find;
@@ -32,10 +31,6 @@ import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.MEDIA;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.NETWORK;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.ORG_NETWORK;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.USER;
-import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VAPP;
-import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VAPP_TEMPLATE;
-import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VDC;
-import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.VM;
 import static org.jclouds.vcloud.director.v1_5.predicates.LinkPredicates.relEquals;
 import static org.jclouds.vcloud.director.v1_5.predicates.LinkPredicates.typeEquals;
 import static org.testng.Assert.assertEquals;
@@ -45,11 +40,11 @@ import static org.testng.Assert.fail;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 
 import javax.annotation.Resource;
-import javax.inject.Inject;
 
 import org.jclouds.apis.BaseApiLiveTest;
 import org.jclouds.date.DateService;
@@ -78,7 +73,7 @@ import org.jclouds.vcloud.director.v1_5.domain.network.Network;
 import org.jclouds.vcloud.director.v1_5.domain.network.NetworkConfiguration;
 import org.jclouds.vcloud.director.v1_5.domain.network.VAppNetworkConfiguration;
 import org.jclouds.vcloud.director.v1_5.domain.org.Org;
-//import org.jclouds.vcloud.director.v1_5.domain.params.InstantiateVAppTemplateParams;
+import org.jclouds.vcloud.director.v1_5.domain.params.InstantiateVAppTemplateParams;
 import org.jclouds.vcloud.director.v1_5.domain.params.InstantiationParams;
 import org.jclouds.vcloud.director.v1_5.domain.params.UndeployVAppParams;
 import org.jclouds.vcloud.director.v1_5.domain.section.NetworkConfigSection;
@@ -115,6 +110,10 @@ import com.google.inject.Guice;
 @Listeners(FormatApiResultsListener.class)
 @Test(groups = "live")
 public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VCloudDirectorApi> {
+   public static final String VAPP = "VApp";
+   public static final String VAPP_TEMPLATE = "VAppTemplate";
+   public static final String VDC = "Vdc";
+   public static final String VM = "Vm";
 
    @Resource
    protected Logger logger = Logger.NULL;
@@ -142,7 +141,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
    private Vdc vdc;
    protected String userUrn;
    private User user;
-   protected String vappId;
+   protected String hardwareId;
 
    protected final Set<String> vAppNames = Sets.newLinkedHashSet();
    protected static final Random random = new Random();
@@ -164,24 +163,18 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
    /** Implement as required to populate xxxApi fields, or NOP */
    protected abstract void setupRequiredApis();
 
-   @Inject
-   protected void initTaskSuccess(TaskSuccess taskSuccess) {
-      retryTaskSuccess = retry(taskSuccess, TASK_TIMEOUT_SECONDS * 1000L);
-   }
-
-   @Inject
-   protected void initTaskSuccessLong(TaskSuccess taskSuccess) {
-      retryTaskSuccessLong = retry(taskSuccess, LONG_TASK_TIMEOUT_SECONDS * 1000L);
-   }
-
    @BeforeClass(groups = { "integration", "live" })
-   public void setupContext() {
+   @Override
+   public void setup() {
       super.setup();
       session = api.getCurrentSession();
       initTestParametersFromPropertiesOrLazyDiscover();
       setupRequiredApis();
+    
+      retryTaskSuccess = retry(new TaskSuccess(api.getTaskApi()), TASK_TIMEOUT_SECONDS * 1000L);
+      retryTaskSuccessLong = retry(new TaskSuccess(api.getTaskApi()), LONG_TASK_TIMEOUT_SECONDS * 1000L);
    }
-
+   
    public static String getTestDateTimeStamp() {
       if (testStamp == null) {
          testStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -207,23 +200,28 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
                .role(role).password("password").build();
    }
 
+   @Override
+   public Properties setupProperties() {
+      Properties overrides = super.setupProperties();
+      vAppTemplateUrn = setIfTestSystemPropertyPresent(overrides, provider + ".vapptemplate-id");
+      vdcUrn = setIfTestSystemPropertyPresent(overrides, provider + ".vdc-id");
+      hardwareId = setIfTestSystemPropertyPresent(overrides, provider + ".hardware-id");
+      networkUrn = setIfTestSystemPropertyPresent(overrides, provider + ".network-id");
+      catalogUrn = setIfTestSystemPropertyPresent(overrides, provider + ".catalog-id");
+      mediaUrn = setIfTestSystemPropertyPresent(overrides, provider + ".media-id");
+      userUrn = setIfTestSystemPropertyPresent(overrides, provider + ".user-id");
+      return overrides;
+   }
+
    protected void initTestParametersFromPropertiesOrLazyDiscover() {
-      catalogUrn = emptyToNull(System.getProperty("test." + provider + ".catalog-id"));
-
-      vAppTemplateUrn = emptyToNull(System.getProperty("test." + provider + ".vapptemplate-id"));
-
-      vdcUrn = emptyToNull(System.getProperty("test." + provider + ".vdc-id"));
-
-      mediaUrn = emptyToNull(System.getProperty("test." + provider + ".media-id"));
-
-      networkUrn = emptyToNull(System.getProperty("test." + provider + ".network-id"));
-
-      userUrn = emptyToNull(System.getProperty("test." + provider + ".user-id"));
-
       org = api.getOrgApi()
                .get(find(api.getOrgApi().list(), ReferencePredicates.nameEquals(session.get()))
                         .getHref());
       orgUrn = org.getId();
+    
+      if (vdcUrn != null) {
+         vdc = api.getVdcApi().get(vdcUrn);
+      }
 
       if (any(Lists.newArrayList(vAppTemplateUrn, networkUrn, vdcUrn), Predicates.isNull())) {
 
@@ -256,7 +254,6 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
                networkUrn = network.getId();
             }
          }
-
       }
    }
 
@@ -279,7 +276,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
                   public VAppTemplate apply(Reference in) {
                      return api.getVAppTemplateApi().get(in.getHref());
                   }})
-               .filter(Predicates.notNull());      
+               .filter(Predicates.notNull());
       
       Optional<VAppTemplate> optionalVAppTemplate = tryFind(vAppTemplates, new Predicate<VAppTemplate>() {
 
@@ -299,7 +296,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
 
       return optionalVAppTemplate;
    }
-   
+
    Function<Vm, String> prettyVm = new Function<Vm, String>() {
 
       @Override
@@ -308,7 +305,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
       }
 
    };
-   
+
    public Optional<Vm> tryFindVmInOrg() {
       FluentIterable<Vm> vms =  FluentIterable.from(vdc.getResourceEntities())
                .filter(ReferencePredicates.<Reference> typeEquals(VM))
@@ -318,8 +315,8 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
                   public Vm apply(Reference in) {
                      return api.getVmApi().get(in.getHref());
                   }})
-               .filter(Predicates.notNull());      
-      
+               .filter(Predicates.notNull());
+
       Optional<Vm> optionalVm = tryFind(vms, new Predicate<Vm>() {
 
          @Override
@@ -327,17 +324,17 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
             return input.getId() != null;
          }
       });
-      
+
       if (optionalVm.isPresent()) {
          Logger.CONSOLE.info("found vm: %s", prettyVm.apply(optionalVm.get()));
       } else {
          Logger.CONSOLE.warn("%s doesn't have any vm in org %s; vms: %s", api
                   .getCurrentSession().getUser(), org.getName(), Iterables.transform(vms, prettyVm));
       }
-      
+
       return optionalVm;
    }
-   
+
    Function<Catalog, String> prettyCatalog = new Function<Catalog, String>() {
 
       @Override
@@ -387,7 +384,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
       }
 
    };
-   
+
    public Optional<Network> tryFindBridgedNetworkInOrg() {
       FluentIterable<Network> networks = FluentIterable.from(org.getLinks())
                .filter(ReferencePredicates.<Link> typeEquals(ORG_NETWORK)).transform(new Function<Link, Network>() {
@@ -447,7 +444,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
       }
       return optionalNetwork;
    }
-   
+
 	public FluentIterable<Media> findAllEmptyMediaInOrg() {
 		vdc = api.getVdcApi().get(vdc.getId());
 		return FluentIterable
@@ -492,7 +489,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
 				return false;
 			}});
 			*/
-	}	
+	}
 
    protected Vdc lazyGetVdc() {
       if (vdc == null) {
@@ -555,12 +552,13 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
                media = api.getMediaApi().get(media.getId());
             }
             mediaUrn = media.getId();
-         } else 
-        	 media = api.getMediaApi().get(mediaUrn);
+         } else {
+            media = api.getMediaApi().get(mediaUrn);
+         }
       }
       return media;
    }
-   
+
    protected VAppTemplate lazyGetVAppTemplate() {
       if (vAppTemplate == null) {
          assertNotNull(vAppTemplateUrn, String.format(URN_REQ_LIVE, VAPP_TEMPLATE));
@@ -603,7 +601,7 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
    /**
     * Instantiate a {@link VApp} in a {@link Vdc} using the {@link VAppTemplate} we have configured
     * for the tests.
-    * 
+    *
     * @return the VApp that is being instantiated
     */
    protected VApp instantiateVApp() {
@@ -611,22 +609,20 @@ public abstract class BaseVCloudDirectorApiLiveTest extends BaseApiLiveTest<VClo
    }
 
    protected VApp instantiateVApp(String name) {
-//      InstantiateVAppTemplateParams instantiate = InstantiateVAppTemplateParams.builder().name(name).notDeploy()
-//               .notPowerOn().description("Test VApp").instantiationParams(instantiationParams())
-//               .source(Reference.builder().href(lazyGetVAppTemplate().getHref()).build()).build();
-
+      InstantiateVAppTemplateParams instantiate = InstantiateVAppTemplateParams.builder().name(name).notDeploy()
+            .notPowerOn().description("Test VApp").instantiationParams(instantiationParams())
+            .source(Reference.builder().href(lazyGetVAppTemplate().getHref()).build()).build();
+   
       VdcApi vdcApi = api.getVdcApi();
-      vappId = emptyToNull(System.getProperty("test." + provider + ".vapp-id"));
-      VApp vAppInstantiated = api.getVAppApi().get(vappId);
+      VApp vAppInstantiated = vdcApi.instantiateVApp(vdcUrn, instantiate);
       assertNotNull(vAppInstantiated, String.format(ENTITY_NON_NULL, VAPP));
-
+   
       Task instantiationTask = getFirst(vAppInstantiated.getTasks(), null);
-      if (instantiationTask != null) {
+      if (instantiationTask != null)
          assertTaskSucceedsLong(instantiationTask);
-      }
+   
       // Save VApp name for cleanUp
       vAppNames.add(vAppInstantiated.getName());
-
       return vAppInstantiated;
    }
 

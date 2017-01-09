@@ -18,6 +18,7 @@ package org.jclouds.vcloud.director.v1_5.features;
 
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.CORRECT_VALUE_OBJECT_FMT;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.ENTITY_EQUAL;
+import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.ENTITY_NON_NULL;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.OBJ_FIELD_EQ;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorLiveTestConstants.TASK_COMPLETE_TIMELY;
 import static org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType.MEDIA;
@@ -99,8 +100,8 @@ public class VmApiLiveTest extends AbstractVAppApiLiveTest {
 
    @BeforeClass(alwaysRun = true)
    protected void setupRequiredEntities() {
-      userUrn = api.getUserApi().addUserToOrg(randomTestUser("VAppAccessTest"), org.getId())
-              .getId();
+//      userUrn = api.getUserApi().addUserToOrg(randomTestUser("VAppAccessTest"), org.getId())
+//              .getId();
    }
 
    @AfterClass(alwaysRun = true, dependsOnMethods = { "cleanUpEnvironment" })
@@ -611,7 +612,7 @@ public class VmApiLiveTest extends AbstractVAppApiLiveTest {
       // Copy existing section and edit fields
       VirtualHardwareSection oldSection = vmApi.getVirtualHardwareSection(vmUrn);
       Set<? extends ResourceAllocationSettingData> oldItems = oldSection.getItems();
-      Set<ResourceAllocationSettingData> newItems = Sets.<ResourceAllocationSettingData>newLinkedHashSet(oldItems);
+      Set<ResourceAllocationSettingData> newItems = Sets.newLinkedHashSet(oldItems);
       ResourceAllocationSettingData oldMemory = Iterables.find(oldItems,
                new Predicate<ResourceAllocationSettingData>() {
                   @Override
@@ -921,7 +922,14 @@ public class VmApiLiveTest extends AbstractVAppApiLiveTest {
    public void testRemoveVm() {
       // Create a temporary VApp to remove
       VApp remove = instantiateVApp();
-      DeployVAppParams params = DeployVAppParams.builder()
+      assertNotNull(remove, String.format(ENTITY_NON_NULL, VAPP));
+      vAppUrn = remove.getId();
+   
+      // Wait for the task to complete
+      Task instantiateTask = Iterables.getOnlyElement(remove.getTasks());
+      assertTaskSucceedsLong(instantiateTask);
+    
+       DeployVAppParams params = DeployVAppParams.builder()
                .deploymentLeaseSeconds((int) TimeUnit.SECONDS.convert(1L, TimeUnit.HOURS)).notForceCustomization()
                .powerOn().build();
       Task deployVApp = vAppApi.deploy(remove.getId(), params);

@@ -69,6 +69,9 @@ public class CatalogReferences extends QueryResultReferences {
       CatalogReferences that = CatalogReferences.class.cast(o);
       return super.equals(that);
    }
-   
-   // NOTE hashcode inherited from QueryResultReferences
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

@@ -62,6 +62,7 @@ import org.jclouds.vcloud.director.v1_5.internal.BaseVCloudDirectorApiLiveTest;
 import org.jclouds.vcloud.director.v1_5.predicates.ReferencePredicates;
 import org.jclouds.xml.internal.JAXBParser;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import com.google.common.base.Function;
@@ -76,12 +77,6 @@ import com.google.common.collect.Iterables;
  * Shared code to test the behaviour of {@link VAppApi} and {@link VAppTemplateApi}.
  */
 public abstract class AbstractVAppApiLiveTest extends BaseVCloudDirectorApiLiveTest {
-
-   public static final String VAPP = "VApp";
-   public static final String VAPP_TEMPLATE = "VAppTemplate";
-   public static final String VDC = "Vdc";
-   public static final String VM = "Vm";
-
    /*
     * Convenience reference to API apis.
     */
@@ -124,7 +119,7 @@ public abstract class AbstractVAppApiLiveTest extends BaseVCloudDirectorApiLiveT
    
    /**
     * Sets up the environment. Retrieves the test {@link Vdc} and {@link VAppTemplate} from their
-    * configured {@link URI}s. Instantiates a new test VApp.
+    * configured urn(s). Instantiates a new test VApp.
     */
    @BeforeClass(alwaysRun = true, description = "Retrieves the required apis from the REST API context")
    protected void setupEnvironment() {
@@ -141,8 +136,8 @@ public abstract class AbstractVAppApiLiveTest extends BaseVCloudDirectorApiLiveT
       vAppUrn = vAppInstantiated.getId();
 
       // Wait for the task to complete
-//      Task instantiateTask = Iterables.getOnlyElement(vAppInstantiated.getTasks());
-//      assertTrue(retryTaskSuccessLong.apply(instantiateTask), String.format(TASK_COMPLETE_TIMELY, "instantiateTask"));
+      Task instantiateTask = Iterables.getOnlyElement(vAppInstantiated.getTasks());
+      assertTaskSucceedsLong(instantiateTask);
 
       // Get the instantiated VApp
       vApp = vAppApi.get(vAppUrn);
@@ -184,7 +179,7 @@ public abstract class AbstractVAppApiLiveTest extends BaseVCloudDirectorApiLiveT
       }
    }
 
-//   @AfterClass(alwaysRun = true, description = "Cleans up the environment by deleting addd VApps")
+   @AfterClass(alwaysRun = true, description = "Cleans up the environment by deleting addd VApps")
    protected void cleanUpEnvironment() {
       vdc = vdcApi.get(vdcUrn); // Refresh
 
@@ -356,7 +351,7 @@ public abstract class AbstractVAppApiLiveTest extends BaseVCloudDirectorApiLiveT
 
    /**
     * Marshals a JAXB annotated object into XML. The XML is output using
-    * {@link org.jclouds.logging.Logger#debug(String)}
+    * {@link org.jclouds.logging.Logger#debug(String, Object...)}
     */
    protected void debug(final Object object) {
       JAXBParser parser = new JAXBParser("true");
