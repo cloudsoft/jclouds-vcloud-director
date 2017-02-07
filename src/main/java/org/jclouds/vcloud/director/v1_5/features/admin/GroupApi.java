@@ -66,7 +66,7 @@ public interface GroupApi {
    /**
     * Retrieves a group.
     *
-    * @param groupString the reference for the group
+    * @param groupUri the reference for the group
     * @return a group
     */
    @GET
@@ -94,9 +94,9 @@ public interface GroupApi {
    /**
     * Deletes a group.
     *
-    * <pre
+    * <pre>
     * DELETE /admin/group/{id}
-    * </pre
+    * </pre>
     */
    @DELETE
    @Consumes

@@ -35,20 +35,20 @@ import com.google.common.collect.Maps;
  * Java class for anonymous complex type.
  *
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="order" use="required" type="{http://www.w3.org/2001/XMLSchema}unsignedShort" />
- *       &lt;attribute name="startDelay" type="{http://www.w3.org/2001/XMLSchema}unsignedShort" default="0" />
- *       &lt;attribute name="waitingForGuest" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
- *       &lt;attribute name="stopDelay" type="{http://www.w3.org/2001/XMLSchema}unsignedShort" default="0" />
- *       &lt;attribute name="startAction" type="{http://www.w3.org/2001/XMLSchema}string" default="powerOn" />
- *       &lt;attribute name="stopAction" type="{http://www.w3.org/2001/XMLSchema}string" default="powerOff" />
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="order" use="required" type="{http://www.w3.org/2001/XMLSchema}unsignedShort" /&gt;
+ *       &lt;attribute name="startDelay" type="{http://www.w3.org/2001/XMLSchema}unsignedShort" default="0" /&gt;
+ *       &lt;attribute name="waitingForGuest" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
+ *       &lt;attribute name="stopDelay" type="{http://www.w3.org/2001/XMLSchema}unsignedShort" default="0" /&gt;
+ *       &lt;attribute name="startAction" type="{http://www.w3.org/2001/XMLSchema}string" default="powerOn" /&gt;
+ *       &lt;attribute name="stopAction" type="{http://www.w3.org/2001/XMLSchema}string" default="powerOff" /&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType

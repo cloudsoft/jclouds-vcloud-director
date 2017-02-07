@@ -110,7 +110,7 @@ public abstract class AbstractVAppType extends ResourceEntity {
        * @see AbstractVAppType#getSections()
        */
       public B sections(Iterable<? extends SectionType> sections) {
-         this.sections = Sets.newLinkedHashSet(checkNotNull(sections, "sections"));
+         this.sections = Sets.<SectionType>newLinkedHashSet(checkNotNull(sections, "sections"));
          return self();
       }
 
@@ -175,23 +175,23 @@ public abstract class AbstractVAppType extends ResourceEntity {
     *
     * Objects of the following type(s) are allowed in the list:
     * <ul>
-    * <li>{@link VirtualHardwareSectionType}
-    * <li>{@link LeaseSettingsSectionType}
-    * <li>{@link EulaSectionType}
-    * <li>{@link RuntimeInfoSectionType}
-    * <li>{@link AnnotationSectionType}
-    * <li>{@link DeploymentOptionSectionType}
-    * <li>{@link StartupSectionType}
-    * <li>{@link ResourceAllocationSectionType}
-    * <li>{@link NetworkConnectionSectionType}
-    * <li>{@link CustomizationSectionType}
-    * <li>{@link ProductSectionType}
-    * <li>{@link GuestCustomizationSectionType}
-    * <li>{@link OperatingSystemSectionType}
-    * <li>{@link NetworkConfigSectionType}
-    * <li>{@link NetworkSectionType}
-    * <li>{@link DiskSectionType}
-    * <li>{@link InstallSectionType}
+    * <li>{@link VirtualHardwareSection}
+    * <li>{@link LeaseSettingsSection}
+    * <li>EulaSectionType
+    * <li>{@link RuntimeInfoSection}
+    * <li>AnnotationSection
+    * <li>{@link DeploymentOptionSection}
+    * <li>{@link StartupSection}
+    * <li>ResourceAllocationSection
+    * <li>{@link NetworkConnectionSection}
+    * <li>{@link CustomizationSection}
+    * <li>{@link ProductSection}
+    * <li>{@link GuestCustomizationSection}
+    * <li>{@link OperatingSystemSection}
+    * <li>{@link NetworkConfigSection}
+    * <li>{@link NetworkSection}
+    * <li>{@link DiskSection}
+    * <li>InstallSection
     * </ul>
     */
    public Set<SectionType> getSections() {

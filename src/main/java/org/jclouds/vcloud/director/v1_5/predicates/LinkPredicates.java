@@ -53,6 +53,7 @@ public class LinkPredicates {
       .maximumSize(Link.Rel.ALL.size())
       .build(
          new CacheLoader<Link.Rel, Predicate<Link>>() {
+            @Override
             public Predicate<Link> load(final Link.Rel rel) {
                return new Predicate<Link>() {
                   @Override
@@ -69,7 +70,7 @@ public class LinkPredicates {
          });
 
    /**
-    * @see ReferenceTypePredicates#nameEquals
+    * @see ReferencePredicates#nameEquals
     */
    public static Predicate<Link> nameEquals(String name) {
       return MEDIA_NAME_SELECTORS.getUnchecked(name);
@@ -79,13 +80,14 @@ public class LinkPredicates {
       .maximumSize(VCloudDirectorMediaType.ALL.size())
       .build(
          new CacheLoader<String, Predicate<Link>>() {
+            @Override
             public Predicate<Link> load(String key) {
                return ReferencePredicates.nameEquals(key);
             }
          });
 
    /**
-    * @see ReferenceTypePredicates#typeEquals
+    * @see ReferencePredicates#typeEquals
     */
    public static Predicate<Link> typeEquals(String type) {
       return MEDIA_TYPE_SELECTORS.getUnchecked(type);
@@ -95,6 +97,7 @@ public class LinkPredicates {
       .maximumSize(VCloudDirectorMediaType.ALL.size())
       .build(
          new CacheLoader<String, Predicate<Link>>() {
+            @Override
             public Predicate<Link> load(String key) {
                return ReferencePredicates.typeEquals(key);
             }

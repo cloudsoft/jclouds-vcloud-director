@@ -27,6 +27,7 @@ import org.jclouds.vcloud.director.v1_5.domain.dmtf.cim.ResourceAllocationSettin
 
 public class AddScsiLogicSASBus {
     static final Ordering<RasdItem> BY_ADDRESS_ORDERING = new Ordering<RasdItem>() {
+        @Override
         public int compare(RasdItem left, RasdItem right) {
             if (left.getAddress() == null && right.getAddress() == null) {
                 return 0;

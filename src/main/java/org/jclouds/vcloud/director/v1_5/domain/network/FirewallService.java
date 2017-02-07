@@ -33,25 +33,25 @@ import com.google.common.collect.Sets;
 
 /**
  * Represents a network firewall service.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for FirewallService complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="FirewallService">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}NetworkServiceType">
- *       &lt;sequence>
- *         &lt;element name="DefaultAction" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="LogDefaultAction" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="FirewallRule" type="{http://www.vmware.com/vcloud/v1.5}FirewallRuleType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="FirewallService"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}NetworkServiceType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="DefaultAction" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="LogDefaultAction" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="FirewallRule" type="{http://www.vmware.com/vcloud/v1.5}FirewallRuleType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "FirewallService")

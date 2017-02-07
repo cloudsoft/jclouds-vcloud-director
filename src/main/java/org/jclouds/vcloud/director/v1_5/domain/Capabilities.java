@@ -33,23 +33,23 @@ import com.google.common.collect.Sets;
 
 /**
  * Collection of supported hardware capabilities.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for Capabilities complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="Capabilities">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="SupportedHardwareVersions" type="{http://www.vmware.com/vcloud/v1.5}SupportedHardwareVersionsType" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Capabilities"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="SupportedHardwareVersions" type="{http://www.vmware.com/vcloud/v1.5}SupportedHardwareVersionsType" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "Capabilities", propOrder = {

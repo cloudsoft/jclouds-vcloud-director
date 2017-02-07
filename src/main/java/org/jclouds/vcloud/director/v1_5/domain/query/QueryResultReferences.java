@@ -62,7 +62,7 @@ public class QueryResultReferences extends ContainerType {
        * @see QueryResultReferences#getReferences()
        */
       public B references(Set<? extends Reference> references) {
-         this.references = Sets.newLinkedHashSet(checkNotNull(references, "references"));
+         this.references = Sets.<Reference>newLinkedHashSet(checkNotNull(references, "references"));
          return self();
       }
 

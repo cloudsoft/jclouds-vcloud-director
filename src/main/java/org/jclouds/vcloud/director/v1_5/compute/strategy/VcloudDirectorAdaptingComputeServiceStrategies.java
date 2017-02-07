@@ -24,7 +24,6 @@ import javax.annotation.Resource;
 
 import org.jclouds.compute.ComputeServiceAdapter;
 import org.jclouds.compute.config.ComputeServiceAdapterContextModule.AddDefaultCredentialsToImage;
-import org.jclouds.compute.domain.ComputeMetadata;
 import org.jclouds.compute.domain.Hardware;
 import org.jclouds.compute.domain.Image;
 import org.jclouds.compute.domain.NodeMetadata;
@@ -94,7 +93,7 @@ public class VcloudDirectorAdaptingComputeServiceStrategies extends AdaptingComp
    };
 
    @Override
-   public Iterable<? extends NodeMetadata> listDetailsOnNodesMatching(Predicate<ComputeMetadata> filter) {
+   public Iterable<? extends NodeMetadata> listDetailsOnNodesMatching(Predicate<? super NodeMetadata> filter) {
       return FluentIterable.from(client.listNodes())
                .transform(nodeMetadataAdapter)
                .filter(Predicates.notNull())

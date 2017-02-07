@@ -69,7 +69,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see InstantiateVAppParamsType#getSource()
+       * @see InstantiateVAppParams#getSource()
        */
       public B source(Reference source) {
          this.source = source;
@@ -79,7 +79,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       /**
        * Sets source to a new Reference that uses this URI as the href.
        * 
-       * @see InstantiateVAppParamsType#getSource()
+       * @see InstantiateVAppParams#getSource()
        */
       public B source(URI source) {
          this.source = Reference.builder().href(source).build();
@@ -87,7 +87,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see InstantiateVAppParamsType#isSourceDelete()
+       * @see InstantiateVAppParams#isSourceDelete()
        */
       public B isSourceDelete(Boolean sourceDelete) {
          this.sourceDelete = sourceDelete;
@@ -95,7 +95,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see InstantiateVAppParamsType#isSourceDelete()
+       * @see InstantiateVAppParams#isSourceDelete()
        */
       public B sourceDelete() {
          this.sourceDelete = Boolean.TRUE;
@@ -103,7 +103,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see InstantiateVAppParamsType#isSourceDelete()
+       * @see InstantiateVAppParams#isSourceDelete()
        */
       public B notSourceDelete() {
          this.sourceDelete = Boolean.FALSE;
@@ -111,7 +111,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see InstantiateVAppParamsType#isLinkedClone()
+       * @see InstantiateVAppParams#isLinkedClone()
        */
       public B isLinkedClone(Boolean linkedClone) {
          this.linkedClone = linkedClone;
@@ -119,7 +119,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see InstantiateVAppParamsType#isLinkedClone()
+       * @see InstantiateVAppParams#isLinkedClone()
        */
       public B linkedClone() {
          this.linkedClone = Boolean.TRUE;
@@ -127,7 +127,7 @@ public class InstantiateVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see InstantiateVAppParamsType#isLinkedClone()
+       * @see InstantiateVAppParams#isLinkedClone()
        */
       public B notLinkedClone() {
          this.linkedClone = Boolean.FALSE;

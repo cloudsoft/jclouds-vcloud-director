@@ -36,19 +36,19 @@ import com.google.common.collect.Sets;
  * Type for root OVF environment
  *
  * <pre>
- * &lt;complexType name="Environment_Type">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://schemas.dmtf.org/ovf/environment/1}Section" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="Entity" type="{http://schemas.dmtf.org/ovf/environment/1}Entity_Type" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" default="" />
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Environment_Type"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://schemas.dmtf.org/ovf/environment/1}Section" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="Entity" type="{http://schemas.dmtf.org/ovf/environment/1}Entity_Type" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;any processContents='lax' namespace='##other' maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "Environment_Type")

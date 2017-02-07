@@ -65,7 +65,7 @@ public class Entity extends Resource {
       private String id;
 
       /**
-       * @see EntityType#getName()
+       * @see Entity#getName()
        */
       public B name(String name) {
          this.name = name;
@@ -73,7 +73,7 @@ public class Entity extends Resource {
       }
 
       /**
-       * @see EntityType#getDescription()
+       * @see Entity#getDescription()
        */
       public B description(String description) {
          this.description = description;
@@ -81,7 +81,7 @@ public class Entity extends Resource {
       }
 
       /**
-       * @see EntityType#getId()
+       * @see Entity#getId()
        */
       public B id(String id) {
          this.id = id;
@@ -89,7 +89,7 @@ public class Entity extends Resource {
       }
 
       /**
-       * @see EntityType#getTasks()
+       * @see Entity#getTasks()
        */
       public B tasks(Iterable<Task> tasks) {
          this.tasks = Lists.newArrayList(checkNotNull(tasks, "tasks"));
@@ -97,7 +97,7 @@ public class Entity extends Resource {
       }
 
       /**
-       * @see EntityType#getTasks()
+       * @see Entity#getTasks()
        */
       public B task(Task task) {
          this.tasks.add(checkNotNull(task, "task"));

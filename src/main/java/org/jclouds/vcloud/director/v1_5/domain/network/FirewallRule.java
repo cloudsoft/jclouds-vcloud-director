@@ -26,47 +26,47 @@ import com.google.common.base.Objects;
 
 /**
  * Represents a firewall rule.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for FirewallRule complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="FirewallRule">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="IsEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Policy" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Protocols" minOccurs="0">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;choice>
- *                   &lt;sequence>
- *                     &lt;element name="Tcp" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *                     &lt;element name="Udp" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *                   &lt;/sequence>
- *                   &lt;element name="Icmp" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *                   &lt;element name="Any" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *                 &lt;/choice>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="Port" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="DestinationIp" type="{http://www.vmware.com/vcloud/v1.5}FirewallIpAddressType"/>
- *         &lt;element name="SourcePort" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="SourceIp" type="{http://www.vmware.com/vcloud/v1.5}FirewallIpAddressType"/>
- *         &lt;element name="Direction" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="EnableLogging" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="FirewallRule"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="IsEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Policy" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Protocols" minOccurs="0"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;complexContent&gt;
+ *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *                 &lt;choice&gt;
+ *                   &lt;sequence&gt;
+ *                     &lt;element name="Tcp" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *                     &lt;element name="Udp" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *                   &lt;/sequence&gt;
+ *                   &lt;element name="Icmp" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *                   &lt;element name="Any" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *                 &lt;/choice&gt;
+ *               &lt;/restriction&gt;
+ *             &lt;/complexContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="Port" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="DestinationIp" type="{http://www.vmware.com/vcloud/v1.5}FirewallIpAddressType"/&gt;
+ *         &lt;element name="SourcePort" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="SourceIp" type="{http://www.vmware.com/vcloud/v1.5}FirewallIpAddressType"/&gt;
+ *         &lt;element name="Direction" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="EnableLogging" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "FirewallRule", propOrder = {

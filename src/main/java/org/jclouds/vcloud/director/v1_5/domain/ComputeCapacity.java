@@ -26,25 +26,25 @@ import com.google.common.base.Objects;
 
 
 /**
- * Represents a compute capacity with units.
- * <p/>
- * <p/>
+ * <p>Represents a compute capacity with units.
+ * </p>
+ * <br>
  * <p>Java class for ComputeCapacity complex type.
- * <p/>
+ * </p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * </p>
  * <pre>
- * &lt;complexType name="ComputeCapacity">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="Cpu" type="{http://www.vmware.com/vcloud/v1.5}CapacityWithUsageType"/>
- *         &lt;element name="Memory" type="{http://www.vmware.com/vcloud/v1.5}CapacityWithUsageType"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="ComputeCapacity"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Cpu" type="{http://www.vmware.com/vcloud/v1.5}CapacityWithUsageType"/&gt;
+ *         &lt;element name="Memory" type="{http://www.vmware.com/vcloud/v1.5}CapacityWithUsageType"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "ComputeCapacity", propOrder = {

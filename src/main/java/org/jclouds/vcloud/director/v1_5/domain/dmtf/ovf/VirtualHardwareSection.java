@@ -105,7 +105,7 @@ public class VirtualHardwareSection extends SectionType {
        * @see org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.VirtualHardwareSection#getItems()
        */
       public B items(Iterable<? extends ResourceAllocationSettingData> items) {
-         this.items = Sets.newLinkedHashSet(checkNotNull(items, "items"));
+         this.items = Sets.<ResourceAllocationSettingData>newLinkedHashSet(checkNotNull(items, "items"));
          return self();
       }
 

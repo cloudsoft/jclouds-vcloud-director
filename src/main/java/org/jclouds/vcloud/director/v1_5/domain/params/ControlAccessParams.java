@@ -63,7 +63,7 @@ public class ControlAccessParams {
       private Set<AccessSetting> accessSettings;
 
       /**
-       * @see ControlAccessParams#getIsSharedToEveryone()
+       * @see ControlAccessParams#isSharedToEveryone()
        */
       public Builder isSharedToEveryone(Boolean sharedToEveryone) {
          this.sharedToEveryone = sharedToEveryone;
@@ -71,7 +71,7 @@ public class ControlAccessParams {
       }
 
       /**
-       * @see ControlAccessParams#getIsSharedToEveryone()
+       * @see ControlAccessParams#isSharedToEveryone()
        */
       public Builder sharedToEveryone() {
          this.sharedToEveryone = Boolean.TRUE;
@@ -79,7 +79,7 @@ public class ControlAccessParams {
       }
 
       /**
-       * @see ControlAccessParams#getIsSharedToEveryone()
+       * @see ControlAccessParams#isSharedToEveryone()
        */
       public Builder notSharedToEveryone() {
          this.sharedToEveryone = Boolean.FALSE;

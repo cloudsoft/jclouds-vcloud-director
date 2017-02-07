@@ -138,7 +138,8 @@ public class Reference {
 
    /**
     * Contains the URI to the entity.
-    * <p/>
+    *
+    * <p>
     * An object reference, expressed in URL format. Because this URL includes the object identifier
     * portion of the id attribute value, it uniquely identifies the object, persists for the life of
     * the object, and is never reused. The value of the href attribute is a reference to a view of
@@ -146,7 +147,8 @@ public class Reference {
     * particular context. Although URLs have a well-known syntax and a well-understood
     * interpretation, a api should treat each href as an opaque string. The rules that govern how
     * the server constructs href strings might change in future releases.
-    * 
+    * </p>
+    *
     * @return an opaque reference and should never be parsed
     */
    public URI getHref() {
@@ -155,10 +157,12 @@ public class Reference {
 
    /**
     * Contains the name of the the entity.
-    * <p/>
+    *
+    * <p>
     * The object type, specified as a MIME content type, of the object that the link references.
     * This attribute is present only for links to objects. It is not present for links to actions.
-    * 
+    * </p>
+    *
     * @return type definition, type, expressed as an HTTP Content-Type
     */
    public String getName() {
@@ -167,7 +171,7 @@ public class Reference {
 
    /**
     * Contains the type of the the entity.
-    * <p/>
+    * <p></p>
     * The object type, specified as a MIME content type, of the object that the link references.
     * This attribute is present only for links to objects. It is not present for links to actions.
     * 

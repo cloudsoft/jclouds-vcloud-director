@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.jclouds.vcloud.director.v1_5.domain.dmtf.AnnotationSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.DeploymentOptionSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.DiskSection;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.NetworkSection;
@@ -72,7 +73,7 @@ public class InstantiationParams {
        * @see InstantiationParams#getSections()
        */
       public Builder sections(Iterable<? extends SectionType> sections) {
-         this.sections = Sets.newLinkedHashSet(checkNotNull(sections, "sections"));
+         this.sections = Sets.<SectionType>newLinkedHashSet(checkNotNull(sections, "sections"));
          return this;
       }
 
@@ -99,7 +100,7 @@ public class InstantiationParams {
    }
 
    private InstantiationParams(Set<? extends SectionType> sections) {
-      this.sections = sections.isEmpty() ? null : ImmutableSet.copyOf(sections);
+      this.sections = sections.isEmpty() ? null : ImmutableSet.<SectionType>copyOf(sections);
    }
 
    @XmlElementRefs({
@@ -130,12 +131,12 @@ public class InstantiationParams {
     * <ul>
     * <li>{@link VirtualHardwareSection}
     * <li>{@link LeaseSettingsSection}
-    * <li>{@link EulaSection}
+    * <li>EulaSection
     * <li>{@link RuntimeInfoSection}
     * <li>{@link AnnotationSection}
     * <li>{@link DeploymentOptionSection}
     * <li>{@link StartupSection}
-    * <li>{@link ResourceAllocationSection}
+    * <li>ResourceAllocationSection
     * <li>{@link NetworkConnectionSection}
     * <li>{@link CustomizationSection}
     * <li>{@link ProductSection}
@@ -144,7 +145,7 @@ public class InstantiationParams {
     * <li>{@link NetworkConfigSection}
     * <li>{@link NetworkSection}
     * <li>{@link DiskSection}
-    * <li>{@link InstallSection}
+    * <li>InstallSection
     * </ul>
     */
    public Set<SectionType> getSections() {

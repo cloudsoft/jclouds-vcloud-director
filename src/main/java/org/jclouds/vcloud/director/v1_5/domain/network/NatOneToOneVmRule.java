@@ -27,26 +27,26 @@ import com.google.common.base.Objects;
 /**
  * Represents the NAT rule for one to one mapping of VM NIC and
  * external IP addresses from a network.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for NatOneToOneVmRule complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="NatOneToOneVmRule">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="MappingMode" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="ExternalIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/>
- *         &lt;element name="VAppScopedVmId" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="VmNicId" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="NatOneToOneVmRule"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="MappingMode" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="ExternalIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/&gt;
+ *         &lt;element name="VAppScopedVmId" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="VmNicId" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "NatOneToOneVmRule", propOrder = {

@@ -60,7 +60,7 @@ public class VAppCreationParams extends ParamsType {
       private Boolean powerOn;
 
       /**
-       * @see VAppCreationParamsType#getVAppParent()
+       * @see VAppCreationParams#getVAppParent()
        */
       public B vAppParent(Reference vAppParent) {
          this.vAppParent = vAppParent;
@@ -68,7 +68,7 @@ public class VAppCreationParams extends ParamsType {
       }
 
       /**
-       * @see VAppCreationParamsType#getInstantiationParams()
+       * @see VAppCreationParams#getInstantiationParams()
        */
       public B instantiationParams(InstantiationParams instantiationParams) {
          this.instantiationParams = instantiationParams;
@@ -76,7 +76,7 @@ public class VAppCreationParams extends ParamsType {
       }
 
       /**
-       * @see VAppCreationParamsType#isDeploy()
+       * @see VAppCreationParams#isDeploy()
        */
       public B deploy(Boolean deploy) {
          this.deploy = deploy;
@@ -84,7 +84,7 @@ public class VAppCreationParams extends ParamsType {
       }
 
       /**
-       * @see VAppCreationParamsType#isDeploy()
+       * @see VAppCreationParams#isDeploy()
        */
       public B deploy() {
          this.deploy = Boolean.TRUE;
@@ -92,7 +92,7 @@ public class VAppCreationParams extends ParamsType {
       }
 
       /**
-       * @see VAppCreationParamsType#isDeploy()
+       * @see VAppCreationParams#isDeploy()
        */
       public B notDeploy() {
          this.deploy = Boolean.FALSE;
@@ -100,7 +100,7 @@ public class VAppCreationParams extends ParamsType {
       }
 
       /**
-       * @see VAppCreationParamsType#isPowerOn()
+       * @see VAppCreationParams#isPowerOn()
        */
       public B powerOn(Boolean powerOn) {
          this.powerOn = powerOn;
@@ -108,7 +108,7 @@ public class VAppCreationParams extends ParamsType {
       }
 
       /**
-       * @see VAppCreationParamsType#isPowerOn()
+       * @see VAppCreationParams#isPowerOn()
        */
       public B powerOn() {
          this.powerOn = Boolean.TRUE;
@@ -116,7 +116,7 @@ public class VAppCreationParams extends ParamsType {
       }
 
       /**
-       * @see VAppCreationParamsType#isPowerOn()
+       * @see VAppCreationParams#isPowerOn()
        */
       public B notPowerOn() {
          this.powerOn = Boolean.FALSE;

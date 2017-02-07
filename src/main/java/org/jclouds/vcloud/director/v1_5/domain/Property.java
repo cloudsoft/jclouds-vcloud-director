@@ -24,7 +24,7 @@ import org.jclouds.vcloud.director.v1_5.VCloudDirectorMediaType;
 
 /**
  * Contains key/value pair as property.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
  * &lt;complexType name="PropertyType" /&gt;
  * </pre>

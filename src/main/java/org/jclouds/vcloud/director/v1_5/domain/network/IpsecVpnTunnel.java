@@ -27,34 +27,34 @@ import com.google.common.base.Objects;
 
 /**
  * Represents details of an IPSec-VPN tunnel.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for IpsecVpnTunnel complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="IpsecVpnTunnel">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element ref="{http://www.vmware.com/vcloud/v1.5}IpsecVpnPeer"/>
- *         &lt;element name="PeerIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType"/>
- *         &lt;element name="PeerNetworkAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType"/>
- *         &lt;element name="PeerNetworkMask" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType"/>
- *         &lt;element name="SharedSecret" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="EncryptionProtocol" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Mtu" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="IsEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="IsOperational" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="ErrorDetails" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="IpsecVpnTunnel"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.vmware.com/vcloud/v1.5}IpsecVpnPeer"/&gt;
+ *         &lt;element name="PeerIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType"/&gt;
+ *         &lt;element name="PeerNetworkAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType"/&gt;
+ *         &lt;element name="PeerNetworkMask" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType"/&gt;
+ *         &lt;element name="SharedSecret" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="EncryptionProtocol" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="Mtu" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="IsEnabled" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="IsOperational" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="ErrorDetails" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "IpsecVpnTunnel", propOrder = {

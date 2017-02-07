@@ -24,14 +24,15 @@ import org.jclouds.vcloud.director.v1_5.domain.Entity;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import org.jclouds.vcloud.director.v1_5.domain.Vm;
 
 /**
- * Predicates for working with {@link EntityType} collections.
+ * Predicates for working with {@link Entity} collections.
  */
 public class EntityPredicates {
    
    /**
-    * Matches {@link EntityType entities} with the given id.
+    * Matches {@link Entity entities} with the given id.
     * 
     * @param T type of the entity, for example {@link Vm}
     * @param id value of the id attribute of the entity

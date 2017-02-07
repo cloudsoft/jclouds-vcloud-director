@@ -67,21 +67,21 @@ public interface VAppTemplateApi {
     *
     * The vApp could be in one of these statues:
     * <ul>
-    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#FAILED_CREATION
+    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#FAILED_CREATION
     * FAILED_CREATION(-1)} - Transient entity state, e.g., model object is addd but the
     * corresponding VC backing does not exist yet. This is further sub-categorized in the respective
     * entities.
-    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNRESOLVED
+    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNRESOLVED
     * UNRESOLVED(0)} - Entity is whole, e.g., VM creation is complete and all the required model
     * objects and VC backings are addd.
-    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#RESOLVED
+    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#RESOLVED
     * RESOLVED(1)} - Entity is resolved.
-    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#UNKNOWN
+    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#UNKNOWN
     * UNKNOWN(6)} - Entity state could not be retrieved from the inventory, e.g., VM power state is
     * null.
-    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#POWERED_OFF
+    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#POWERED_OFF
     * POWERED_OFF(8)} - All VMs of the vApp template are powered off.
-    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntityType.Status#MIXED MIXED(10)}
+    * <li>{@link org.jclouds.vcloud.director.v1_5.domain.ResourceEntity.Status#MIXED MIXED(10)}
     * - vApp template status is set to {@code MIXED} when the VMs in the vApp are in different power
     * states.
     * </ul>
@@ -128,7 +128,7 @@ public interface VAppTemplateApi {
     * DELETE /vAppTemplate/{id}
     * </pre>
     *
-    * @param templateUrn
+    * @param templateUri
     *           the String of the template
     * @return the task performing the action. This operation is asynchronous and the user should
     *         monitor the returned task status in order to check when it is completed.
@@ -470,9 +470,6 @@ public interface VAppTemplateApi {
    @Fallback(NullOnNotFoundOr404.class)
    Envelope getOvf(@EndpointParam URI templateHref);
 
-   /**
-    * @see VAppTemplateApi#getOwnerOfVAppTemplate(URI)
-    */
    @GET
    @Consumes(OWNER)
    @Path("/owner")
@@ -480,9 +477,6 @@ public interface VAppTemplateApi {
    @Fallback(NullOnNotFoundOr404.class)
    Owner getOwner(@EndpointParam URI templateHref);
 
-   /**
-    * @see VAppTemplateApi#getProductSectionsForVAppTemplate(URI)
-    */
    @GET
    @Consumes(PRODUCT_SECTION_LIST)
    @Path("/productSections")

@@ -33,7 +33,7 @@ import com.google.common.collect.Sets;
 
 /**
  * Represents a metadata entry
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
  * &lt;xs:complexType name="MetadataType"&gt;
  * </pre>
@@ -92,7 +92,7 @@ public class MetadataEntry extends Resource {
       }
 
       /**
-       * @see ResourceType#getHref()
+       * @see MetadataEntry#getHref()
        */
       @Override
       public B href(URI href) {
@@ -101,7 +101,7 @@ public class MetadataEntry extends Resource {
       }
 
       /**
-       * @see ResourceType#getType()
+       * @see MetadataEntry#getType()
        */
       @Override
       public B type(String type) {
@@ -110,7 +110,7 @@ public class MetadataEntry extends Resource {
       }
 
       /**
-       * @see ResourceType#getLinks()
+       * @see MetadataEntry#getLinks()
        */
       @Override
       public B links(Set<Link> links) {
@@ -119,7 +119,7 @@ public class MetadataEntry extends Resource {
       }
 
       /**
-       * @see ResourceType#getLinks()
+       * @see MetadataEntry#getLinks()
        */
       @Override
       public B link(Link link) {

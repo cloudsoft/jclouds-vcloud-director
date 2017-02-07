@@ -37,7 +37,7 @@ import com.google.common.collect.Maps;
 
 /**
  * A link.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
  * &lt;xs:complexType name="LinkType"&gt;
  * </pre>

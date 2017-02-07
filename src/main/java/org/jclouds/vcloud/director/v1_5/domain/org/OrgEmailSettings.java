@@ -36,22 +36,22 @@ import com.google.common.collect.ImmutableList;
  * Defines the email settings for an organization.
  *
  * <pre>
- * &lt;complexType name="OrgEmailSettings">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ResourceType">
- *       &lt;sequence>
- *         &lt;element name="IsDefaultSmtpServer" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="IsDefaultOrgEmail" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="FromEmailAddress" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="DefaultSubjectPrefix" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="IsAlertEmailToAllAdmins" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="AlertEmailTo" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SmtpServerSettings" type="{http://www.vmware.com/vcloud/v1.5}SmtpServerSettingsType" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="OrgEmailSettings"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ResourceType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="IsDefaultSmtpServer" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="IsDefaultOrgEmail" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="FromEmailAddress" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="DefaultSubjectPrefix" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="IsAlertEmailToAllAdmins" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="AlertEmailTo" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="SmtpServerSettings" type="{http://www.vmware.com/vcloud/v1.5}SmtpServerSettingsType" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "OrgEmailSettings")
@@ -89,7 +89,7 @@ public class OrgEmailSettings extends Resource {
       private SmtpServerSettings smtpServerSettings;
 
       /**
-       * @see OrgEmailSettings#getIsDefaultSmtpServer()
+       * @see OrgEmailSettings#isDefaultSmtpServer()
        */
       public B isDefaultSmtpServer(boolean isDefaultSmtpServer) {
          this.isDefaultSmtpServer = isDefaultSmtpServer;
@@ -97,7 +97,7 @@ public class OrgEmailSettings extends Resource {
       }
 
       /**
-       * @see OrgEmailSettings#getIsDefaultOrgEmail()
+       * @see OrgEmailSettings#isDefaultOrgEmail()
        */
       public B isDefaultOrgEmail(boolean isDefaultOrgEmail) {
          this.isDefaultOrgEmail = isDefaultOrgEmail;
@@ -121,7 +121,7 @@ public class OrgEmailSettings extends Resource {
       }
 
       /**
-       * @see OrgEmailSettings#getIsAlertEmailToAllAdmins()
+       * @see OrgEmailSettings#isAlertEmailToAllAdmins()
        */
       public B isAlertEmailToAllAdmins(boolean isAlertEmailToAllAdmins) {
          this.isAlertEmailToAllAdmins = isAlertEmailToAllAdmins;

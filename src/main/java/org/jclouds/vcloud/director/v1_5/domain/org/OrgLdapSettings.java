@@ -40,18 +40,18 @@ import com.google.common.collect.Maps;
  * Base settings for LDAP connection
  *
  * <pre>
- * &lt;complexType name="OrgLdapSettings">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ResourceType">
- *       &lt;sequence>
- *         &lt;element name="OrgLdapMode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="CustomUsersOu" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="CustomOrgLdapSettings" type="{http://www.vmware.com/vcloud/v1.5}CustomOrgLdapSettings" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="OrgLdapSettings"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}ResourceType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="OrgLdapMode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="CustomUsersOu" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="CustomOrgLdapSettings" type="{http://www.vmware.com/vcloud/v1.5}CustomOrgLdapSettings" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "OrgLdapSettings")

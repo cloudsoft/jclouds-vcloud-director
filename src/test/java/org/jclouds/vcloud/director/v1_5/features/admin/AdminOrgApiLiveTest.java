@@ -316,7 +316,7 @@ public class AdminOrgApiLiveTest extends BaseVCloudDirectorApiLiveTest {
    @Test(description = "PUT /admin/org/{id}/settings", dependsOnMethods = { "testGetEmailSettings" })
    public void testEditSettings() throws Exception {
       String newFromEmailAddress = "test" + random.nextInt(Integer.MAX_VALUE) + "@test.com";
-      Exception exception = null;
+      Exception exceptionInFinally = null;
 
       try {
          OrgSettings newSettings = OrgSettings.builder()
@@ -328,21 +328,18 @@ public class AdminOrgApiLiveTest extends BaseVCloudDirectorApiLiveTest {
          assertTrue(equal(modified.getEmailSettings().getFromEmailAddress(), newFromEmailAddress),
                   String.format(OBJ_FIELD_UPDATABLE, "orgSettings", "emailSettings"));
 
-      } catch (Exception e) {
-         exception = e;
       } finally {
          try {
             OrgSettings restorableSettings = OrgSettings.builder().emailSettings(emailSettings).build();
 
             settings = adminOrgApi.editSettings(org.getId(), restorableSettings);
          } catch (Exception e) {
-            if (exception != null) {
-               logger.warn(e, "Error resetting settings; rethrowing original test exception...");
-               throw exception;
-            } else {
-               throw e;
-            }
+            exceptionInFinally = e;
+            logger.warn(e, "Error resetting settings");
          }
+      }
+      if (exceptionInFinally != null) {
+         throw exceptionInFinally;
       }
    }
 }

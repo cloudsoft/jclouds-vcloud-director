@@ -90,7 +90,7 @@ public class QueryResultVAppRecord extends QueryResultRecordType {
       }
 
       /**
-       * @see QueryResultVAppRecord#getIsPublic()
+       * @see QueryResultVAppRecord#isIsPublic()
        */
       public B isPublic(Boolean isPublic) {
          this.isPublic = isPublic;
@@ -98,7 +98,7 @@ public class QueryResultVAppRecord extends QueryResultRecordType {
       }
 
       /**
-       * @see QueryResultVAppRecord#getIsEnabled()
+       * @see QueryResultVAppRecord#isIsEnabled()
        */
       public B isEnabled(Boolean isEnabled) {
          this.isEnabled = isEnabled;
@@ -106,7 +106,7 @@ public class QueryResultVAppRecord extends QueryResultRecordType {
       }
 
       /**
-       * @see QueryResultVAppRecord#getIsBusy()
+       * @see QueryResultVAppRecord#isIsBusy()
        */
       public B isBusy(Boolean isBusy) {
          this.isBusy = isBusy;
@@ -138,7 +138,7 @@ public class QueryResultVAppRecord extends QueryResultRecordType {
       }
 
       /**
-       * @see QueryResultVAppRecord#getIsDeployed()
+       * @see QueryResultVAppRecord#isIsDeployed()
        */
       public B isDeployed(Boolean isDeployed) {
          this.isDeployed = isDeployed;
@@ -146,7 +146,7 @@ public class QueryResultVAppRecord extends QueryResultRecordType {
       }
 
       /**
-       * @see QueryResultVAppRecord#getIsInMaintenanceMode()
+       * @see QueryResultVAppRecord#isIsInMaintenanceMode()
        */
       public B isInMaintenanceMode(Boolean isInMaintenanceMode) {
          this.isInMaintenanceMode = isInMaintenanceMode;

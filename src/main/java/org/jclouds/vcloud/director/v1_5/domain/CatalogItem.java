@@ -30,8 +30,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 /**
- * Contains a reference to a VappTemplate or Media object and related metadata.
- * <p/>
+ * <p>Contains a reference to a VappTemplate or Media object and related metadata.
+ * </p>
  * <pre>
  * &lt;complexType name="CatalogItemType" /&gt;
  * </pre>
@@ -116,7 +116,7 @@ public class CatalogItem extends Entity {
 
    /**
     * User-specified key/value pair.
-    * <p/>
+    * <br><br>
     * This element has been superseded by the {@link Metadata} element, which is the preferred way to specify key/value pairs for objects.
     */
    public Set<Property> getProperties() {

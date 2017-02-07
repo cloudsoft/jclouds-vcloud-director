@@ -34,18 +34,18 @@ import com.google.common.collect.Sets;
  * Represents group in the system.
  *
  * <pre>
- * &lt;complexType name="Group">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}EntityType">
- *       &lt;sequence>
- *         &lt;element name="NameInSource" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="UsersList" type="{http://www.vmware.com/vcloud/v1.5}UsersListType" minOccurs="0"/>
- *         &lt;element name="Role" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Group"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}EntityType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="NameInSource" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="UsersList" type="{http://www.vmware.com/vcloud/v1.5}UsersListType" minOccurs="0"/&gt;
+ *         &lt;element name="Role" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlRootElement(name = "Group")
@@ -83,7 +83,7 @@ public class Group extends Entity {
       }
 
       /**
-       * @see Group#getUsers()
+       * @see Group#getUsersList()
        */
       public B users(Iterable<Reference> users) {
          this.users = Sets.newLinkedHashSet(checkNotNull(users, "users"));
@@ -91,7 +91,7 @@ public class Group extends Entity {
       }
       
       /**
-       * @see Group#getUsers()
+       * @see Group#getUsersList()
        */
       public B user(Reference user) {
          users.add(checkNotNull(user, "user"));

@@ -21,7 +21,6 @@
 // Generated on: 2012.02.08 at 02:47:44 PM GMT 
 //
 
-
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.cim;
 
 import java.util.Map;
@@ -40,13 +39,13 @@ import com.google.common.collect.Maps;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="cimUnsignedShort">
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>unsignedShort">
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/extension>
- *   &lt;/simpleContent>
- * &lt;/complexType>
+ * &lt;complexType name="cimUnsignedShort"&gt;
+ *   &lt;simpleContent&gt;
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>unsignedShort"&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/simpleContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "cimUnsignedShort", namespace = "http://schemas.dmtf.org/wbem/wscim/1/common")

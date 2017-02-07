@@ -848,7 +848,7 @@ public class VAppApiLiveTest extends AbstractVAppApiLiveTest {
                .sourcedItems(ImmutableList.of(vmItem)).build();
    }
    
-   private final class IsVAppNetworkNamed implements Predicate<VAppNetworkConfiguration> {
+   private static final class IsVAppNetworkNamed implements Predicate<VAppNetworkConfiguration> {
       private final String networkName;
 
       private IsVAppNetworkNamed(String networkName) {

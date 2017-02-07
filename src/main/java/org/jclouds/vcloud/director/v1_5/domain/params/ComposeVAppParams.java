@@ -69,7 +69,7 @@ public class ComposeVAppParams extends VAppCreationParams {
       }
 
       /**
-       * @see ComposeVAppParams#getSourcedItem()
+       * @see ComposeVAppParams#getSourcedItems()
        */
       public B sourcedItem(SourcedCompositionItemParam sourcedItem) {
          this.sourcedItems.add(checkNotNull(sourcedItem, "sourcedItem"));

@@ -137,7 +137,7 @@ public class VirtualHardwareSection extends org.jclouds.vcloud.director.v1_5.dom
    /**
     * Contains the URI to the entity.
     *
-    * @see ResourceType#getHref()
+    * @see VirtualHardwareSection#getHref()
     */
    public String getType() {
       return type;
@@ -146,7 +146,7 @@ public class VirtualHardwareSection extends org.jclouds.vcloud.director.v1_5.dom
    /**
     * Contains the type of the the entity.
     *
-    * @see ResourceType#getType()
+    * @see VirtualHardwareSection#getType()
     */
    public URI getHref() {
       return href;
@@ -155,7 +155,7 @@ public class VirtualHardwareSection extends org.jclouds.vcloud.director.v1_5.dom
    /**
     * Set of optional links to an entity or operation associated with this object.
     *
-    * @see ResourceType#getLinks()
+    * @see VirtualHardwareSection#getLinks()
     */
    public Set<Link> getLinks() {
       return links != null ? ImmutableSet.copyOf(links) : Sets.<Link>newLinkedHashSet();

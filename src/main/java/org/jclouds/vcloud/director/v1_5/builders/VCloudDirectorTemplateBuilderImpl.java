@@ -16,33 +16,36 @@
  */
 package org.jclouds.vcloud.director.v1_5.builders;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
+import static com.google.common.base.Predicates.and;
+import static com.google.common.collect.Lists.newArrayList;
+
+import java.util.List;
+import java.util.Set;
+
+import javax.inject.Named;
+import javax.inject.Provider;
+
 import org.jclouds.collect.Memoized;
 import org.jclouds.compute.domain.Hardware;
 import org.jclouds.compute.domain.Image;
 import org.jclouds.compute.domain.OperatingSystem;
 import org.jclouds.compute.domain.TemplateBuilder;
 import org.jclouds.compute.options.TemplateOptions;
-import org.jclouds.compute.strategy.GetImageStrategy;
-import org.jclouds.compute.suppliers.ImageCacheSupplier;
 import org.jclouds.domain.Location;
 
-import javax.inject.Named;
-import javax.inject.Provider;
-import java.util.List;
-import java.util.Set;
-
-import static com.google.common.base.Predicates.and;
-import static com.google.common.collect.Lists.newArrayList;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.base.Supplier;
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 public class VCloudDirectorTemplateBuilderImpl extends TemplateBuilderImpl {
     @Inject
-    protected VCloudDirectorTemplateBuilderImpl(@Memoized Supplier<Set<? extends Location>> locations, ImageCacheSupplier images, @Memoized Supplier<Set<? extends Hardware>> hardwares, Supplier<Location> defaultLocation, @Named("DEFAULT") Provider<TemplateOptions> optionsProvider, @Named("DEFAULT") Provider<TemplateBuilder> defaultTemplateProvider, GetImageStrategy getImageStrategy) {
-        super(locations, images, hardwares, defaultLocation, optionsProvider, defaultTemplateProvider, getImageStrategy);
+    protected VCloudDirectorTemplateBuilderImpl(@Memoized Supplier<Set<? extends Location>> locations,
+            @Memoized Supplier<Set<? extends Image>> images, @Memoized Supplier<Set<? extends Hardware>> hardwares,
+            Supplier<Location> defaultLocation, @Named("DEFAULT") Provider<TemplateOptions> optionsProvider,
+            @Named("DEFAULT") Provider<TemplateBuilder> defaultTemplateProvider) {
+        super(locations, images, hardwares, defaultLocation, optionsProvider, defaultTemplateProvider);
     }
 
     /**

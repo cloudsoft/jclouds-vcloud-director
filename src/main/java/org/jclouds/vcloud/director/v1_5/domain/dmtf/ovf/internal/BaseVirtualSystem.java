@@ -96,7 +96,7 @@ public abstract class BaseVirtualSystem extends SectionType {
        * @see org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.internal.BaseVirtualSystem#getAdditionalSections()
        */
       public B additionalSections(Iterable<? extends SectionType> additionalSections) {
-         this.additionalSections = Sets.newLinkedHashSet(checkNotNull(additionalSections, "additionalSections"));
+         this.additionalSections = Sets.<SectionType>newLinkedHashSet(checkNotNull(additionalSections, "additionalSections"));
          return self();
       }
 

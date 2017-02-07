@@ -40,7 +40,7 @@ public class ResourceType extends VCloudExtensibleType {
   public List<LinkType> getLink()
   {
     if (this.link == null) {
-      this.link = new ArrayList();
+      this.link = new ArrayList<LinkType>();
     }
     return this.link;
   }

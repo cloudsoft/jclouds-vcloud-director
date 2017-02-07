@@ -37,27 +37,27 @@ import com.google.common.collect.Sets;
 
 /**
  * Represents a composition item.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for SourcedCompositionItemParam complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="SourcedCompositionItemParam">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="Source" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType"/>
- *         &lt;element name="VAppScopedLocalId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="InstantiationParams" type="{http://www.vmware.com/vcloud/v1.5}InstantiationParamsType" minOccurs="0"/>
- *         &lt;element name="NetworkAssignment" type="{http://www.vmware.com/vcloud/v1.5}NetworkAssignmentType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="sourceDelete" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SourcedCompositionItemParam"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Source" type="{http://www.vmware.com/vcloud/v1.5}ReferenceType"/&gt;
+ *         &lt;element name="VAppScopedLocalId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="InstantiationParams" type="{http://www.vmware.com/vcloud/v1.5}InstantiationParamsType" minOccurs="0"/&gt;
+ *         &lt;element name="NetworkAssignment" type="{http://www.vmware.com/vcloud/v1.5}NetworkAssignmentType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="sourceDelete" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "SourcedCompositionItemParam", propOrder = {

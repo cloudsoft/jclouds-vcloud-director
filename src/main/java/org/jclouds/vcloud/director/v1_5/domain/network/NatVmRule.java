@@ -27,28 +27,28 @@ import com.google.common.base.Objects;
 /**
  * Represents the NAT rule for port forwarding between VM NIC/port
  * and external IP/port.
- * <p/>
- * <p/>
+ * <p>&nbsp;</p>
+ * <p>&nbsp;</p>
  * <p>Java class for NatVmRule complex type.
- * <p/>
+ * <p>&nbsp;</p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * <p>&nbsp;</p>
  * <pre>
- * &lt;complexType name="NatVmRule">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType">
- *       &lt;sequence>
- *         &lt;element name="ExternalIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/>
- *         &lt;element name="ExternalPort" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="VAppScopedVmId" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="VmNicId" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="InternalPort" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="Protocol" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax' namespace='##other'/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="NatVmRule"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.vmware.com/vcloud/v1.5}VCloudExtensibleType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="ExternalIpAddress" type="{http://www.vmware.com/vcloud/v1.5}IpAddressType" minOccurs="0"/&gt;
+ *         &lt;element name="ExternalPort" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="VAppScopedVmId" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="VmNicId" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="InternalPort" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="Protocol" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax' namespace='##other'/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlType(name = "NatVmRule", propOrder = {
