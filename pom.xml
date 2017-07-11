@@ -23,14 +23,14 @@
   <parent>
     <groupId>org.apache.jclouds.labs</groupId>
     <artifactId>jclouds-labs</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
   </parent>
 
   <!-- TODO: when out of labs, switch to org.jclouds.api -->
   <groupId>io.cloudsoft.jclouds.labs</groupId>
   <artifactId>vcloud-director</artifactId>
   <name>jclouds vcloud-director api</name>
-  <version>2.0.1.1-20170329.1600</version>
+  <version>2.0.2.1-20170711.1100</version>
   <description>jclouds components to access an implementation of VMware vCloud Director 1.5+</description>
   <packaging>bundle</packaging>
 
