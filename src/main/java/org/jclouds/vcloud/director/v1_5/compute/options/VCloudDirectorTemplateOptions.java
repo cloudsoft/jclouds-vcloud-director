@@ -19,6 +19,7 @@ package org.jclouds.vcloud.director.v1_5.compute.options;
 import static com.google.common.base.Objects.equal;
 import java.util.Map;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.compute.options.TemplateOptions;
 import org.jclouds.domain.LoginCredentials;
 import org.jclouds.javax.annotation.Nullable;
@@ -115,8 +116,8 @@ public class VCloudDirectorTemplateOptions extends TemplateOptions implements Cl
    }
 
    @Override
-   public Objects.ToStringHelper string() {
-      Objects.ToStringHelper toString = super.string();
+   public MoreObjects.ToStringHelper string() {
+      MoreObjects.ToStringHelper toString = super.string();
       if (guestCustomizationScript != null)
          toString.add("guestCustomizationScript", guestCustomizationScript);
       if (memory != null)
