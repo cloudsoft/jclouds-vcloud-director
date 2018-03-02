@@ -97,7 +97,7 @@ public class VCloudDirectorComputeServiceAdapterLiveTest extends BaseVCloudDirec
    }
 
    @Override
-   protected Properties setupProperties() {
+   public Properties setupProperties() {
       Properties properties = super.setupProperties();
       properties.setProperty("jclouds.ssh.max-retries", "10");
       return properties;

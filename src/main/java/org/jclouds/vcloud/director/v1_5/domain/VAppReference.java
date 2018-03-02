@@ -68,6 +68,9 @@ public class VAppReference extends Reference {
       VAppReference that = VAppReference.class.cast(o);
       return super.equals(that);
    }
-   
-   // NOTE hashcode inherited from Reference
+    
+   @Override
+   public int hashCode() {
+      return super.hashCode();
+   }
 }

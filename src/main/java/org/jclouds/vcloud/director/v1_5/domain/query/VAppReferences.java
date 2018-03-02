@@ -69,6 +69,9 @@ public class VAppReferences extends QueryResultReferences {
       VAppReferences that = VAppReferences.class.cast(o);
       return super.equals(that);
    }
-   
-   // NOTE hashcode inherited from QueryResultReferences
+    
+   @Override
+   public int hashCode() {
+      return super.hashCode();
+   }
 }

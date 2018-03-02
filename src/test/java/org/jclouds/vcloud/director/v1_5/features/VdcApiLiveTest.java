@@ -223,7 +223,7 @@ public class VdcApiLiveTest extends BaseVCloudDirectorApiLiveTest {
                .build());
 
       Task task = Iterables.getFirst(composedVApp.getTasks(), null);
-      assertNotNull(task, "vdcApi.composeVApp returned VApp that did not contain any tasks");
+      assertNotNull(task, "vdcApi.instantiateVApp returned VApp that did not contain any tasks");
       assertTaskSucceedsLong(task);
 
       Checks.checkVApp(composedVApp);

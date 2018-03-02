@@ -82,6 +82,8 @@ public class RoleReferences extends QueryResultReferences {
       return super.equals(that);
    }
    
-   // NOTE hashcode inherited from QueryResultReferences
-
+   @Override
+   public int hashCode() {
+      return super.hashCode();
+   }
 }

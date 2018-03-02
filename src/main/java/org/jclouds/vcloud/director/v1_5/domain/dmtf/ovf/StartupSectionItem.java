@@ -58,5 +58,9 @@ public class StartupSectionItem extends Item {
       StartupSectionItem that = StartupSectionItem.class.cast(obj);
       return super.equals(that);
    }
-
+   
+   @Override
+   public int hashCode() {
+      return super.hashCode();
+   }
 }

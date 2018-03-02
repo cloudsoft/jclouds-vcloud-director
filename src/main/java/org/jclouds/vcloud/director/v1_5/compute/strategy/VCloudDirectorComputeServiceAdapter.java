@@ -433,12 +433,12 @@ public class VCloudDirectorComputeServiceAdapter implements
    private Reference tryFindNetworkInVDC(Vdc vdc, String networkName) {
       Optional<Reference> referenceOptional = Iterables.tryFind(vdc.getAvailableNetworks(), ReferencePredicates.nameEquals(networkName));
       if (!referenceOptional.isPresent()) {
-         throw new IllegalStateException("Can't find a network named: " + networkName + "in vDC " + vdc.getName());
+         throw new IllegalStateException("Can't find a network named: " + networkName + " in vDC " + vdc.getName());
       }
       return referenceOptional.get();
    }
 
-   private SourcedCompositionItemParam createVmItem(Vm vm, String networkName, GuestCustomizationSection guestCustomizationSection) {
+   public static SourcedCompositionItemParam createVmItem(Vm vm, String networkName, GuestCustomizationSection guestCustomizationSection) {
       // creating an item element. this item will contain the vm which should be added to the vapp.
       final String name = name("vm-");
       Reference reference = Reference.builder().name(name).href(vm.getHref()).type(vm.getType()).build();
@@ -471,7 +471,7 @@ public class VCloudDirectorComputeServiceAdapter implements
       return vmItemBuilder.build();
    }
 
-   protected InstantiationParams instantiationParams(Vdc vdc, Reference network) {
+   public static InstantiationParams instantiationParams(Vdc vdc, Reference network) {
       NetworkConfiguration networkConfiguration = networkConfiguration(vdc, network);
 
       InstantiationParams instantiationParams = InstantiationParams.builder()
@@ -484,7 +484,7 @@ public class VCloudDirectorComputeServiceAdapter implements
    }
 
    /** Build a {@link NetworkConfigSection} object. */
-   private NetworkConfigSection networkConfigSection(String networkName, NetworkConfiguration networkConfiguration) {
+   private static NetworkConfigSection networkConfigSection(String networkName, NetworkConfiguration networkConfiguration) {
       NetworkConfigSection networkConfigSection = NetworkConfigSection
               .builder()
               .info(MsgType.builder().value("Configuration parameters for logical networks").build())
@@ -498,7 +498,7 @@ public class VCloudDirectorComputeServiceAdapter implements
       return networkConfigSection;
    }
 
-   private NetworkConfiguration networkConfiguration(Vdc vdc, final Reference network) {
+   private static NetworkConfiguration networkConfiguration(Vdc vdc, final Reference network) {
       Set<Reference> networks = vdc.getAvailableNetworks();
       Optional<Reference> parentNetwork = Iterables.tryFind(networks, new Predicate<Reference>() {
          @Override
