@@ -112,7 +112,23 @@
     </dependency>
   </dependencies>
 
+
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <configuration>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <quiet>true</quiet>
+            <maxmemory>512m</maxmemory>
+            <additionalparam>-Xdoclint:none</additionalparam> <!-- disable checking -->
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
     <plugins>
       <plugin>
         <groupId>org.apache.rat</groupId>
