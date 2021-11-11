@@ -1,7 +1,7 @@
 jclouds-vcloud-director latest development version
 ==================================================
 
-Latest branch from which jclouds-vcloud-director was built is `2.0.2.x`.
+Latest branch from which jclouds-vcloud-director was built is `2.4.0.x`.
 Please submit PRs against the latest branch.
 
 
@@ -15,8 +15,8 @@ Please submit PRs against the latest branch.
 ## Updating jclouds-vcloud-director to a more recent jclouds version
 
 This is needed when Apache Brooklyn updated its [jclouds](https://github.com/apache/brooklyn-server/blob/master/pom.xml#L104) version.
-1. Checkout to "latest" branch and create a new branch for it e.g. `2.2.x` and push it.
-2. Create a new branch from newly created "2.2.x" called "2.2.x-upgrade" and make a pull request with the necessary changes.
+1. Checkout to "latest" branch and create a new branch for it e.g. `2.5.x` and push it.
+2. Create a new branch from newly created "2.5.x" called "2.5.x-upgrade" and make a pull request with the necessary changes.
 3. Submit a PR in README.md in `master` pointing the correct "latest" branch.
 
 
