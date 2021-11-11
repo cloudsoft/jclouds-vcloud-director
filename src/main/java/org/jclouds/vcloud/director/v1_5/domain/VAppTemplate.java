@@ -284,7 +284,7 @@ public class VAppTemplate extends ResourceEntity {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(super.toString())
+      return MoreObjects.toStringHelper(super.toString())
             .add("owner", owner)
             .add("children", children)
             .add("sections", sections)

@@ -169,7 +169,7 @@ public class Session {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("user", user).add("org", org).add("href", href).add("links", links)
+      return MoreObjects.toStringHelper("").add("user", user).add("org", org).add("href", href).add("links", links)
             .toString();
    }
 }

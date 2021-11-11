@@ -109,6 +109,6 @@ public class NetworkFeatures {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("services", services).toString();
+      return MoreObjects.toStringHelper("").add("services", services).toString();
    }
 }

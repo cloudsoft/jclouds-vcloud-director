@@ -114,7 +114,7 @@ public class PublishCatalogParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("isPublished", isPublished).toString();
    }
 

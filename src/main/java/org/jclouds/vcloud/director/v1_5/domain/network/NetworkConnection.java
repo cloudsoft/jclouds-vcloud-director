@@ -352,7 +352,7 @@ public class NetworkConnection {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("networkConnectionIndex", networkConnectionIndex)
             .add("ipAddress", ipAddress)
             .add("externalIpAddress", externalIpAddress)

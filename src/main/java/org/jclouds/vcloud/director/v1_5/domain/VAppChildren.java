@@ -140,6 +140,6 @@ public class VAppChildren {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("vApps", vApps).add("vms", vms).toString();
+      return MoreObjects.toStringHelper("").add("vApps", vApps).add("vms", vms).toString();
    }
 }

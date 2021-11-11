@@ -266,7 +266,7 @@ public class IpScope {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
               .add("isInherited", isInherited)
               .add("isEnabled", isEnabled)
             .add("gateway", gateway)

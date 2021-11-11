@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Gives more details of remote peer end point.
@@ -192,7 +192,7 @@ public class IpsecVpnRemotePeer extends IpsecVpnManagedPeerType<IpsecVpnRemotePe
    }
 
    @Override
-   protected Objects.ToStringHelper string() {
+   protected MoreObjects.ToStringHelper string() {
       return super.string()
             .add("vcdUrl", vcdUrl)
             .add("vcdOrganization", vcdOrganization)

@@ -113,7 +113,7 @@ public class IpRange {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("startAddress", startAddress)
+      return MoreObjects.toStringHelper("").add("startAddress", startAddress)
             .add("endAddress", endAddress).toString();
    }
 

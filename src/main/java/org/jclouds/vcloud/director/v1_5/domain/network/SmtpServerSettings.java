@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-import com.google.common.base.Objects.ToStringHelper;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects.ToStringHelper;
+import com.google.common.base.MoreObjects;
 
 /**
  * Specifies connection details for the organization s SMTP server.
@@ -206,7 +206,7 @@ public class SmtpServerSettings {
    }
 
    public ToStringHelper string() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("isUseAuthentication", useAuthentication)
             .add("host", host)
             .add("username", username)

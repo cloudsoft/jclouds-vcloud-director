@@ -135,6 +135,6 @@ public class VmQuestionAnswer {
 
     @Override
     public String toString() {
-       return Objects.toStringHelper("").add("choiceId", choiceId).add("questionId", questionId).toString();
+       return MoreObjects.toStringHelper("").add("choiceId", choiceId).add("questionId", questionId).toString();
     }
 }

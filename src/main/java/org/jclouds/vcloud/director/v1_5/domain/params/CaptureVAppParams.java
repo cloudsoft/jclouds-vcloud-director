@@ -227,7 +227,7 @@ public class CaptureVAppParams extends ParamsType {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("source", source)
             .add("sections", sections).toString();
    }

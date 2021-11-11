@@ -191,7 +191,7 @@ public class FirewallService extends NetworkServiceType<FirewallService> {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("defaultAction", defaultAction)
             .add("logDefaultAction", logDefaultAction)
             .add("firewallRules", firewallRules).toString();

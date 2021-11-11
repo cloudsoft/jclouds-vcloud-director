@@ -18,8 +18,8 @@ package org.jclouds.vcloud.director.v1_5.builders;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -1137,7 +1137,7 @@ public class TemplateBuilderImpl implements TemplateBuilder {
     * @since 1.5
     */
    protected ToStringHelper string() {
-      ToStringHelper toString = Objects.toStringHelper("").omitNullValues();
+      ToStringHelper toString = MoreObjects.toStringHelper("").omitNullValues();
       if (biggest)
          toString.add("biggest", biggest);
       if (fastest)

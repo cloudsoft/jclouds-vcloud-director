@@ -34,6 +34,7 @@ import org.jclouds.vcloud.director.v1_5.domain.Link;
 import org.jclouds.vcloud.director.v1_5.domain.network.VAppNetworkConfiguration;
 
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
@@ -180,7 +181,7 @@ public class NetworkConfigSection extends SectionType {
    }
 
    @Override
-   public Objects.ToStringHelper string() {
+   public MoreObjects.ToStringHelper string() {
       return super.string().add("links", links).add("networkConfigs", networkConfigs).add("href", href).add("type", type);
    }
 

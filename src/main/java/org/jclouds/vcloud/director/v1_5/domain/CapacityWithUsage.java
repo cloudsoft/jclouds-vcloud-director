@@ -184,7 +184,7 @@ public class CapacityWithUsage extends CapacityType<CapacityWithUsage>
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("used", used)
             .add("overhead", overhead).toString();
    }

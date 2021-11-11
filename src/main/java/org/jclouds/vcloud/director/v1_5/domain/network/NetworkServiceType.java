@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Represents a network service
@@ -94,7 +94,7 @@ public abstract class NetworkServiceType<T extends NetworkServiceType<T>> {
       return string().toString();
    }
 
-   protected Objects.ToStringHelper string() {
-      return Objects.toStringHelper("").add("isEnabled", isEnabled);
+   protected MoreObjects.ToStringHelper string() {
+      return MoreObjects.toStringHelper("").add("isEnabled", isEnabled);
    }
 }

@@ -25,8 +25,8 @@ import org.jclouds.vcloud.director.v1_5.domain.Reference;
 import org.jclouds.vcloud.director.v1_5.domain.network.IpAddresses;
 import org.jclouds.vcloud.director.v1_5.domain.network.Network;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 @XmlRootElement(name = "OrgNetwork")
 public class OrgNetwork extends Network {

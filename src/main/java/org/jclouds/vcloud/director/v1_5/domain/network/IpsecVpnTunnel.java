@@ -381,7 +381,7 @@ public class IpsecVpnTunnel {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("name", name)
             .add("description", description)
             .add("peerIpAddress", peerIpAddress)

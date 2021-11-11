@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Represents a DHCP network service.
@@ -163,7 +163,7 @@ public class DhcpService extends NetworkServiceType<DhcpService> {
    }
 
    @Override
-   protected Objects.ToStringHelper string() {
+   protected MoreObjects.ToStringHelper string() {
       return super.string().add("defaultLeastTime", defaultLeaseTime).add("maxLeaseTime", maxLeaseTime).add("ipRange", ipRange);
    }
 }

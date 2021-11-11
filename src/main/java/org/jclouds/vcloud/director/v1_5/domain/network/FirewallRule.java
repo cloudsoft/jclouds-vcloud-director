@@ -371,7 +371,7 @@ public class FirewallRule {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("isEnabled", isEnabled)
             .add("description", description)
             .add("policy", policy)

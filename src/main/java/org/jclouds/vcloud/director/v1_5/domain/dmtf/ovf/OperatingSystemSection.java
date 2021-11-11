@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OperatingSystemSection specifies the operating system installed on a virtual machine.
@@ -147,7 +147,7 @@ public class OperatingSystemSection extends SectionType {
    }
 
    @Override
-   protected Objects.ToStringHelper string() {
+   protected MoreObjects.ToStringHelper string() {
       return super.string()
             .add("id", id)
             .add("version", version)

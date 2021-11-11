@@ -167,7 +167,7 @@ public class UndeployVAppParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("undeployPowerAction", undeployPowerAction).toString();
+      return MoreObjects.toStringHelper("").add("undeployPowerAction", undeployPowerAction).toString();
    }
 
 }

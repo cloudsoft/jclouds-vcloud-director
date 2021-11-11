@@ -156,7 +156,7 @@ public class CloneMediaParams extends ParamsType {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("source", source)
             .add("isSourceDelete", isSourceDelete).toString();
    }

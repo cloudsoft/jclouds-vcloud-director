@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-import com.google.common.base.Objects.ToStringHelper;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects.ToStringHelper;
+import com.google.common.base.MoreObjects;
 
 /**
  * Defines how a group is imported from LDAP.
@@ -268,7 +268,7 @@ public class OrgLdapGroupAttributes {
    }
 
    public ToStringHelper string() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("objectClass", objectClass)
             .add("objectIdentifier", objectIdentifier)
             .add("groupName", groupName)

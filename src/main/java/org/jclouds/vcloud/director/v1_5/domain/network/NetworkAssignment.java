@@ -142,7 +142,7 @@ public class NetworkAssignment
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("innerNetwork", innerNetwork)
             .add("containerNetwork", containerNetwork).toString();
    }

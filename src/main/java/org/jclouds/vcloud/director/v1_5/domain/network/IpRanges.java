@@ -104,6 +104,6 @@ public class IpRanges {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("ipRanges", ipRanges).toString();
+      return MoreObjects.toStringHelper("").add("ipRanges", ipRanges).toString();
    }
 }

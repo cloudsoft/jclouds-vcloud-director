@@ -98,7 +98,7 @@ public class CimString {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("value", value).add("otherAttributes", otherAttributes).toString();
+      return MoreObjects.toStringHelper("").add("value", value).add("otherAttributes", otherAttributes).toString();
    }
 
 }

@@ -233,7 +233,7 @@ public class SourcedCompositionItemParam {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("source", source)
             .add("vAppScopedLocalId", vAppScopedLocalId)
             .add("instantiationParams", instantiationParams)

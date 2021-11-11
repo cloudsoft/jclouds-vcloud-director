@@ -220,7 +220,7 @@ public class NatPortForwardingRule {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("externalIpAddress", externalIpAddress)
             .add("externalPort", externalPort)
             .add("internalIpAddress", internalIpAddress)

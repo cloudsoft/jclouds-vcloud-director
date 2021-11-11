@@ -145,7 +145,7 @@ public class ComputeCapacity {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("cpu", cpu)
             .add("memory", memory).toString();
    }

@@ -607,7 +607,7 @@ public class User extends Entity {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("fullName", fullName)
             .add("emailAddress", emailAddress)
             .add("telephone", telephone)

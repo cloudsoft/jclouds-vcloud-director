@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlType;
 import org.jclouds.logging.Logger;
 
 
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
@@ -198,7 +199,7 @@ public class Reference {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").add("href", href).add("name", name).add("type", type);
+      return MoreObjects.toStringHelper("").add("href", href).add("name", name).add("type", type);
    }
 
 }

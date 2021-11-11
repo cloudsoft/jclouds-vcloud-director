@@ -240,7 +240,7 @@ public class NetworkConfiguration {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("ipScopes", ipScopes).add("parentNetwork", parentNetwork)
+      return MoreObjects.toStringHelper("").add("ipScopes", ipScopes).add("parentNetwork", parentNetwork)
             .add("fenceMode", fenceMode)
             .add("retainNetInfoAcrossDeployments", retainNetInfoAcrossDeployments)
             .add("features", features)

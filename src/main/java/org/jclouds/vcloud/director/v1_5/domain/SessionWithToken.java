@@ -116,6 +116,6 @@ public class SessionWithToken {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("session", session).add("token", token).toString();
+      return MoreObjects.toStringHelper("").add("session", session).add("token", token).toString();
    }
 }

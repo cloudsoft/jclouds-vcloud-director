@@ -188,6 +188,6 @@ public class ControlAccessParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("sharedToEveryone", sharedToEveryone).add("everyoneAccessLevel", everyoneAccessLevel).add("accessSettings", accessSettings).toString();
+      return MoreObjects.toStringHelper("").add("sharedToEveryone", sharedToEveryone).add("everyoneAccessLevel", everyoneAccessLevel).add("accessSettings", accessSettings).toString();
    }
 }

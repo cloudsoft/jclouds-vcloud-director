@@ -29,7 +29,7 @@ public class VcloudDirectorError {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("minorErrorCode", minorErrorCode)
             .add("message", message)
             .add("majorErrorCode", majorErrorCode)

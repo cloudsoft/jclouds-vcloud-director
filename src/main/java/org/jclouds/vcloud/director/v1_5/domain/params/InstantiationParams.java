@@ -168,7 +168,7 @@ public class InstantiationParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("sections", sections).toString();
+      return MoreObjects.toStringHelper("").add("sections", sections).toString();
    }
    
 }

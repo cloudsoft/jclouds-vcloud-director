@@ -132,7 +132,7 @@ public class Capabilities {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("supportedHardwareVersions", supportedHardwareVersions).toString();
    }
 

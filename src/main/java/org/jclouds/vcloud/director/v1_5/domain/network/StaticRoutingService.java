@@ -140,7 +140,7 @@ public class StaticRoutingService extends NetworkServiceType<StaticRoutingServic
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("staticRoutes", staticRoutes).toString();
    }
 

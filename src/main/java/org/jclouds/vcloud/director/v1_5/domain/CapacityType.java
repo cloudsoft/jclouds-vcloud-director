@@ -174,7 +174,7 @@ public class CapacityType<T extends CapacityType<T>> {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("units", units)
             .add("allocated", allocated)
             .add("limit", limit).toString();

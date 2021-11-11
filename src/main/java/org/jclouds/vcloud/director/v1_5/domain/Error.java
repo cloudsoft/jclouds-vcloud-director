@@ -248,7 +248,7 @@ public class Error {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("message", message).add("majorErrorCode", majorErrorCode).add("minorErrorCode", minorErrorCode)
             .add("vendorSpecificErrorCode", vendorSpecificErrorCode).add("stackTrace", stackTrace)
             .toString();

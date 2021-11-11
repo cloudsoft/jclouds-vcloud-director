@@ -228,7 +228,7 @@ public class NatRule {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("description", description)
             .add("oneToOneBasicRule", oneToOneBasicRule)
             .add("oneToOneVmRule", oneToOneVmRule)

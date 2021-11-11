@@ -103,6 +103,6 @@ public class MediaInsertOrEjectParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("media", media).toString();
+      return MoreObjects.toStringHelper("").add("media", media).toString();
    }
 }

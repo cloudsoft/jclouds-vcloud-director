@@ -194,7 +194,7 @@ public class StaticRoute {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("name", name)
             .add("network", network)
             .add("nextHopIp", nextHopIp)

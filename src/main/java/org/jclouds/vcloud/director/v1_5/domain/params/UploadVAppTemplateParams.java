@@ -138,7 +138,7 @@ public class UploadVAppTemplateParams extends ParamsType {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("transferFormat", transferFormat)
             .add("manifestRequired", manifestRequired).toString();
    }

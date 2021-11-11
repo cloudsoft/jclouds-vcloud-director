@@ -173,7 +173,7 @@ public class NatOneToOneBasicRule {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("mappingMode", mappingMode)
             .add("externalIpAddress", externalIpAddress)
             .add("internalIpAddress", internalIpAddress).toString();

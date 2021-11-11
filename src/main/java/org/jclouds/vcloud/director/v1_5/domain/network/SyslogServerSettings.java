@@ -112,7 +112,7 @@ public class SyslogServerSettings {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("syslogServerIp1", syslogServerIp1)
+      return MoreObjects.toStringHelper("").add("syslogServerIp1", syslogServerIp1)
             .add("syslogServerIp1", syslogServerIp2).toString();
    }
 }

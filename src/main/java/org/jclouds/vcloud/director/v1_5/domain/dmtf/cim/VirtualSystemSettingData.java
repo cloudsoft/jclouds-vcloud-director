@@ -693,7 +693,7 @@ public class VirtualSystemSettingData {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("elementName", elementName)
             .add("instanceID", instanceID)
             .add("caption", caption)

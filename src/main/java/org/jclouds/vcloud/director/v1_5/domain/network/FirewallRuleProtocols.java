@@ -177,7 +177,7 @@ public class FirewallRuleProtocols {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("tcp", tcp)
             .add("udp", udp)
             .add("icmp", icmp)

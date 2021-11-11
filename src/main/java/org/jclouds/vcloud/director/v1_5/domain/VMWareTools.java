@@ -95,6 +95,6 @@ public class VMWareTools {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("version", version).toString();
+      return MoreObjects.toStringHelper("").add("version", version).toString();
    }
 }

@@ -181,7 +181,7 @@ public class DeployVAppParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("powerOn", powerOn).add("deploymentLeaseSeconds", deploymentLeaseSeconds).add("forceCustomization", forceCustomization).toString();
+      return MoreObjects.toStringHelper("").add("powerOn", powerOn).add("deploymentLeaseSeconds", deploymentLeaseSeconds).add("forceCustomization", forceCustomization).toString();
    }
 
 }

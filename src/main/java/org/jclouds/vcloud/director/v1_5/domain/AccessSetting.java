@@ -121,6 +121,6 @@ public class AccessSetting {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("subject", subject).add("accessLevel", accessLevel).toString();
+      return MoreObjects.toStringHelper("").add("subject", subject).add("accessLevel", accessLevel).toString();
    }
 }

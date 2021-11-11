@@ -94,7 +94,7 @@ public class RouterInfo {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("externalIp", externalIp).toString();
+      return MoreObjects.toStringHelper("").add("externalIp", externalIp).toString();
    }
 
 }

@@ -104,6 +104,6 @@ public class IpAddresses {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("ipAddresses", ipAddresses).toString();
+      return MoreObjects.toStringHelper("").add("ipAddresses", ipAddresses).toString();
    }
 }

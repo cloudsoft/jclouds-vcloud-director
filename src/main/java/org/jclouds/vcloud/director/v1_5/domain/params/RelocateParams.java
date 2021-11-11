@@ -109,7 +109,7 @@ public class RelocateParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("datastore", datastore).toString();
    }
 }

@@ -35,8 +35,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.RasdItem;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents a list of RASD items.
@@ -204,6 +204,6 @@ public class RasdItemsList extends ForwardingList<RasdItem> implements Set<RasdI
    }
 
    public ToStringHelper string() {
-      return Objects.toStringHelper("").add("href", href).add("links", links).add("type", type).add("items", items);
+      return MoreObjects.toStringHelper("").add("href", href).add("links", links).add("type", type).add("items", items);
    }
 }
