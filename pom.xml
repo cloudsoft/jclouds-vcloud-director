@@ -222,6 +222,7 @@
       Also updates version from 1.11 to 1.15.
       (i.e. overriding the jclouds 2.0.0 defaults, copy-pasting from jclouds project/pom.xml).
        -->
+<!-- disable sniffer
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
@@ -242,6 +243,7 @@
           </signature>
         </configuration>
       </plugin>
+-->
 
       <!-- 
       Workaround for https://github.com/google/error-prone/issues/493 with error-prone 2.0.5.

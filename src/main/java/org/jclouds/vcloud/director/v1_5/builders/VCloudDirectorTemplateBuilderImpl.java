@@ -16,7 +16,6 @@
  */
 package org.jclouds.vcloud.director.v1_5.builders;
 
-import static com.google.common.base.Predicates.and;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.List;

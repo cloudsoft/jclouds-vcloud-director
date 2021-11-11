@@ -17,7 +17,6 @@
 package org.jclouds.vcloud.director.v1_5.domain;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 
 /**
  * @see {@link org.jclouds.vcloud.director.v1_5.handlers.ErrorHandler} for code to parse, and thus instantiate, a vCD error.
