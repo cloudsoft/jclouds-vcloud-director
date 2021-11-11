@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.environment;
 
+import com.google.common.base.MoreObjects;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAnyElement;
@@ -97,7 +98,7 @@ public class PropertySectionType extends SectionType<PropertySectionType> {
     }
 
     @Override
-    protected Objects.ToStringHelper string() {
+    protected MoreObjects.ToStringHelper string() {
        return super.string()
              .add("properties", properties).add("any", any);
     }

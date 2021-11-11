@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
@@ -29,7 +30,7 @@ public class VcloudDirectorError {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("minorErrorCode", minorErrorCode)
             .add("message", message)
             .add("majorErrorCode", majorErrorCode)

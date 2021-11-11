@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -284,7 +285,7 @@ public class VAppTemplate extends ResourceEntity {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(super.toString())
+      return MoreObjects.toStringHelper(super.toString())
             .add("owner", owner)
             .add("children", children)
             .add("sections", sections)

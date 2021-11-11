@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -195,7 +196,7 @@ public class VirtualHardwareSection extends SectionType {
    }
 
    @Override
-   protected Objects.ToStringHelper string() {
+   protected MoreObjects.ToStringHelper string() {
       return super.string()
             .add("transport", transport)
             .add("virtualSystem", virtualSystem)

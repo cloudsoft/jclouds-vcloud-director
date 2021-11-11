@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.cim;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.jclouds.vcloud.director.v1_5.domain.dmtf.DMTFConstants.CIM_RASD_NS;
@@ -34,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.base.Function;
 
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -836,7 +837,7 @@ public class ResourceAllocationSettingData {
    }
 
    public ToStringHelper string() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("elementName", elementName)
             .add("instanceID", instanceID)
             .add("caption", caption)

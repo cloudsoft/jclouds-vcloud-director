@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -174,7 +175,7 @@ public class CapacityType<T extends CapacityType<T>> {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("units", units)
             .add("allocated", allocated)
             .add("limit", limit).toString();

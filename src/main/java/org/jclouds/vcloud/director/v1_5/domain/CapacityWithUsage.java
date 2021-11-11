@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -184,7 +185,7 @@ public class CapacityWithUsage extends CapacityType<CapacityWithUsage>
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("used", used)
             .add("overhead", overhead).toString();
    }

@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.params;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -181,7 +182,7 @@ public class DeployVAppParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("powerOn", powerOn).add("deploymentLeaseSeconds", deploymentLeaseSeconds).add("forceCustomization", forceCustomization).toString();
+      return MoreObjects.toStringHelper("").add("powerOn", powerOn).add("deploymentLeaseSeconds", deploymentLeaseSeconds).add("forceCustomization", forceCustomization).toString();
    }
 
 }

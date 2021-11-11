@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -99,6 +100,6 @@ public class ScreenTicket {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("value", value).toString();
+      return MoreObjects.toStringHelper("").add("value", value).toString();
    }
 }

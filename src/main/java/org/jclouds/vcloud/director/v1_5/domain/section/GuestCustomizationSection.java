@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.section;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -563,7 +564,7 @@ public class GuestCustomizationSection extends SectionType {
    }
 
    @Override
-   public Objects.ToStringHelper string() {
+   public MoreObjects.ToStringHelper string() {
       return super.string()
             .add("enabled", enabled)
             .add("changeSid", changeSid)

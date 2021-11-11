@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.network;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -240,7 +241,7 @@ public class NetworkConfiguration {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("ipScopes", ipScopes).add("parentNetwork", parentNetwork)
+      return MoreObjects.toStringHelper("").add("ipScopes", ipScopes).add("parentNetwork", parentNetwork)
             .add("fenceMode", fenceMode)
             .add("retainNetInfoAcrossDeployments", retainNetInfoAcrossDeployments)
             .add("features", features)

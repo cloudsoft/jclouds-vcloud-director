@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.params;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -114,7 +115,7 @@ public class PublishCatalogParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("isPublished", isPublished).toString();
    }
 

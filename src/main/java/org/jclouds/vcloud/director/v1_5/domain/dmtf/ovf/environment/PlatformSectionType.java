@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.environment;
 
+import com.google.common.base.MoreObjects;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAnyElement;
@@ -133,7 +134,7 @@ public class PlatformSectionType extends SectionType<PlatformSectionType> {
    }
 
    @Override
-   protected Objects.ToStringHelper string() {
+   protected MoreObjects.ToStringHelper string() {
       return super.string()
             .add("version", version).add("vendor", vendor).add("timezone", timezone)
             .add("locale", locale).add("kind", kind).add("any", any);

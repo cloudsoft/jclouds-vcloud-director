@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.cim;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.jclouds.vcloud.director.v1_5.domain.dmtf.DMTFConstants.CIM_VSSD_NS;
@@ -693,7 +694,7 @@ public class VirtualSystemSettingData {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("elementName", elementName)
             .add("instanceID", instanceID)
             .add("caption", caption)

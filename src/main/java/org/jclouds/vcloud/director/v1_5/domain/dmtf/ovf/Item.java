@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import java.util.Map;
@@ -180,7 +181,7 @@ public class Item {
 
     @Override
     public String toString() {
-       return Objects.toStringHelper("")
+       return MoreObjects.toStringHelper("")
              .add("id", id)
              .add("order", order)
              .add("startDelay", startDelay)

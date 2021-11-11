@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.query;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import org.jclouds.vcloud.director.v1_5.domain.Link;
 
 
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 
@@ -219,7 +220,7 @@ public class QueryResultRecordType {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").add("href", href).add("id", id)
+      return MoreObjects.toStringHelper("").add("href", href).add("id", id)
             .add("type", type).add("links", links);
    }
 }

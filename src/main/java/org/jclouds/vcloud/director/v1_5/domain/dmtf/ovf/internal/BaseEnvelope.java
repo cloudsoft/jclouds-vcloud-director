@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.internal;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Set;
@@ -167,8 +168,8 @@ public abstract class BaseEnvelope<V extends BaseVirtualSystem, E extends BaseEn
       return string().toString();
    }
 
-   protected Objects.ToStringHelper string() {
-      return Objects.toStringHelper("")
+   protected MoreObjects.ToStringHelper string() {
+      return MoreObjects.toStringHelper("")
             .add("diskSections", diskSections)
             .add("networkSections", networkSections)
             .add("additionalSections", additionalSections)

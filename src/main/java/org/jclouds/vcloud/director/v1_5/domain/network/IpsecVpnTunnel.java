@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.network;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -381,7 +382,7 @@ public class IpsecVpnTunnel {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("name", name)
             .add("description", description)
             .add("peerIpAddress", peerIpAddress)

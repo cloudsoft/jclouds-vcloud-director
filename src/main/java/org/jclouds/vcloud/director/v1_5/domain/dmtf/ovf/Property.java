@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -294,7 +295,7 @@ public class Property {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("key", key).add("values", values).add("label", label).add("description", description)
             .add("type", type).add("qualifiers", qualifiers).add("userConfigurable", userConfigurable).add("defaultValue", defaultValue)
             .toString();

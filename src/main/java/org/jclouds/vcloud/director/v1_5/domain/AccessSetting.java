@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -121,6 +122,6 @@ public class AccessSetting {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("subject", subject).add("accessLevel", accessLevel).toString();
+      return MoreObjects.toStringHelper("").add("subject", subject).add("accessLevel", accessLevel).toString();
    }
 }

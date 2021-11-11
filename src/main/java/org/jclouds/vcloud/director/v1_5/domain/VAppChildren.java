@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -140,6 +141,6 @@ public class VAppChildren {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("vApps", vApps).add("vms", vms).toString();
+      return MoreObjects.toStringHelper("").add("vApps", vApps).add("vms", vms).toString();
    }
 }
