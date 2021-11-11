@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -169,7 +170,7 @@ public class Session {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("user", user).add("org", org).add("href", href).add("links", links)
+      return MoreObjects.toStringHelper("").add("user", user).add("org", org).add("href", href).add("links", links)
             .toString();
    }
 }

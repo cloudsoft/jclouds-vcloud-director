@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -248,7 +249,7 @@ public class Error {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("message", message).add("majorErrorCode", majorErrorCode).add("minorErrorCode", minorErrorCode)
             .add("vendorSpecificErrorCode", vendorSpecificErrorCode).add("stackTrace", stackTrace)
             .toString();

@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.org;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.google.common.base.Function;
 
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -583,7 +584,7 @@ public class CustomOrgLdapSettings {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("hostName", hostName)
             .add("port", port)
             .add("isSsl", isSsl)

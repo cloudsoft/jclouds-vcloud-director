@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.params;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -167,7 +168,7 @@ public class UndeployVAppParams {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("undeployPowerAction", undeployPowerAction).toString();
+      return MoreObjects.toStringHelper("").add("undeployPowerAction", undeployPowerAction).toString();
    }
 
 }

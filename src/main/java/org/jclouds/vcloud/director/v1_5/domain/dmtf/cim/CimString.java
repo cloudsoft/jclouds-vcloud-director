@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.cim;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import java.util.Map;
@@ -98,7 +99,7 @@ public class CimString {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("value", value).add("otherAttributes", otherAttributes).toString();
+      return MoreObjects.toStringHelper("").add("value", value).add("otherAttributes", otherAttributes).toString();
    }
 
 }

@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.network;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -170,7 +171,7 @@ public class NatService extends NetworkServiceType<NatService> {
    }
 
    @Override
-   protected Objects.ToStringHelper string() {
+   protected MoreObjects.ToStringHelper string() {
       return super.string().add("natType", natType).add("natRules", natRules).add("policy", policy);
    }
 }

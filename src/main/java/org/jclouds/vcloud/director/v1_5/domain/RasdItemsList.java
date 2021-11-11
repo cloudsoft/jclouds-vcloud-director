@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -24,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import java.util.Spliterator;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,7 +38,7 @@ import com.google.common.collect.Sets;
 import org.jclouds.vcloud.director.v1_5.domain.dmtf.RasdItem;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents a list of RASD items.
@@ -204,6 +206,11 @@ public class RasdItemsList extends ForwardingList<RasdItem> implements Set<RasdI
    }
 
    public ToStringHelper string() {
-      return Objects.toStringHelper("").add("href", href).add("links", links).add("type", type).add("items", items);
+      return MoreObjects.toStringHelper("").add("href", href).add("links", links).add("type", type).add("items", items);
    }
+
+    @Override
+    public Spliterator<RasdItem> spliterator() {
+        return super.spliterator();
+    }
 }

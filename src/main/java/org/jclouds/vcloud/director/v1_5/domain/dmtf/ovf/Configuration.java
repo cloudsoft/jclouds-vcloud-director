@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf;
 
+import com.google.common.base.MoreObjects;
 import static org.jclouds.vcloud.director.v1_5.domain.dmtf.DMTFConstants.OVF_NS;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -125,8 +126,8 @@ public class Configuration {
       return string().toString();
    }
 
-   protected Objects.ToStringHelper string() {
-      return Objects.toStringHelper("").add("id", id).add("default", isDefault).add("label", label).add("description", description);
+   protected MoreObjects.ToStringHelper string() {
+      return MoreObjects.toStringHelper("").add("id", id).add("default", isDefault).add("label", label).add("description", description);
    }
 
    public String getId() {

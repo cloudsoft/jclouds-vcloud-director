@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.network;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -266,7 +267,7 @@ public class IpScope {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
               .add("isInherited", isInherited)
               .add("isEnabled", isEnabled)
             .add("gateway", gateway)

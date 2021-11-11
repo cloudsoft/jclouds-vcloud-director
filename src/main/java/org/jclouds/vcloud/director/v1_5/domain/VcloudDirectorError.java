@@ -16,7 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * @see {@link org.jclouds.vcloud.director.v1_5.handlers.ErrorHandler} for code to parse, and thus instantiate, a vCD error.
@@ -29,7 +29,7 @@ public class VcloudDirectorError {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("minorErrorCode", minorErrorCode)
             .add("message", message)
             .add("majorErrorCode", majorErrorCode)

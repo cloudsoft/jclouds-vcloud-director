@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -134,7 +135,7 @@ public class MsgType {
 
     @Override
     public String toString() {
-       return Objects.toStringHelper("")
+       return MoreObjects.toStringHelper("")
              .add("value", value).add("msgid", msgid).toString();
     }
 }

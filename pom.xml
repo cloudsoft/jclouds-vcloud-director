@@ -21,20 +21,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.apache.jclouds.labs</groupId>
-    <artifactId>jclouds-labs</artifactId>
-    <version>2.1.2</version>
+    <groupId>org.apache.jclouds</groupId>
+    <artifactId>jclouds-project</artifactId>
+    <version>2.4.0</version>
   </parent>
 
   <!-- TODO: when out of labs, switch to org.jclouds.api -->
   <groupId>io.cloudsoft.jclouds.labs</groupId>
   <artifactId>vcloud-director</artifactId>
-  <version>2.1.2</version>
   <name>jclouds vcloud-director api</name>
   <description>jclouds components to access an implementation of VMware vCloud Director 1.5+</description>
-  <packaging>bundle</packaging>
 
   <properties>
+    <jclouds.version>2.4.0</jclouds.version>
     <test.vcloud-director.endpoint>https://vcloudbeta.bluelock.com/api</test.vcloud-director.endpoint>
     <test.vcloud-director.api-version>1.5</test.vcloud-director.api-version>
     <test.vcloud-director.build-version>1.5.0.464915</test.vcloud-director.build-version>
@@ -64,10 +63,24 @@
     </jclouds.osgi.import>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>apache-snapshots</id>
+      <url>https://repository.apache.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.jamesmurty.utils</groupId>
       <artifactId>java-xmlbuilder</artifactId>
+      <version>0.4</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jclouds</groupId>
@@ -161,7 +174,7 @@
           <dependency>
             <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-resources</artifactId>
-            <version>2.1.2</version>
+            <version>${jclouds.version}</version>
             <scope>compile</scope>
           </dependency>
         </dependencies>
@@ -194,7 +207,7 @@
           <dependency>
             <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-resources</artifactId>
-            <version>2.1.2</version>
+            <version>${jclouds.version}</version>
             <scope>compile</scope>
           </dependency>
         </dependencies>
@@ -209,6 +222,7 @@
       Also updates version from 1.11 to 1.15.
       (i.e. overriding the jclouds 2.0.0 defaults, copy-pasting from jclouds project/pom.xml).
        -->
+<!-- disable sniffer
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
@@ -229,6 +243,7 @@
           </signature>
         </configuration>
       </plugin>
+-->
 
       <!-- 
       Workaround for https://github.com/google/error-prone/issues/493 with error-prone 2.0.5.

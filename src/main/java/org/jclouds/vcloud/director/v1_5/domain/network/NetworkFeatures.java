@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.network;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -109,6 +110,6 @@ public class NetworkFeatures {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("services", services).toString();
+      return MoreObjects.toStringHelper("").add("services", services).toString();
    }
 }

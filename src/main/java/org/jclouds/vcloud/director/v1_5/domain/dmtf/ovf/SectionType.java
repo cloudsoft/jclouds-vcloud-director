@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static org.jclouds.vcloud.director.v1_5.domain.dmtf.DMTFConstants.OVF_NS;
 
@@ -134,8 +135,8 @@ public abstract class SectionType {
       return string().toString();
    }
 
-   protected Objects.ToStringHelper string() {
-      return Objects.toStringHelper("").add("info", info).add("required", required);
+   protected MoreObjects.ToStringHelper string() {
+      return MoreObjects.toStringHelper("").add("info", info).add("required", required);
    }
 
 }

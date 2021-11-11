@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.dmtf.ovf.environment;
 
+import com.google.common.base.MoreObjects;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
@@ -84,8 +85,8 @@ public abstract class SectionType<T extends SectionType<T>> {
        return string().toString();
     }
 
-    protected Objects.ToStringHelper string() {
-       return Objects.toStringHelper("").add("otherAttributes", otherAttributes);
+    protected MoreObjects.ToStringHelper string() {
+       return MoreObjects.toStringHelper("").add("otherAttributes", otherAttributes);
     }
 
 }

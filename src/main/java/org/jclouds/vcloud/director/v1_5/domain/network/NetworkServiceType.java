@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.network;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -94,7 +95,7 @@ public abstract class NetworkServiceType<T extends NetworkServiceType<T>> {
       return string().toString();
    }
 
-   protected Objects.ToStringHelper string() {
-      return Objects.toStringHelper("").add("isEnabled", isEnabled);
+   protected MoreObjects.ToStringHelper string() {
+      return MoreObjects.toStringHelper("").add("isEnabled", isEnabled);
    }
 }

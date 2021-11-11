@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 
 
@@ -116,6 +117,6 @@ public class SessionWithToken {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("session", session).add("token", token).toString();
+      return MoreObjects.toStringHelper("").add("session", session).add("token", token).toString();
    }
 }

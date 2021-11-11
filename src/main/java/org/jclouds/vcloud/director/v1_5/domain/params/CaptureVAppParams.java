@@ -16,6 +16,7 @@
  */
 package org.jclouds.vcloud.director.v1_5.domain.params;
 
+import com.google.common.base.MoreObjects;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -227,7 +228,7 @@ public class CaptureVAppParams extends ParamsType {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("source", source)
             .add("sections", sections).toString();
    }

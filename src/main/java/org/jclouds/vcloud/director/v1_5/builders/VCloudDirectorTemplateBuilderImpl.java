@@ -16,7 +16,6 @@
  */
 package org.jclouds.vcloud.director.v1_5.builders;
 
-import static com.google.common.base.Predicates.and;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.List;
@@ -75,12 +74,12 @@ public class VCloudDirectorTemplateBuilderImpl extends TemplateBuilderImpl {
 
                 @Override
                 public boolean apply(Image input) {
-                    return and(osPredicates).apply(input.getOperatingSystem());
+                    return Predicates.and(osPredicates).apply(input.getOperatingSystem());
                 }
 
                 @Override
                 public String toString() {
-                    return and(osPredicates).toString();
+                    return Predicates.and(osPredicates).toString();
                 }
 
             });
