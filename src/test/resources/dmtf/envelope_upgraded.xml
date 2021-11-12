@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ovf:Envelope xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:vcloud="http://www.vmware.com/vcloud/v1.5" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2.22.0/CIM_VirtualSystemSettingData.xsd http://www.vmware.com/schema/ovf http://www.vmware.com/schema/ovf http://schemas.dmtf.org/ovf/envelope/1 http://schemas.dmtf.org/ovf/envelope/1/dsp8023_1.1.0.xsd http://www.vmware.com/vcloud/v1.5 http://emea01.canopy-cloud.com/api/v1.5/schema/master.xsd http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2.22.0/CIM_ResourceAllocationSettingData.xsd">
+<ovf:References/>
+<ovf:NetworkSection>
+    <ovf:Info>The list of logical networks</ovf:Info>
+    <ovf:Network ovf:name="vAppNet-Deployment_Network_001">
+        <ovf:Description/>
+    </ovf:Network>
+</ovf:NetworkSection>
+<vcloud:CustomizationSection goldMaster="false" ovf:required="false">
+    <ovf:Info>VApp template customization section</ovf:Info>
+    <vcloud:CustomizeOnInstantiate>true</vcloud:CustomizeOnInstantiate>
+</vcloud:CustomizationSection>
+<vcloud:NetworkConfigSection ovf:required="false">
+    <ovf:Info>The configuration parameters for logical networks</ovf:Info>
+    <vcloud:NetworkConfig networkName="vAppNet-Deployment_Network_001">
+        <vcloud:Description/>
+        <vcloud:Configuration>
+            <vcloud:IpScope>
+                <vcloud:IsInherited>false</vcloud:IsInherited>
+                <vcloud:Gateway>192.168.1.1</vcloud:Gateway>
+                <vcloud:Netmask>255.255.255.0</vcloud:Netmask>
+                <vcloud:Dns1>8.8.8.8</vcloud:Dns1>
+                <vcloud:IpRanges>
+                    <vcloud:IpRange>
+                        <vcloud:StartAddress>192.168.1.2</vcloud:StartAddress>
+                        <vcloud:EndAddress>192.168.1.253</vcloud:EndAddress>
+                    </vcloud:IpRange>
+                </vcloud:IpRanges>
+            </vcloud:IpScope>
+            <vcloud:FenceMode>isolated</vcloud:FenceMode>
+            <vcloud:RetainNetInfoAcrossDeployments>false</vcloud:RetainNetInfoAcrossDeployments>
+        </vcloud:Configuration>
+        <vcloud:IsDeployed>false</vcloud:IsDeployed>
+    </vcloud:NetworkConfig>
+</vcloud:NetworkConfigSection>
+<vcloud:LeaseSettingsSection ovf:required="false">
+    <ovf:Info>Lease settings section</ovf:Info>
+    <vcloud:StorageLeaseInSeconds>0</vcloud:StorageLeaseInSeconds>
+</vcloud:LeaseSettingsSection>
+<ovf:VirtualSystemCollection ovf:id="win64-development_2012R2">
+    <ovf:Info>A collection of virtual machines</ovf:Info>
+    <ovf:Name>win64-development_2012R2</ovf:Name>
+    <ovf:AnnotationSection>
+        <ovf:Info>A human-readable annotation</ovf:Info>
+        <ovf:Annotation>windows machine with development environment set up done.</ovf:Annotation>
+    </ovf:AnnotationSection>
+    <ovf:StartupSection>
+        <ovf:Info>VApp startup section</ovf:Info>
+        <ovf:Item ovf:stopDelay="0" ovf:stopAction="guestShutdown" ovf:startDelay="0" ovf:startAction="powerOn" ovf:order="0" ovf:id="W2K12R2_STD_ENG_X64"/>
+    </ovf:StartupSection>
+    <ovf:VirtualSystem ovf:id="W2K12R2_STD_ENG_X64">
+        <ovf:Info>A virtual machine</ovf:Info>
+        <ovf:Name>W2K12R2_STD_ENG_X64</ovf:Name>
+        <ovf:AnnotationSection>
+            <ovf:Info>A human-readable annotation</ovf:Info>
+            <ovf:Annotation>Windows 2012 R2 Standard Edition; Englisch; 64Bit[\r]</ovf:Annotation>
+        </ovf:AnnotationSection>
+        <ovf:OperatingSystemSection ovf:id="74" vmw:osType="windows8Server64Guest">
+            <ovf:Info>Specifies the operating system installed</ovf:Info>
+            <ovf:Description>Microsoft Windows Server 2012 (64-bit)</ovf:Description>
+        </ovf:OperatingSystemSection>
+        <ovf:VirtualHardwareSection ovf:transport="">
+            <ovf:Info>Virtual hardware requirements</ovf:Info>
+            <ovf:System>
+                <vssd:ElementName>Virtual Hardware Family</vssd:ElementName>
+                <vssd:InstanceID>0</vssd:InstanceID>
+                <vssd:VirtualSystemIdentifier>W2K12R2_STD_ENG_X64</vssd:VirtualSystemIdentifier>
+                <vssd:VirtualSystemType>vmx-09</vssd:VirtualSystemType>
+            </ovf:System>
+            <ovf:Item>
+                <rasd:Address>00:11:22:33:44:55</rasd:Address>
+                <rasd:AddressOnParent>0</rasd:AddressOnParent>
+                <rasd:AutomaticAllocation>true</rasd:AutomaticAllocation>
+                <rasd:Connection vcloud:primaryNetworkConnection="true" vcloud:ipAddressingMode="POOL">vAppNet-Deployment_Network_001</rasd:Connection>
+                <rasd:Description>E1000 ethernet adapter on "vAppNet-Deployment_Network_001"</rasd:Description>
+                <rasd:ElementName>Network adapter 0</rasd:ElementName>
+                <rasd:InstanceID>1</rasd:InstanceID>
+                <rasd:ResourceSubType>E1000</rasd:ResourceSubType>
+                <rasd:ResourceType>10</rasd:ResourceType>
+                <vmw:Config vmw:value="32" vmw:key="slotInfo.pciSlotNumber" ovf:required="false"/>
+                <vmw:Config vmw:value="true" vmw:key="wakeOnLanEnabled" ovf:required="false"/>
+            </ovf:Item>
+            <ovf:Item>
+                <rasd:Address>0</rasd:Address>
+                <rasd:Description>SCSI Controller</rasd:Description>
+                <rasd:ElementName>SCSI Controller 0</rasd:ElementName>
+                <rasd:InstanceID>2</rasd:InstanceID>
+                <rasd:ResourceSubType>lsilogicsas</rasd:ResourceSubType>
+                <rasd:ResourceType>6</rasd:ResourceType>
+                <vmw:Config vmw:value="160" vmw:key="slotInfo.pciSlotNumber" ovf:required="false"/>
+            </ovf:Item>
+            <ovf:Item>
+                <rasd:AddressOnParent>0</rasd:AddressOnParent>
+                <rasd:Description>Hard disk</rasd:Description>
+                <rasd:ElementName>Hard disk 1</rasd:ElementName>
+                <rasd:HostResource vcloud:capacity="51200" vcloud:busSubType="lsilogicsas" vcloud:busType="6"/>
+                <rasd:InstanceID>2000</rasd:InstanceID>
+                <rasd:Parent>2</rasd:Parent>
+                <rasd:ResourceType>17</rasd:ResourceType>
+                <vmw:Config vmw:value="false" vmw:key="backing.writeThrough" ovf:required="false"/>
+            </ovf:Item>
+            <ovf:Item>
+                <rasd:Address>0</rasd:Address>
+                <rasd:Description>IDE Controller</rasd:Description>
+                <rasd:ElementName>IDE Controller 0</rasd:ElementName>
+                <rasd:InstanceID>3</rasd:InstanceID>
+                <rasd:ResourceType>5</rasd:ResourceType>
+            </ovf:Item>
+            <ovf:Item>
+                <rasd:AddressOnParent>0</rasd:AddressOnParent>
+                <rasd:AutomaticAllocation>false</rasd:AutomaticAllocation>
+                <rasd:Description>Floppy Drive</rasd:Description>
+                <rasd:ElementName>Floppy Drive 1</rasd:ElementName>
+                <rasd:HostResource/>
+                <rasd:InstanceID>8000</rasd:InstanceID>
+                <rasd:ResourceType>14</rasd:ResourceType>
+            </ovf:Item>
+            <ovf:Item>
+                <rasd:AllocationUnits>hertz * 10^6</rasd:AllocationUnits>
+                <rasd:Description>Number of Virtual CPUs</rasd:Description>
+                <rasd:ElementName>2 virtual CPU(s)</rasd:ElementName>
+                <rasd:InstanceID>4</rasd:InstanceID>
+                <rasd:Reservation>0</rasd:Reservation>
+                <rasd:ResourceType>3</rasd:ResourceType>
+                <rasd:VirtualQuantity>2</rasd:VirtualQuantity>
+                <rasd:Weight>0</rasd:Weight>
+            </ovf:Item>
+            <ovf:Item>
+                <rasd:AllocationUnits>byte * 2^20</rasd:AllocationUnits>
+                <rasd:Description>Memory Size</rasd:Description>
+                <rasd:ElementName>8192 MB of memory</rasd:ElementName>
+                <rasd:InstanceID>5</rasd:InstanceID>
+                <rasd:Reservation>0</rasd:Reservation>
+                <rasd:ResourceType>4</rasd:ResourceType>
+                <rasd:VirtualQuantity>8192</rasd:VirtualQuantity>
+                <rasd:Weight>0</rasd:Weight>
+            </ovf:Item>
+            <ovf:Item>
+                <rasd:AddressOnParent>0</rasd:AddressOnParent>
+                <rasd:AutomaticAllocation>false</rasd:AutomaticAllocation>
+                <rasd:Description>CD/DVD Drive</rasd:Description>
+                <rasd:ElementName>CD/DVD Drive 1</rasd:ElementName>
+                <rasd:HostResource/>
+                <rasd:InstanceID>3000</rasd:InstanceID>
+                <rasd:Parent>3</rasd:Parent>
+                <rasd:ResourceType>15</rasd:ResourceType>
+            </ovf:Item>
+            <vmw:Config vmw:value="false" vmw:key="cpuHotAddEnabled" ovf:required="false"/>
+            <vmw:Config vmw:value="false" vmw:key="cpuHotRemoveEnabled" ovf:required="false"/>
+            <vmw:Config vmw:value="bios" vmw:key="firmware" ovf:required="false"/>
+            <vmw:Config vmw:value="false" vmw:key="virtualICH7MPresent" ovf:required="false"/>
+            <vmw:Config vmw:value="false" vmw:key="virtualSMCPresent" ovf:required="false"/>
+            <vmw:Config vmw:value="false" vmw:key="memoryHotAddEnabled" ovf:required="false"/>
+            <vmw:Config vmw:value="false" vmw:key="nestedHVEnabled" ovf:required="false"/>
+            <vmw:Config vmw:value="soft" vmw:key="powerOpInfo.powerOffType" ovf:required="false"/>
+            <vmw:Config vmw:value="soft" vmw:key="powerOpInfo.resetType" ovf:required="false"/>
+            <vmw:Config vmw:value="checkpoint" vmw:key="powerOpInfo.standbyAction" ovf:required="false"/>
+            <vmw:Config vmw:value="hard" vmw:key="powerOpInfo.suspendType" ovf:required="false"/>
+            <vmw:Config vmw:value="true" vmw:key="tools.afterPowerOn" ovf:required="false"/>
+            <vmw:Config vmw:value="true" vmw:key="tools.afterResume" ovf:required="false"/>
+            <vmw:Config vmw:value="true" vmw:key="tools.beforeGuestShutdown" ovf:required="false"/>
+            <vmw:Config vmw:value="true" vmw:key="tools.beforeGuestStandby" ovf:required="false"/>
+            <vmw:Config vmw:value="false" vmw:key="tools.syncTimeWithHost" ovf:required="false"/>
+            <vmw:Config vmw:value="manual" vmw:key="tools.toolsUpgradePolicy" ovf:required="false"/>
+            <vmw:Config vmw:value="4225a392-5ab5-c3af-cbf8-cbe5d1cf3446" vmw:key="uuid" ovf:required="false"/>
+        </ovf:VirtualHardwareSection>
+        <vcloud:GuestCustomizationSection ovf:required="false" vcloud:adminAutoLogon="true" vcloud:adminAutoLogonCount="1">
+            <ovf:Info>Specifies Guest OS Customization Settings</ovf:Info>
+            <vcloud:Enabled>true</vcloud:Enabled>
+            <vcloud:ChangeSid>false</vcloud:ChangeSid>
+            <vcloud:VirtualMachineId>f222dad0-eded-4141-81cc-7a7a7a7a7aee</vcloud:VirtualMachineId>
+            <vcloud:JoinDomainEnabled>false</vcloud:JoinDomainEnabled>
+            <vcloud:UseOrgSettings>false</vcloud:UseOrgSettings>
+            <vcloud:AdminPasswordEnabled>true</vcloud:AdminPasswordEnabled>
+            <vcloud:AdminPasswordAuto>false</vcloud:AdminPasswordAuto>
+            <vcloud:AdminPassword>password</vcloud:AdminPassword>
+            <vcloud:ResetPasswordRequired>false</vcloud:ResetPasswordRequired>
+            <vcloud:ComputerName>W2K12R2STDENG</vcloud:ComputerName>
+        </vcloud:GuestCustomizationSection>
+        <vcloud:NetworkConnectionSection ovf:required="false">
+            <ovf:Info>Specifies the available VM network connections</ovf:Info>
+            <vcloud:PrimaryNetworkConnectionIndex>0</vcloud:PrimaryNetworkConnectionIndex>
+            <vcloud:NetworkConnection network="vAppNet-Deployment_Network_001" needsCustomization="true">
+                <vcloud:NetworkConnectionIndex>0</vcloud:NetworkConnectionIndex>
+                <vcloud:IsConnected>true</vcloud:IsConnected>
+                <vcloud:MACAddress>00:11:22:33:44:55</vcloud:MACAddress>
+                <vcloud:IpAddressAllocationMode>POOL</vcloud:IpAddressAllocationMode>
+            </vcloud:NetworkConnection>
+        </vcloud:NetworkConnectionSection>
+    </ovf:VirtualSystem>
+</ovf:VirtualSystemCollection>
+</ovf:Envelope>
