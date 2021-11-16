@@ -31,7 +31,7 @@
   <artifactId>vcloud-director</artifactId>
   <name>jclouds vcloud-director api</name>
   <description>jclouds components to access an implementation of VMware vCloud Director 1.5+</description>
-  <version>2.4.0.1</version>
+  <version>2.4.0.2-SNAPSHOT</version>
 
   <properties>
     <jclouds.version>2.4.0</jclouds.version>
